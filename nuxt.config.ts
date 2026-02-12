@@ -46,7 +46,7 @@ export default defineNuxtConfig({
             default: 'github-light',
             dark: 'github-dark',
           },
-          langs: ['java', 'kotlin', 'typescript', 'javascript', 'bash', 'yaml', 'json', 'sql', 'python', 'xml'],
+          langs: ['java', 'kotlin', 'typescript', 'javascript', 'bash', 'yaml', 'json', 'sql', 'python', 'xml', 'markdown'],
         },
         remarkPlugins: {
           'remark-math': {},
