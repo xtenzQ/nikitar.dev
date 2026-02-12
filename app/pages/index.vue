@@ -9,7 +9,7 @@ const { data: posts } = await useAsyncData('recent-posts', () =>
 
 useSeoMeta({
   title: 'Nikita Rusetskii',
-  description: 'Software & AI Engineer — blog and portfolio. I build things with Java, Kotlin, and Python.',
+  description: 'Software & AI Engineer. I build things with Java, Kotlin, and Python. Into distributed systems and LLM-powered applications.',
 })
 
 defineOgImage({
@@ -25,7 +25,7 @@ defineOgImage({
       <h1 class="text-3xl font-bold" style="color: var(--heading);">Hey, I'm Nikita</h1>
       <p class="mt-3 text-lg max-w-2xl" style="color: var(--text);">
         Software &amp; AI Engineer. I build things with Java, Kotlin, and Python.
-        Currently exploring ML/AI and sharing what I learn along the way.
+        Into distributed systems and LLM-powered applications.
       </p>
       <div class="mt-5">
         <SocialLinks />
