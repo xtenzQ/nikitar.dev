@@ -5,7 +5,10 @@ defineProps<{
 </script>
 
 <template>
-  <span class="inline-block text-sm font-medium px-3 py-1 rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
+  <span
+    class="inline-block text-sm font-medium px-3 py-1 rounded-lg border"
+    style="background: var(--badge-bg); color: var(--badge-text); border-color: var(--border);"
+  >
     {{ label }}
   </span>
 </template>

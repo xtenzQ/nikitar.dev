@@ -7,11 +7,18 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/content',
+    '@nuxtjs/color-mode',
     '@nuxtjs/seo',
     '@nuxt/icon',
   ],
 
   css: ['~/assets/css/main.css'],
+
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+    fallback: 'light',
+  },
 
   vite: {
     plugins: [tailwindcss()],
@@ -32,14 +39,30 @@ export default defineNuxtConfig({
   },
 
   content: {
-    watch: false,
-    highlight: {
-      langs: ['java', 'kotlin', 'typescript', 'javascript', 'bash', 'yaml', 'json', 'sql', 'python', 'xml'],
-      theme: 'github-dark',
+    build: {
+      markdown: {
+        highlight: {
+          theme: {
+            default: 'github-light',
+            dark: 'github-dark',
+          },
+          langs: ['java', 'kotlin', 'typescript', 'javascript', 'bash', 'yaml', 'json', 'sql', 'python', 'xml'],
+        },
+        remarkPlugins: {
+          'remark-math': {},
+        },
+        rehypePlugins: {
+          'rehype-katex': {},
+        },
+      },
     },
   },
 
   ogImage: { enabled: false },
+
+  robots: {
+    robotsTxt: false,
+  },
 
   nitro: {
     watchOptions: {
@@ -54,7 +77,8 @@ export default defineNuxtConfig({
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap' },
+        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css' },
       ],
     },
   },

@@ -8,12 +8,18 @@ defineProps<{
 </script>
 
 <template>
-  <div class="border-l-4 border-blue-400 pl-5 py-3">
-    <component :is="url ? 'a' : 'div'" :href="url" target="_blank" rel="noopener noreferrer"
-      class="font-semibold text-slate-900" :class="url && 'hover:text-blue-600 transition-colors'">
+  <div class="pl-5 py-3 border-l-4" style="border-color: var(--accent);">
+    <component
+      :is="url ? 'a' : 'div'"
+      :href="url"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="font-semibold transition-colors"
+      style="color: var(--heading);"
+    >
       {{ title }}
     </component>
-    <p class="text-sm text-slate-600 mt-1">{{ description }}</p>
+    <p class="text-sm mt-1" style="color: var(--text);">{{ description }}</p>
     <div v-if="tags?.length" class="flex flex-wrap gap-2 mt-2">
       <TagBadge v-for="tag in tags" :key="tag" :label="tag" />
     </div>

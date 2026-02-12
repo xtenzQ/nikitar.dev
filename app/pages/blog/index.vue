@@ -9,7 +9,7 @@ const { data: posts } = await useAsyncData('all-posts', () =>
 
 <template>
   <div>
-    <h1 class="text-3xl font-bold text-slate-900 mb-8">Blog</h1>
+    <h1 class="text-3xl font-bold mb-8" style="color: var(--heading);">Blog</h1>
 
     <div v-if="posts?.length" class="space-y-6">
       <BlogPostCard
@@ -23,6 +23,6 @@ const { data: posts } = await useAsyncData('all-posts', () =>
       />
     </div>
 
-    <p v-else class="text-slate-500">No posts yet. Check back soon!</p>
+    <p v-else style="color: var(--text-muted);">No posts yet. Check back soon!</p>
   </div>
 </template>
