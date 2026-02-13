@@ -11,7 +11,7 @@ defineProps<{
 <template>
   <NuxtLink
     :to="path"
-    class="blog-post-card block pl-5 py-4 rounded-r-lg border-l-4 transition-all"
+    class="blog-post-card block px-5 py-4 rounded-lg transition-all"
   >
     <time class="text-xs font-medium" style="color: var(--text-muted);">{{ date }}</time>
     <h3 class="text-lg font-semibold mt-1" style="color: var(--heading);">{{ title }}</h3>
@@ -23,10 +23,6 @@ defineProps<{
 </template>
 
 <style scoped>
-.blog-post-card {
-  border-color: var(--accent);
-}
-
 .blog-post-card:hover {
   background-color: var(--card-hover);
   box-shadow: 0 2px 8px var(--shadow);

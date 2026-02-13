@@ -234,7 +234,7 @@ These patterns come from real prompt engineering experience. They're not in the 
 
 Tell the agent what NOT to do. This prevents drift.
 
-```
+```bash
 # Bad: only positive instructions
 "Analyze the codebase and describe what you find."
 
@@ -292,24 +292,8 @@ If the agent doesn't have the `Edit` tool, it physically can't edit files. Not "
 
 The orchestrator must understand context before delegating to sub-agents.
 
-```
-WRONG:                              RIGHT:
-
-User asks question                  User asks question
-  │                                   │
-  ├──> Spawn agent 1                  ├──> READ mentioned files first
-  ├──> Spawn agent 2                  │     (understand the full context)
-  └──> Spawn agent 3                  │
-                                      ├──> Plan sub-tasks based on
-  Agents get vague tasks              │     what you actually read
-  Results are unfocused               │
-                                      ├──> Spawn agent 1 (specific task)
-                                      ├──> Spawn agent 2 (specific task)
-                                      └──> Spawn agent 3 (specific task)
-
-                                      Agents get precise tasks
-                                      Results are focused
-```
+::diagram{src="read-before-spawn"}
+::
 
 #### Tip 5: No Open Questions
 
@@ -394,30 +378,8 @@ You can't just tell the agent "use ticket NUMBER-123 and research." That's too v
 
 ### Bad vs. Good Prompts
 
-```
-BAD                                         GOOD
-───                                         ────
-
-"Research ticket ENG-1234"                  "Research the payment processing flow.
-                                             Focus on Stripe webhook handling.
-                                             I need to understand how payment
-                                             status gets updated in the database.
-                                             Relevant code: src/services/payments/
-                                             and src/api/webhooks/."
-
-"Fix the bug"                               "/create_plan eng_1234.md
-
-                                             Think about the migration strategy.
-                                             We cannot have downtime.
-                                             Look at how we handled PR #456."
-
-"Implement the feature"                     "/implement plan.md
-
-                                             Start with Phase 1 only.
-                                             Run tests after each change.
-                                             If something doesn't match the plan,
-                                             stop and tell me."
-```
+::diagram{src="bad-vs-good-prompts"}
+::
 
 ### The Pattern
 

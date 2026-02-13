@@ -27,9 +27,6 @@ defineOgImage({
         Software &amp; AI Engineer. I build things with Java, Kotlin, and Python.
         Into distributed systems and LLM-powered applications.
       </p>
-      <div class="mt-5">
-        <SocialLinks />
-      </div>
     </section>
 
     <section v-if="posts?.length">
