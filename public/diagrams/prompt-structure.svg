@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 384" fill="none">
   <style>
     text { font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif; }
-    .title { font-size: 14px; font-weight: 700; }
-    .section-num { font-size: 12px; font-weight: 700; }
-    .section-title { font-size: 12px; font-weight: 700; }
-    .section-desc { font-size: 11px; }
+    .section-num { font-size: 14px; font-weight: 700; }
+    .section-title { font-size: 14px; font-weight: 700; font-family: 'Lato', 'Source Sans 3', system-ui, sans-serif; letter-spacing: -0.02em; }
+    .section-desc { font-size: 13px; }
   </style>
 
   <!-- Outer box -->
@@ -12,25 +11,25 @@
 
   <!-- Section 1: Scope -->
   <rect x="40" y="40" width="440" height="64" rx="8" fill="rgba(0,112,203,0.08)"/>
-  <text x="64" y="64" class="section-num" fill="var(--accent)">1.</text>
-  <text x="80" y="64" class="section-title" fill="var(--heading)">SCOPE: What exactly to work on</text>
-  <text x="64" y="84" class="section-desc" fill="var(--text-muted)">"Research the payment processing flow in our codebase"</text>
+  <text x="64" y="66" class="section-num" fill="var(--accent)">1.</text>
+  <text x="82" y="66" class="section-title" fill="var(--heading)">SCOPE: What exactly to work on</text>
+  <text x="64" y="86" class="section-desc" fill="var(--text-muted)">"Research the payment processing flow in our codebase"</text>
 
   <!-- Section 2: Focus -->
   <rect x="40" y="120" width="440" height="64" rx="8" fill="rgba(239,156,3,0.08)"/>
-  <text x="64" y="144" class="section-num" fill="#ef9c03">2.</text>
-  <text x="80" y="144" class="section-title" fill="var(--heading)">FOCUS: Where to look</text>
-  <text x="64" y="164" class="section-desc" fill="var(--text-muted)">"Relevant code is probably in src/services/payments/"</text>
+  <text x="64" y="146" class="section-num" fill="#ef9c03">2.</text>
+  <text x="82" y="146" class="section-title" fill="var(--heading)">FOCUS: Where to look</text>
+  <text x="64" y="166" class="section-desc" fill="var(--text-muted)">"Relevant code is probably in src/services/payments/"</text>
 
   <!-- Section 3: Context -->
   <rect x="40" y="200" width="440" height="64" rx="8" fill="rgba(40,200,64,0.08)"/>
-  <text x="64" y="224" class="section-num" fill="#28c840">3.</text>
-  <text x="80" y="224" class="section-title" fill="var(--heading)">CONTEXT: What matters and why</text>
-  <text x="64" y="244" class="section-desc" fill="var(--text-muted)">"We need to understand this because we are migrating to Stripe v3"</text>
+  <text x="64" y="226" class="section-num" fill="#28c840">3.</text>
+  <text x="82" y="226" class="section-title" fill="var(--heading)">CONTEXT: What matters and why</text>
+  <text x="64" y="246" class="section-desc" fill="var(--text-muted)">"We need to understand this because we are migrating to Stripe v3"</text>
 
   <!-- Section 4: Boundaries -->
   <rect x="40" y="280" width="440" height="64" rx="8" fill="rgba(223,60,48,0.08)"/>
-  <text x="64" y="304" class="section-num" fill="#df3c30">4.</text>
-  <text x="80" y="304" class="section-title" fill="var(--heading)">BOUNDARIES: When to stop or ask</text>
-  <text x="64" y="324" class="section-desc" fill="var(--text-muted)">"If you find more than 3 services involved, stop and tell me"</text>
+  <text x="64" y="306" class="section-num" fill="#df3c30">4.</text>
+  <text x="82" y="306" class="section-title" fill="var(--heading)">BOUNDARIES: When to stop or ask</text>
+  <text x="64" y="326" class="section-desc" fill="var(--text-muted)">"If you find more than 3 services involved, stop and tell me"</text>
 </svg>

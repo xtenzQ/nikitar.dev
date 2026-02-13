@@ -1,50 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 442" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" fill="none">
   <style>
     text { font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif; }
-    .col-title { font-size: 14px; font-weight: 700; }
-    .prompt { font-size: 12px; }
-    .prompt-bold { font-size: 12px; font-weight: 600; }
-    .arrow-label { font-size: 11px; font-weight: 600; }
+    .col-title { font-size: 16px; font-weight: 700; font-family: 'Lato', 'Source Sans 3', system-ui, sans-serif; letter-spacing: -0.02em; }
+    .prompt { font-size: 14px; }
+    .prompt-bold { font-size: 14px; font-weight: 600; }
+    .arrow-label { font-size: 13px; font-weight: 600; }
   </style>
 
   <!-- Column headers -->
-  <text x="200" y="30" text-anchor="middle" class="col-title" fill="#df3c30">BAD</text>
-  <text x="600" y="30" text-anchor="middle" class="col-title" fill="#28c840">GOOD</text>
+  <text x="160" y="28" text-anchor="middle" class="col-title" fill="#df3c30">BAD</text>
+  <text x="510" y="28" text-anchor="middle" class="col-title" fill="#28c840">GOOD</text>
 
-  <!-- Row 1: right card 108px (5 text lines), left card centered within -->
-  <rect x="24" y="92" width="352" height="48" rx="8" fill="rgba(223,60,48,0.07)"/>
-  <text x="40" y="121" class="prompt" fill="var(--text)">"Research ticket ENG-1234"</text>
+  <!-- Row 1 -->
+  <rect x="16" y="72" width="288" height="44" rx="8" fill="rgba(223,60,48,0.07)"/>
+  <text x="32" y="99" class="prompt" fill="var(--text)">"Research ticket ENG-1234"</text>
 
-  <text x="400" y="116" text-anchor="middle" class="arrow-label" fill="var(--accent)">&#8594;</text>
+  <text x="328" y="99" text-anchor="middle" class="arrow-label" fill="var(--accent)">&#8594;</text>
 
-  <rect x="424" y="62" width="352" height="108" rx="8" fill="rgba(40,200,64,0.07)"/>
-  <text x="440" y="86" class="prompt-bold" fill="var(--text)">"Research the payment processing flow.</text>
-  <text x="440" y="104" class="prompt" fill="var(--text)">Focus on Stripe webhook handling.</text>
-  <text x="440" y="122" class="prompt" fill="var(--text)">I need to understand how payment status</text>
-  <text x="440" y="140" class="prompt" fill="var(--text)">gets updated in the database.</text>
-  <text x="440" y="158" class="prompt" fill="var(--text-muted)">Relevant code: src/services/payments/"</text>
+  <rect x="352" y="48" width="312" height="104" rx="8" fill="rgba(40,200,64,0.07)"/>
+  <text x="368" y="72" class="prompt-bold" fill="var(--text)">"Research the payment processing flow.</text>
+  <text x="368" y="90" class="prompt" fill="var(--text)">Focus on Stripe webhook handling.</text>
+  <text x="368" y="108" class="prompt" fill="var(--text)">I need to understand how payment status</text>
+  <text x="368" y="126" class="prompt" fill="var(--text)">gets updated in the database.</text>
+  <text x="368" y="144" class="prompt" fill="var(--text-muted)">Relevant code: src/services/payments/"</text>
 
-  <!-- Row 2: right card 96px (4 text lines), left card centered within -->
-  <rect x="24" y="226" width="352" height="48" rx="8" fill="rgba(223,60,48,0.07)"/>
-  <text x="40" y="255" class="prompt" fill="var(--text)">"Fix the bug"</text>
+  <!-- Row 2 -->
+  <rect x="16" y="196" width="288" height="44" rx="8" fill="rgba(223,60,48,0.07)"/>
+  <text x="32" y="223" class="prompt" fill="var(--text)">"Fix the bug"</text>
 
-  <text x="400" y="250" text-anchor="middle" class="arrow-label" fill="var(--accent)">&#8594;</text>
+  <text x="328" y="223" text-anchor="middle" class="arrow-label" fill="var(--accent)">&#8594;</text>
 
-  <rect x="424" y="202" width="352" height="96" rx="8" fill="rgba(40,200,64,0.07)"/>
-  <text x="440" y="226" class="prompt-bold" fill="var(--text)">"/create_plan eng_1234.md</text>
-  <text x="440" y="244" class="prompt" fill="var(--text)">Think about the migration strategy.</text>
-  <text x="440" y="262" class="prompt" fill="var(--text)">We cannot have downtime.</text>
-  <text x="440" y="280" class="prompt" fill="var(--text-muted)">Look at how we handled PR #456."</text>
+  <rect x="352" y="178" width="312" height="86" rx="8" fill="rgba(40,200,64,0.07)"/>
+  <text x="368" y="202" class="prompt-bold" fill="var(--text)">"/create_plan eng_1234.md</text>
+  <text x="368" y="220" class="prompt" fill="var(--text)">Think about the migration strategy.</text>
+  <text x="368" y="238" class="prompt" fill="var(--text)">We cannot have downtime.</text>
+  <text x="368" y="256" class="prompt" fill="var(--text-muted)">Look at how we handled PR #456."</text>
 
-  <!-- Row 3: right card 96px (4 text lines), left card centered within -->
-  <rect x="24" y="354" width="352" height="48" rx="8" fill="rgba(223,60,48,0.07)"/>
-  <text x="40" y="383" class="prompt" fill="var(--text)">"Implement the feature"</text>
+  <!-- Row 3 -->
+  <rect x="16" y="312" width="288" height="44" rx="8" fill="rgba(223,60,48,0.07)"/>
+  <text x="32" y="339" class="prompt" fill="var(--text)">"Implement the feature"</text>
 
-  <text x="400" y="378" text-anchor="middle" class="arrow-label" fill="var(--accent)">&#8594;</text>
+  <text x="328" y="339" text-anchor="middle" class="arrow-label" fill="var(--accent)">&#8594;</text>
 
-  <rect x="424" y="330" width="352" height="96" rx="8" fill="rgba(40,200,64,0.07)"/>
-  <text x="440" y="354" class="prompt-bold" fill="var(--text)">"/implement plan.md</text>
-  <text x="440" y="372" class="prompt" fill="var(--text)">Start with Phase 1 only.</text>
-  <text x="440" y="390" class="prompt" fill="var(--text)">Run tests after each change.</text>
-  <text x="440" y="408" class="prompt" fill="var(--text-muted)">If something doesn't match the plan, stop."</text>
+  <rect x="352" y="294" width="312" height="86" rx="8" fill="rgba(40,200,64,0.07)"/>
+  <text x="368" y="318" class="prompt-bold" fill="var(--text)">"/implement plan.md</text>
+  <text x="368" y="336" class="prompt" fill="var(--text)">Start with Phase 1 only.</text>
+  <text x="368" y="354" class="prompt" fill="var(--text)">Run tests after each change.</text>
+  <text x="368" y="372" class="prompt" fill="var(--text-muted)">If something doesn't match the plan, stop."</text>
 </svg>

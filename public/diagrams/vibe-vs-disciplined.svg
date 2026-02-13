@@ -1,56 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 896 560" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 440" fill="none">
   <style>
     text { font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif; }
-    .title { font-size: 14px; font-weight: 700; }
-    .subtitle { font-size: 11px; font-weight: 600; opacity: 0.7; }
-    .body { font-size: 12px; }
-    .label { font-size: 11px; font-weight: 600; }
-    .result { font-size: 12px; font-weight: 600; }
+    .title { font-size: 16px; font-weight: 700; font-family: 'Lato', 'Source Sans 3', system-ui, sans-serif; letter-spacing: -0.02em; }
+    .subtitle { font-size: 13px; font-weight: 600; }
+    .body { font-size: 14px; }
+    .result { font-size: 14px; font-weight: 600; }
   </style>
 
-  <rect x="24" y="24" width="400" height="512" rx="12" fill="rgba(223,60,48,0.07)"/>
-  <text x="224" y="56" text-anchor="middle" class="title" fill="var(--heading)">Vibe Coding</text>
-  <text x="224" y="72" text-anchor="middle" class="subtitle" fill="var(--text-muted)">(ease)</text>
+  <rect x="16" y="16" width="308" height="408" rx="12" fill="rgba(223,60,48,0.07)"/>
+  <text x="170" y="48" text-anchor="middle" class="title" fill="var(--heading)">Vibe Coding</text>
+  <text x="170" y="66" text-anchor="middle" class="subtitle" fill="var(--text-muted)">(ease)</text>
 
-  <rect x="56" y="96" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="80" y="120" class="body" fill="var(--text)">You: "make a login page"</text>
-  <text x="80" y="136" class="body" fill="var(--text-muted)">AI writes 200 lines</text>
+  <rect x="40" y="84" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="56" y="105" class="body" fill="var(--text)">You: "make a login page"</text>
+  <text x="56" y="123" class="body" fill="var(--text-muted)">AI writes 200 lines</text>
 
-  <rect x="56" y="184" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="80" y="208" class="body" fill="var(--text)">You: "it doesn't work, fix it"</text>
-  <text x="80" y="224" class="body" fill="var(--text-muted)">AI rewrites 150 lines</text>
+  <rect x="40" y="152" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="56" y="173" class="body" fill="var(--text)">You: "it doesn't work, fix it"</text>
+  <text x="56" y="191" class="body" fill="var(--text-muted)">AI rewrites 150 lines</text>
 
-  <rect x="56" y="272" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="80" y="296" class="body" fill="var(--text)">You: "now add validation"</text>
-  <text x="80" y="312" class="body" fill="var(--text-muted)">AI patches on top of patches</text>
+  <rect x="40" y="220" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="56" y="241" class="body" fill="var(--text)">You: "now add validation"</text>
+  <text x="56" y="259" class="body" fill="var(--text-muted)">AI patches on top of patches</text>
 
-  <rect x="56" y="360" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="80" y="384" class="body" fill="var(--text)">You: "why is everything broken?"</text>
-  <text x="80" y="400" class="body" fill="var(--text-muted)">...</text>
+  <rect x="40" y="288" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="56" y="309" class="body" fill="var(--text)">You: "why is everything broken?"</text>
+  <text x="56" y="327" class="body" fill="var(--text-muted)">...</text>
 
-  <rect x="56" y="456" width="336" height="48" rx="8" fill="rgba(223,60,48,0.12)"/>
-  <text x="224" y="484" text-anchor="middle" class="result" fill="#df3c30">Tangled mess of corrections</text>
+  <rect x="40" y="360" width="260" height="40" rx="8" fill="rgba(223,60,48,0.12)"/>
+  <text x="170" y="385" text-anchor="middle" class="result" fill="#df3c30">Tangled mess of corrections</text>
 
-  <rect x="472" y="24" width="400" height="512" rx="12" fill="rgba(40,200,64,0.07)"/>
-  <text x="672" y="56" text-anchor="middle" class="title" fill="var(--heading)">Disciplined AI Coding</text>
-  <text x="672" y="72" text-anchor="middle" class="subtitle" fill="var(--text-muted)">(simplicity)</text>
+  <rect x="356" y="16" width="308" height="408" rx="12" fill="rgba(40,200,64,0.07)"/>
+  <text x="510" y="48" text-anchor="middle" class="title" fill="var(--heading)">Disciplined AI Coding</text>
+  <text x="510" y="66" text-anchor="middle" class="subtitle" fill="var(--text-muted)">(simplicity)</text>
 
-  <rect x="504" y="96" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="528" y="120" class="body" fill="var(--text)">You: research auth flow in codebase</text>
-  <text x="528" y="136" class="body" fill="var(--text-muted)">AI maps existing patterns</text>
+  <rect x="380" y="84" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="396" y="105" class="body" fill="var(--text)">You: research auth flow</text>
+  <text x="396" y="123" class="body" fill="var(--text-muted)">AI maps existing patterns</text>
 
-  <rect x="504" y="184" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="528" y="208" class="body" fill="var(--text)">You: review research, plan approach</text>
-  <text x="528" y="224" class="body" fill="var(--text-muted)">AI creates implementation plan</text>
+  <rect x="380" y="152" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="396" y="173" class="body" fill="var(--text)">You: review, plan approach</text>
+  <text x="396" y="191" class="body" fill="var(--text-muted)">AI creates implementation plan</text>
 
-  <rect x="504" y="272" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="528" y="296" class="body" fill="var(--text)">You: review plan, approve</text>
-  <text x="528" y="312" class="body" fill="var(--text-muted)">AI implements following the plan</text>
+  <rect x="380" y="220" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="396" y="241" class="body" fill="var(--text)">You: review plan, approve</text>
+  <text x="396" y="259" class="body" fill="var(--text-muted)">AI implements following plan</text>
 
-  <rect x="504" y="360" width="336" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="528" y="384" class="body" fill="var(--text)">You: review code, run tests</text>
-  <text x="528" y="400" class="body" fill="var(--text-muted)">Ship with confidence</text>
+  <rect x="380" y="288" width="260" height="52" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="396" y="309" class="body" fill="var(--text)">You: review code, run tests</text>
+  <text x="396" y="327" class="body" fill="var(--text-muted)">Ship with confidence</text>
 
-  <rect x="504" y="456" width="336" height="48" rx="8" fill="rgba(40,200,64,0.12)"/>
-  <text x="672" y="484" text-anchor="middle" class="result" fill="#28c840">Clean code that fits the codebase</text>
+  <rect x="380" y="360" width="260" height="40" rx="8" fill="rgba(40,200,64,0.12)"/>
+  <text x="510" y="385" text-anchor="middle" class="result" fill="#28c840">Clean code that fits the codebase</text>
 </svg>

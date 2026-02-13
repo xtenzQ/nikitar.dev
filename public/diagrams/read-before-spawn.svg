@@ -1,76 +1,76 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 836 464" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" fill="none">
   <style>
     text { font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif; }
-    .title { font-size: 14px; font-weight: 700; }
-    .subtitle { font-size: 11px; font-weight: 600; opacity: 0.7; }
-    .body { font-size: 12px; }
-    .result { font-size: 12px; font-weight: 600; }
+    .title { font-size: 16px; font-weight: 700; font-family: 'Lato', 'Source Sans 3', system-ui, sans-serif; letter-spacing: -0.02em; }
+    .subtitle { font-size: 13px; font-weight: 600; }
+    .body { font-size: 14px; }
+    .result { font-size: 14px; font-weight: 600; }
   </style>
 
-  <rect x="24" y="24" width="370" height="416" rx="12" fill="rgba(223,60,48,0.07)"/>
-  <text x="209" y="52" text-anchor="middle" class="title" fill="var(--heading)">WRONG</text>
-  <text x="209" y="68" text-anchor="middle" class="subtitle" fill="var(--text-muted)">Spawn immediately</text>
+  <rect x="16" y="16" width="308" height="388" rx="12" fill="rgba(223,60,48,0.07)"/>
+  <text x="170" y="44" text-anchor="middle" class="title" fill="var(--heading)">WRONG</text>
+  <text x="170" y="62" text-anchor="middle" class="subtitle" fill="var(--text-muted)">Spawn immediately</text>
 
-  <rect x="48" y="96" width="322" height="48" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.25)" stroke-width="1"/>
-  <text x="209" y="125" text-anchor="middle" class="body" fill="var(--text)">User asks question</text>
+  <rect x="36" y="84" width="268" height="44" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.25)" stroke-width="1"/>
+  <text x="170" y="111" text-anchor="middle" class="body" fill="var(--text)">User asks question</text>
 
-  <line x1="209" y1="144" x2="209" y2="168" stroke="var(--border)" stroke-width="1.5"/>
-  <polygon points="203,168 209,178 215,168" fill="var(--border)"/>
+  <line x1="170" y1="128" x2="170" y2="148" stroke="var(--border)" stroke-width="1.5"/>
+  <polygon points="164,148 170,158 176,148" fill="var(--border)"/>
 
-  <line x1="209" y1="178" x2="97" y2="202" stroke="var(--border)" stroke-width="1.5"/>
-  <line x1="209" y1="178" x2="209" y2="202" stroke="var(--border)" stroke-width="1.5"/>
-  <line x1="209" y1="178" x2="321" y2="202" stroke="var(--border)" stroke-width="1.5"/>
+  <line x1="170" y1="158" x2="80" y2="180" stroke="var(--border)" stroke-width="1.5"/>
+  <line x1="170" y1="158" x2="170" y2="180" stroke="var(--border)" stroke-width="1.5"/>
+  <line x1="170" y1="158" x2="260" y2="180" stroke="var(--border)" stroke-width="1.5"/>
 
-  <rect x="49" y="202" width="96" height="40" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="97" y="227" text-anchor="middle" class="body" fill="var(--text)">Agent 1</text>
+  <rect x="40" y="180" width="80" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="80" y="203" text-anchor="middle" class="body" fill="var(--text)">Agent 1</text>
 
-  <rect x="161" y="202" width="96" height="40" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="209" y="227" text-anchor="middle" class="body" fill="var(--text)">Agent 2</text>
+  <rect x="130" y="180" width="80" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="170" y="203" text-anchor="middle" class="body" fill="var(--text)">Agent 2</text>
 
-  <rect x="273" y="202" width="96" height="40" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="321" y="227" text-anchor="middle" class="body" fill="var(--text)">Agent 3</text>
+  <rect x="220" y="180" width="80" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="260" y="203" text-anchor="middle" class="body" fill="var(--text)">Agent 3</text>
 
-  <rect x="48" y="274" width="322" height="64" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="209" y="300" text-anchor="middle" class="body" fill="var(--text-muted)">Agents get vague tasks</text>
-  <text x="209" y="320" text-anchor="middle" class="body" fill="var(--text-muted)">Results are unfocused</text>
+  <rect x="36" y="244" width="268" height="56" rx="8" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="170" y="268" text-anchor="middle" class="body" fill="var(--text-muted)">Agents get vague tasks</text>
+  <text x="170" y="288" text-anchor="middle" class="body" fill="var(--text-muted)">Results are unfocused</text>
 
-  <rect x="48" y="370" width="322" height="40" rx="6" fill="rgba(223,60,48,0.12)"/>
-  <text x="209" y="395" text-anchor="middle" class="result" fill="#df3c30">Wasted context, poor results</text>
+  <rect x="36" y="328" width="268" height="40" rx="6" fill="rgba(223,60,48,0.12)"/>
+  <text x="170" y="353" text-anchor="middle" class="result" fill="#df3c30">Wasted context, poor results</text>
 
-  <rect x="442" y="24" width="370" height="416" rx="12" fill="rgba(40,200,64,0.07)"/>
-  <text x="627" y="52" text-anchor="middle" class="title" fill="var(--heading)">RIGHT</text>
-  <text x="627" y="68" text-anchor="middle" class="subtitle" fill="var(--text-muted)">Read first, then delegate</text>
+  <rect x="356" y="16" width="308" height="388" rx="12" fill="rgba(40,200,64,0.07)"/>
+  <text x="510" y="44" text-anchor="middle" class="title" fill="var(--heading)">RIGHT</text>
+  <text x="510" y="62" text-anchor="middle" class="subtitle" fill="var(--text-muted)">Read first, then delegate</text>
 
-  <rect x="466" y="92" width="322" height="40" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.25)" stroke-width="1"/>
-  <text x="627" y="117" text-anchor="middle" class="body" fill="var(--text)">User asks question</text>
+  <rect x="376" y="80" width="268" height="40" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.25)" stroke-width="1"/>
+  <text x="510" y="105" text-anchor="middle" class="body" fill="var(--text)">User asks question</text>
 
-  <line x1="627" y1="132" x2="627" y2="148" stroke="var(--border)" stroke-width="1.5"/>
-  <polygon points="621,148 627,158 633,148" fill="var(--border)"/>
+  <line x1="510" y1="120" x2="510" y2="136" stroke="var(--border)" stroke-width="1.5"/>
+  <polygon points="504,136 510,146 516,136" fill="var(--border)"/>
 
-  <rect x="466" y="166" width="322" height="40" rx="8" fill="rgba(239,156,3,0.1)" stroke="rgba(239,156,3,0.3)" stroke-width="1"/>
-  <text x="627" y="191" text-anchor="middle" class="body" fill="var(--text)">READ mentioned files first</text>
+  <rect x="376" y="152" width="268" height="40" rx="8" fill="rgba(239,156,3,0.1)" stroke="rgba(239,156,3,0.3)" stroke-width="1"/>
+  <text x="510" y="177" text-anchor="middle" class="body" fill="var(--text)">READ mentioned files first</text>
 
-  <line x1="627" y1="206" x2="627" y2="222" stroke="var(--border)" stroke-width="1.5"/>
-  <polygon points="621,222 627,232 633,222" fill="var(--border)"/>
+  <line x1="510" y1="192" x2="510" y2="208" stroke="var(--border)" stroke-width="1.5"/>
+  <polygon points="504,208 510,218 516,208" fill="var(--border)"/>
 
-  <rect x="466" y="240" width="322" height="40" rx="8" fill="rgba(239,156,3,0.1)" stroke="rgba(239,156,3,0.3)" stroke-width="1"/>
-  <text x="627" y="265" text-anchor="middle" class="body" fill="var(--text)">Plan sub-tasks based on what you read</text>
+  <rect x="376" y="224" width="268" height="40" rx="8" fill="rgba(239,156,3,0.1)" stroke="rgba(239,156,3,0.3)" stroke-width="1"/>
+  <text x="510" y="249" text-anchor="middle" class="body" fill="var(--text)">Plan sub-tasks based on what you read</text>
 
-  <line x1="627" y1="280" x2="627" y2="296" stroke="var(--border)" stroke-width="1.5"/>
+  <line x1="510" y1="264" x2="510" y2="280" stroke="var(--border)" stroke-width="1.5"/>
 
-  <line x1="627" y1="296" x2="515" y2="316" stroke="var(--border)" stroke-width="1.5"/>
-  <line x1="627" y1="296" x2="627" y2="316" stroke="var(--border)" stroke-width="1.5"/>
-  <line x1="627" y1="296" x2="739" y2="316" stroke="var(--border)" stroke-width="1.5"/>
+  <line x1="510" y1="280" x2="420" y2="296" stroke="var(--border)" stroke-width="1.5"/>
+  <line x1="510" y1="280" x2="510" y2="296" stroke="var(--border)" stroke-width="1.5"/>
+  <line x1="510" y1="280" x2="600" y2="296" stroke="var(--border)" stroke-width="1.5"/>
 
-  <rect x="467" y="316" width="96" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="515" y="339" text-anchor="middle" class="body" fill="var(--text)">Specific 1</text>
+  <rect x="380" y="296" width="80" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="420" y="319" text-anchor="middle" class="body" fill="var(--text)">Specific 1</text>
 
-  <rect x="579" y="316" width="96" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="627" y="339" text-anchor="middle" class="body" fill="var(--text)">Specific 2</text>
+  <rect x="470" y="296" width="80" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="510" y="319" text-anchor="middle" class="body" fill="var(--text)">Specific 2</text>
 
-  <rect x="691" y="316" width="96" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
-  <text x="739" y="339" text-anchor="middle" class="body" fill="var(--text)">Specific 3</text>
+  <rect x="560" y="296" width="80" height="36" rx="6" fill="var(--card-bg)" stroke="var(--border)" stroke-width="1"/>
+  <text x="600" y="319" text-anchor="middle" class="body" fill="var(--text)">Specific 3</text>
 
-  <rect x="466" y="384" width="322" height="32" rx="6" fill="rgba(40,200,64,0.12)"/>
-  <text x="627" y="405" text-anchor="middle" class="result" fill="#28c840">Precise tasks, focused results</text>
+  <rect x="376" y="360" width="268" height="36" rx="6" fill="rgba(40,200,64,0.12)"/>
+  <text x="510" y="383" text-anchor="middle" class="result" fill="#28c840">Precise tasks, focused results</text>
 </svg>

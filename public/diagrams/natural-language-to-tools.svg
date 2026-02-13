@@ -1,42 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 336" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" fill="none">
   <style>
     text { font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif; }
-    .col-title { font-size: 13px; font-weight: 700; }
-    .cmd { font-size: 12px; font-weight: 600; }
-    .tool { font-size: 11.5px; font-family: 'SF Mono', 'Fira Code', monospace; }
+    .col-title { font-size: 16px; font-weight: 700; font-family: 'Lato', 'Source Sans 3', system-ui, sans-serif; letter-spacing: -0.02em; }
+    .cmd { font-size: 14px; font-weight: 600; }
+    .tool { font-size: 13px; font-family: 'SF Mono', 'Fira Code', monospace; }
   </style>
 
-  <text x="156" y="32" text-anchor="middle" class="col-title" fill="var(--heading)">What you type</text>
-  <text x="480" y="32" text-anchor="middle" class="col-title" fill="var(--heading)">What the agent actually does</text>
+  <text x="140" y="30" text-anchor="middle" class="col-title" fill="var(--heading)">What you type</text>
+  <text x="456" y="30" text-anchor="middle" class="col-title" fill="var(--heading)">What the agent actually does</text>
 
-  <rect x="24" y="64" width="264" height="48" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.3)" stroke-width="1"/>
-  <text x="156" y="93" text-anchor="middle" class="cmd" fill="var(--accent)">/commit</text>
+  <rect x="16" y="56" width="248" height="48" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.3)" stroke-width="1"/>
+  <text x="140" y="85" text-anchor="middle" class="cmd" fill="var(--accent)">/commit</text>
 
-  <line x1="296" y1="88" x2="328" y2="88" stroke="var(--accent)" stroke-width="1.5"/>
-  <polygon points="328,84 336,88 328,92" fill="var(--accent)"/>
+  <line x1="272" y1="80" x2="304" y2="80" stroke="var(--accent)" stroke-width="1.5"/>
+  <polygon points="304,76 312,80 304,84" fill="var(--accent)"/>
 
-  <text x="360" y="68" class="tool" fill="var(--text)">git status</text>
-  <text x="360" y="84" class="tool" fill="var(--text)">git diff</text>
-  <text x="360" y="100" class="tool" fill="var(--text)">git add &lt;files&gt;</text>
-  <text x="360" y="116" class="tool" fill="var(--text)">git commit -m "..."</text>
+  <text x="328" y="64" class="tool" fill="var(--text)">git status</text>
+  <text x="328" y="80" class="tool" fill="var(--text)">git diff</text>
+  <text x="328" y="96" class="tool" fill="var(--text)">git add &lt;files&gt;</text>
+  <text x="328" y="112" class="tool" fill="var(--text)">git commit -m "..."</text>
 
-  <rect x="24" y="160" width="264" height="48" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.3)" stroke-width="1"/>
-  <text x="156" y="189" text-anchor="middle" class="cmd" fill="var(--accent)">"find auth code"</text>
+  <rect x="16" y="148" width="248" height="48" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.3)" stroke-width="1"/>
+  <text x="140" y="177" text-anchor="middle" class="cmd" fill="var(--accent)">"find auth code"</text>
 
-  <line x1="296" y1="184" x2="328" y2="184" stroke="var(--accent)" stroke-width="1.5"/>
-  <polygon points="328,180 336,184 328,188" fill="var(--accent)"/>
+  <line x1="272" y1="172" x2="304" y2="172" stroke="var(--accent)" stroke-width="1.5"/>
+  <polygon points="304,168 312,172 304,176" fill="var(--accent)"/>
 
-  <text x="360" y="172" class="tool" fill="var(--text)">Grep: "auth"</text>
-  <text x="360" y="188" class="tool" fill="var(--text)">Glob: **/auth/**</text>
-  <text x="360" y="204" class="tool" fill="var(--text)">LS: src/services/auth/</text>
+  <text x="328" y="160" class="tool" fill="var(--text)">Grep: "auth"</text>
+  <text x="328" y="176" class="tool" fill="var(--text)">Glob: **/auth/**</text>
+  <text x="328" y="192" class="tool" fill="var(--text)">LS: src/services/auth/</text>
 
-  <rect x="24" y="256" width="264" height="48" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.3)" stroke-width="1"/>
-  <text x="156" y="285" text-anchor="middle" class="cmd" fill="var(--accent)">"explain the login flow"</text>
+  <rect x="16" y="240" width="248" height="48" rx="8" fill="rgba(0,112,203,0.08)" stroke="rgba(0,112,203,0.3)" stroke-width="1"/>
+  <text x="140" y="269" text-anchor="middle" class="cmd" fill="var(--accent)">"explain the login flow"</text>
 
-  <line x1="296" y1="280" x2="328" y2="280" stroke="var(--accent)" stroke-width="1.5"/>
-  <polygon points="328,276 336,280 328,284" fill="var(--accent)"/>
+  <line x1="272" y1="264" x2="304" y2="264" stroke="var(--accent)" stroke-width="1.5"/>
+  <polygon points="304,260 312,264 304,268" fill="var(--accent)"/>
 
-  <text x="360" y="268" class="tool" fill="var(--text)">Read: src/auth/login.ts</text>
-  <text x="360" y="284" class="tool" fill="var(--text)">Read: src/auth/middleware.ts</text>
-  <text x="360" y="300" class="tool" fill="var(--text)">Trace calls between files</text>
+  <text x="328" y="252" class="tool" fill="var(--text)">Read: src/auth/login.ts</text>
+  <text x="328" y="268" class="tool" fill="var(--text)">Read: src/auth/middleware.ts</text>
+  <text x="328" y="284" class="tool" fill="var(--text)">Trace calls between files</text>
 </svg>
