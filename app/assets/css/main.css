@@ -312,6 +312,15 @@ pre.shiki {
   background-color: var(--code-bg) !important;
 }
 
+/* ── Theme Toggle ────────────────────────────────────────── */
+.theme-toggle {
+  color: var(--text-muted);
+}
+
+.dark .theme-toggle {
+  color: var(--heading);
+}
+
 /* ── Selection ─────────────────────────────────────────────── */
 ::selection {
   background-color: rgba(0, 86, 178, 0.2);

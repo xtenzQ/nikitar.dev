@@ -21,8 +21,7 @@ function toggleTheme() {
         </NuxtLink>
         <button
           aria-label="Toggle dark mode"
-          class="p-2 rounded-md transition-colors hover:opacity-80"
-          style="color: var(--text-muted);"
+          class="p-2 rounded-md transition-colors hover:opacity-80 theme-toggle"
           @click="toggleTheme"
         >
           <Icon v-if="colorMode.value === 'dark'" name="mdi:weather-sunny" size="20" />
