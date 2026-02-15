@@ -26,9 +26,14 @@ defineOgImage({
 <template>
   <div>
     <section class="mb-12">
-      <h1 class="text-3xl font-bold" style="color: var(--heading);">Hey, I'm Nikita</h1>
+      <h1 class="text-3xl font-bold" style="color: var(--heading);">
+        <Icon name="ph:hand-waving" size="32" class="wave-icon" /> Hey, I'm Nikita
+      </h1>
       <p class="mt-3 text-lg font-light max-w-2xl" style="color: var(--text);">
-        Software &amp; AI Engineer. I build things with Java, Kotlin, and Python.
+        Software &amp; AI Engineer. I build things with
+        <span class="lang-tag"><Icon name="custom:java-outline" size="18" class="lang-icon" />Java</span>,
+        <span class="lang-tag"><Icon name="custom:kotlin-outline" size="18" class="lang-icon" />Kotlin</span>, and
+        <span class="lang-tag"><Icon name="custom:python-outline" size="18" class="lang-icon" />Python</span>.
         Into distributed systems and LLM-powered applications.
       </p>
     </section>
@@ -52,6 +57,24 @@ defineOgImage({
 </template>
 
 <style scoped>
+.wave-icon {
+  display: inline-block;
+  vertical-align: -0.15em;
+  color: var(--accent);
+}
+
+.lang-tag {
+  white-space: nowrap;
+}
+
+.lang-icon {
+  display: inline-block;
+  vertical-align: -0.15em;
+  margin-left: 0.35em;
+  margin-right: 0.15em;
+  color: var(--accent);
+}
+
 .recent-post-list {
   list-style: none;
   padding: 0;
