@@ -35,8 +35,8 @@
   <text x="541" y="118" text-anchor="middle" class="box-desc" fill="var(--text-muted)">action</text>
 
   <!-- Return arrow: Tool -> Context (going down and back) -->
-  <path d="M541,136 L541,188 L139,188 L139,136" stroke="var(--accent)" stroke-width="2" fill="none"/>
-  <polygon points="133,136 139,124 145,136" fill="var(--accent)"/>
+  <path d="M541,140 L541,188 L139,188 L139,148" stroke="var(--accent)" stroke-width="2" fill="none"/>
+  <polygon points="133,148 139,136 145,148" fill="var(--accent)"/>
 
   <!-- Label on return arrow -->
   <text x="340" y="212" text-anchor="middle" class="loop-label" fill="var(--text-muted)">result feeds back into context</text>
