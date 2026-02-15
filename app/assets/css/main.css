@@ -61,6 +61,10 @@
 }
 
 /* ── Base Styles ───────────────────────────────────────────── */
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);

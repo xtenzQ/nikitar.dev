@@ -7,6 +7,10 @@ const { data: posts } = await useAsyncData('recent-posts', () =>
     .all()
 )
 
+useHead({
+  titleTemplate: '%s',
+})
+
 useSeoMeta({
   title: 'Nikita Rusetskii',
   description: 'Software & AI Engineer. I build things with Java, Kotlin, and Python. Into distributed systems and LLM-powered applications.',
