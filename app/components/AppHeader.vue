@@ -81,12 +81,13 @@ onUnmounted(() => {
         </button>
         <button
           aria-label="Toggle menu"
-          class="flex items-center justify-center w-9 h-9 rounded-md transition-colors hover:opacity-80"
+          class="burger-toggle flex items-center justify-center w-9 h-9 rounded-md transition-colors hover:opacity-80"
+          :class="{ open: mobileMenuOpen }"
           style="color: var(--text-muted);"
           @click.stop="mobileMenuOpen = !mobileMenuOpen"
         >
-          <Icon v-if="!mobileMenuOpen" name="mdi:menu" size="22" />
-          <Icon v-else name="mdi:close" size="22" />
+          <Icon class="burger-icon" name="mdi:menu" size="22" />
+          <Icon class="close-icon" name="mdi:close" size="22" />
         </button>
       </div>
     </nav>
@@ -141,5 +142,17 @@ onUnmounted(() => {
 
 .mobile-nav-link:hover {
   background: var(--hover-bg, rgba(128, 128, 128, 0.1));
+}
+
+.burger-toggle .close-icon {
+  display: none;
+}
+
+.burger-toggle.open .burger-icon {
+  display: none;
+}
+
+.burger-toggle.open .close-icon {
+  display: block;
 }
 </style>

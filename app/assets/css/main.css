@@ -185,12 +185,10 @@ a:hover {
   font-size: 1em;
 }
 
-/* On small screens, position anchor inline instead of outside */
+/* On small screens, hide anchor links */
 @media (max-width: 768px) {
   .prose .heading-anchor .anchor-link {
-    position: static;
-    padding-right: 0;
-    margin-right: 4px;
+    display: none;
   }
 }
 
