@@ -1,13 +1,19 @@
 <script setup lang="ts">
-const { photos } = useAppConfig()
+import type { Photo } from '~/composables/usePhotos'
 
-// Full rows on desktop: 4 or 8 photos sit in 4 columns, 3 or 6 in 3
-const columns = photos.length % 4 === 0 ? 4 : 3
+const props = defineProps<{
+  groups: { title?: string, photos: Photo[] }[]
+}>()
+
+// One viewer for the whole gallery, so the arrows walk across groups
+const photos = computed(() => props.groups.flatMap(group => group.photos))
+const offsets = computed(() => props.groups.map((_, i) =>
+  props.groups.slice(0, i).reduce((sum, group) => sum + group.photos.length, 0)))
 
 const dialog = ref<HTMLDialogElement>()
 const isOpen = ref(false)
 const current = ref(0)
-const photo = computed(() => photos[current.value]!)
+const photo = computed(() => photos.value[current.value]!)
 
 function open(index: number) {
   current.value = index
@@ -20,7 +26,8 @@ function close() {
 }
 
 function step(delta: number) {
-  current.value = (current.value + delta + photos.length) % photos.length
+  const count = photos.value.length
+  current.value = (current.value + delta + count) % count
 }
 
 function onKeydown(e: KeyboardEvent) {
@@ -47,16 +54,27 @@ function onTouchEnd(e: TouchEvent) {
 
 <template>
   <div>
-    <ul class="photos" :style="{ '--columns': columns }">
-      <li v-for="(item, index) in photos" :key="item.name">
-        <figure>
-          <button type="button" class="photo-btn" :aria-label="`Open photo: ${item.caption}`" @click="open(index)">
-            <img :src="`/photos/${item.name}.webp`" :alt="item.alt" width="600" height="800" loading="lazy" decoding="async">
-          </button>
-          <figcaption>{{ item.caption }}</figcaption>
-        </figure>
-      </li>
-    </ul>
+    <section v-for="(group, g) in groups" :key="group.title ?? g" :class="{ 'mt-10': g > 0 }">
+      <h2 v-if="group.title" class="section-label">{{ group.title }}</h2>
+      <ul class="photos">
+        <li v-for="(item, i) in group.photos" :key="item.name">
+          <figure>
+            <button type="button" class="photo-btn" :aria-label="`Open photo: ${item.caption}`" @click="open(offsets[g]! + i)">
+              <img
+                :src="`/photos/${item.name}.webp`"
+                :alt="item.alt"
+                :style="{ objectPosition: item.focus }"
+                width="600"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              >
+            </button>
+            <figcaption>{{ item.caption }}</figcaption>
+          </figure>
+        </li>
+      </ul>
+    </section>
 
     <dialog
       ref="dialog"
@@ -73,13 +91,13 @@ function onTouchEnd(e: TouchEvent) {
       </button>
 
       <figure v-if="isOpen" class="lightbox-figure">
-        <!-- The small version is already cached, so it shows instantly while the large one loads -->
+        <!-- The thumbnail is already cached, so it shows instantly while the large one loads -->
         <img
           :key="photo.name"
           :src="`/photos/${photo.name}-large.webp`"
           :alt="photo.alt"
-          width="1200"
-          height="1600"
+          :width="photo.width"
+          :height="photo.height"
           :style="{ backgroundImage: `url(/photos/${photo.name}.webp)` }"
         >
         <figcaption class="lightbox-caption">
@@ -111,7 +129,7 @@ function onTouchEnd(e: TouchEvent) {
 
 @media (min-width: 640px) {
   .photos {
-    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -196,8 +214,6 @@ function onTouchEnd(e: TouchEvent) {
   max-width: 100%;
   height: auto;
   max-height: calc(100dvh - 9rem);
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
   border-radius: 12px;
   background-size: cover;
 }

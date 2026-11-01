@@ -1,0 +1,64 @@
+{
+  "groups": [
+    {
+      "id": "korea-2025",
+      "title": "Korea, 2025",
+      "photos": [
+        {
+          "name": "seoul",
+          "caption": "Seoul, 2025",
+          "alt": "N Seoul Tower above a park on Namsan",
+          "width": 1200,
+          "height": 1600,
+          "featured": true
+        },
+        {
+          "name": "busan-night",
+          "caption": "Busan, 2025",
+          "alt": "Gwangan Bridge lit up at night under a full moon",
+          "width": 1200,
+          "height": 1600,
+          "featured": true
+        },
+        {
+          "name": "incheon",
+          "caption": "Inha University, 2025",
+          "alt": "Cherry blossoms on the Inha University campus",
+          "width": 1200,
+          "height": 1600,
+          "featured": true
+        },
+        {
+          "name": "busan-sunset",
+          "caption": "Busan, 2025",
+          "alt": "Gwangan Bridge at sunset behind green bushes",
+          "width": 1200,
+          "height": 1600,
+          "featured": true
+        }
+      ]
+    },
+    {
+      "id": "korea-2019",
+      "title": "Korea, 2019",
+      "photos": [
+        {
+          "name": "inha-2019",
+          "caption": "Inha University, 2019",
+          "alt": "A traditional pavilion by a pond on the Inha University campus in autumn",
+          "width": 1200,
+          "height": 1600,
+          "featured": true
+        },
+        {
+          "name": "seoul-2019",
+          "caption": "Seoul, 2019",
+          "alt": "Nikita in front of the Samsung Seoul R&D Campus sign",
+          "width": 1200,
+          "height": 1600,
+          "featured": true
+        }
+      ]
+    }
+  ]
+}

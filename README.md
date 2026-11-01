@@ -23,6 +23,7 @@
 
 - 🗂️ One-page index: a short bio and open source pull requests in a macOS-style grouped list
 - 🐙 Open source section pulled from the GitHub API at build time, refreshed by a daily rebuild (curate it in `app/app.config.ts`)
+- 📷 Photos: a featured set on the home page, all of them grouped by trip on `/photos`, with a native `<dialog>` viewer
 - 📝 Markdown-based blog powered by [Nuxt Content](https://content.nuxt.com/)
 - 🌗 Dark / light mode with system preference detection
 - 🏷️ Tags with per-tag post listings
@@ -36,7 +37,7 @@
 
 ## 🛠️ Stack
 
-- [Nuxt 3](https://nuxt.com/) — Vue.js meta-framework
+- [Nuxt 4](https://nuxt.com/) — Vue.js meta-framework
 - [Vue 3](https://vuejs.org/) — Progressive JavaScript framework
 - [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS framework
 - [Nuxt Content](https://content.nuxt.com/) — Git-based headless CMS
@@ -63,7 +64,12 @@ pnpm generate
 
 # Preview production build
 pnpm preview
+
+# Process new photos from photos-src/<trip>/ (macOS; needs `brew install webp`)
+pnpm photos
 ```
+
+Agent and contributor docs: `AGENTS.md`, plus a `SPEC.md` per module (start with the root one).
 
 ## 📦 Third-Party Assets
 

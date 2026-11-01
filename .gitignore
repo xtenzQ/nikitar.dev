@@ -22,3 +22,9 @@ logs
 .env
 .env.*
 !.env.example
+
+# Photo originals (full size, with EXIF/GPS) never go into git; scripts/photos turns them into public/photos
+photos-src/
+
+# Local Claude Code settings
+.claude/settings.local.json

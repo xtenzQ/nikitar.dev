@@ -53,6 +53,25 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
   },
 
+  // Crawlers that collect AI training data are asked to skip photos; search and AI search stay allowed
+  robots: {
+    groups: [
+      {
+        userAgent: [
+          'GPTBot',
+          'ClaudeBot',
+          'anthropic-ai',
+          'Google-Extended',
+          'Applebot-Extended',
+          'CCBot',
+          'meta-externalagent',
+          'Bytespider',
+        ],
+        disallow: ['/photos'],
+      },
+    ],
+  },
+
   content: {
     build: {
       markdown: {
@@ -81,7 +100,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/'],
+      // '/' links /photos only when there are more photos than the featured set
+      routes: ['/', '/photos'],
     },
     watchOptions: {
       usePolling: true,

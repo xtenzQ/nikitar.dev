@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { profile, github, photos } = useAppConfig()
+const { profile, github } = useAppConfig()
+const { all: allPhotos, featured } = usePhotos()
 
 const { data: contributions } = await useFetch('/api/contributions', { key: 'contributions' })
 
@@ -109,8 +110,19 @@ useSchemaOrg([
       </ul>
     </section>
 
-    <section v-if="photos.length" class="mt-10" aria-label="Photos">
-      <PhotoStrip />
+    <section v-if="featured.length" class="mt-10" aria-label="Photos">
+      <PhotoGallery :groups="[{ photos: featured }]" />
+      <ul v-if="allPhotos.length > featured.length" class="group mt-4">
+        <li>
+          <NuxtLink to="/photos" class="group-row">
+            <Icon name="ph:images" size="20" class="row-chevron" />
+            <div class="group-row-body">
+              <span class="row-text" style="color: var(--text-muted);">All {{ allPhotos.length }} photos</span>
+              <Icon name="ph:caret-right" size="14" class="row-chevron" />
+            </div>
+          </NuxtLink>
+        </li>
+      </ul>
     </section>
   </div>
 </template>

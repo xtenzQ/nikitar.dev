@@ -25,15 +25,4 @@ export default defineAppConfig({
       'aptem336/ACO',
     ],
   },
-
-  // Each photo is public/photos/<name>.webp (600×800, the strip) and <name>-large.webp
-  // (1200×1600, loaded only in the viewer). Both have metadata stripped.
-  photos: [
-    { name: 'seoul', caption: 'Seoul, 2025', alt: 'N Seoul Tower above a park on Namsan' },
-    { name: 'busan-night', caption: 'Busan, 2025', alt: 'Gwangan Bridge lit up at night under a full moon' },
-    { name: 'incheon', caption: 'Inha University, 2025', alt: 'Cherry blossoms on the Inha University campus' },
-    { name: 'busan-sunset', caption: 'Busan, 2025', alt: 'Gwangan Bridge at sunset behind green bushes' },
-    { name: 'inha-2019', caption: 'Inha University, 2019', alt: 'A traditional pavilion by a pond on the Inha University campus in autumn' },
-    { name: 'seoul-2019', caption: 'Seoul, 2019', alt: 'Nikita in front of the Samsung Seoul R&D Campus sign' },
-  ],
 })
