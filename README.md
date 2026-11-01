@@ -1,7 +1,7 @@
 <h1 align="center">🌐 nikitar.dev</h1>
 
 <p align="center">
-  Personal portfolio and blog built with Nuxt 3, Tailwind CSS, and Nuxt Content.
+  Personal site of Nikita Rusetskii: a one-page index with open source contributions and photos. Built with Nuxt 4, Tailwind CSS, and Nuxt Content.
 </p>
 
 <p align="center">
@@ -21,19 +21,17 @@
 
 ## ✨ Features
 
-- 🗂️ One-page index: a short bio and open source pull requests in a macOS-style grouped list
-- 🐙 Open source section pulled from the GitHub API at build time, refreshed by a daily rebuild (curate it in `app/app.config.ts`)
+- 🗂️ One-page index: a short bio, open source pull requests, and photos in macOS-style grouped lists
+- 🐙 Open source pull requests pulled from the GitHub API at build time and refreshed by a daily rebuild (curate them in `app/app.config.ts`)
 - 📷 Photos: a featured set on the home page, all of them grouped by trip on `/photos`, with a native `<dialog>` viewer
-- 📝 Markdown-based blog powered by [Nuxt Content](https://content.nuxt.com/)
+- 🧹 Photo pipeline (`pnpm photos`): downscales originals and strips EXIF/GPS before anything reaches the repo
 - 🌗 Dark / light mode with system preference detection
-- 🏷️ Tags with per-tag post listings
-- 🔢 KaTeX math formula rendering
-- 🎨 Syntax highlighting with [Shiki](https://shiki.style/) (GitHub Light & Dark themes)
-- 📋 One-click code block copy button
-- 🔗 Heading anchor links for easy sharing
+- 🔤 System fonts (SF Pro on Apple devices), no web fonts
 - 📱 Fully responsive design
-- 🔍 SEO optimized (Open Graph, structured data, sitemap)
+- 🔍 SEO optimized (Open Graph, structured data, sitemap); `robots.txt` asks AI training crawlers to skip `/photos`
 - 🚀 Static site generation deployed to GitHub Pages
+
+The blog engine stays in place for when writing resumes (it is dormant and unlinked for now): Markdown posts via [Nuxt Content](https://content.nuxt.com/), tags, KaTeX math, [Shiki](https://shiki.style/) syntax highlighting, code copy buttons, and heading anchor links.
 
 ## 🛠️ Stack
 
