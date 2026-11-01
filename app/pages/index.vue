@@ -1,137 +1,172 @@
 <script setup lang="ts">
-const { data: posts } = await useAsyncData('recent-posts', () =>
-  queryCollection('blog')
-    .where('draft', '=', false)
-    .order('date', 'DESC')
-    .limit(3)
-    .all()
-)
+const { profile, github, photos } = useAppConfig()
+
+const { data: contributions } = await useFetch('/api/contributions', { key: 'contributions' })
+
+const allContributionsUrl = `https://github.com/search?type=pullrequests&q=${encodeURIComponent(`is:pr author:${github.username} -user:${github.username}`)}`
 
 useHead({
   titleTemplate: '%s',
 })
 
 useSeoMeta({
-  title: 'Nikita Rusetskii',
-  description: 'Software & AI Engineer. I build things with Java, Kotlin, and Python. Into distributed systems and LLM-powered applications.',
+  title: profile.name,
+  description: 'Software engineer at KMS Lighthouse in Belgrade. Solr-based search, Lucene internals, RAG, and agent harnesses for software engineering.',
 })
 
 defineOgImage({
   component: 'NuxtSeo',
-  title: 'Nikita Rusetskii',
-  description: 'Software & AI Engineer — blog and portfolio',
+  title: profile.name,
+  description: 'Search, Lucene, RAG, and agent tooling',
 })
+
+useSchemaOrg([
+  definePerson({
+    name: profile.name,
+    url: 'https://nikitar.dev',
+    jobTitle: 'Software Engineer',
+    sameAs: [
+      'https://github.com/xtenzQ',
+      'https://www.linkedin.com/in/xtenzq/',
+      'https://scholar.google.com/citations?user=qy3ZD4IAAAAJ&hl=en',
+    ],
+  }),
+])
 </script>
 
 <template>
   <div>
-    <section class="mb-12">
-      <h1 class="text-3xl font-bold" style="color: var(--heading);">
-        <Icon name="ph:hand-waving" size="32" class="wave-icon" /> Hey, I'm Nikita
-      </h1>
-      <p class="mt-3 text-lg font-light max-w-2xl" style="color: var(--text);">
-        Software &amp; AI Engineer. I build things with
-        <span class="lang-tag"><Icon name="custom:java-outline" size="18" class="lang-icon" />Java</span>,
-        <span class="lang-tag"><Icon name="custom:kotlin-outline" size="18" class="lang-icon" />Kotlin</span>, and
-        <span class="lang-tag"><Icon name="custom:python-outline" size="18" class="lang-icon" />Python</span>.
-        Into distributed systems and LLM-powered applications.
-      </p>
-    </section>
+    <header class="flex items-center gap-4">
+      <img :src="profile.avatar" alt="" width="44" height="44" class="avatar">
+      <div class="flex-1 min-w-0">
+        <h1 class="name">{{ profile.name }}</h1>
+        <p class="role">{{ profile.role }} · {{ profile.location }}</p>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <SocialLinks class="hidden sm:flex" />
+        <ThemeToggle />
+      </div>
+    </header>
 
-    <section v-if="posts?.length">
-      <h2 class="text-xl font-semibold mb-4" style="color: var(--heading);">Recent posts</h2>
-      <ul class="recent-post-list">
-        <li v-for="post in posts" :key="post.path" class="recent-post-item">
-          <span class="dot" />
-          <NuxtLink :to="post.path" class="recent-post-title">{{ post.title }}</NuxtLink>
-          <span class="dash" />
-          <time class="recent-post-date" style="color: var(--text-muted);">{{ formatDateLong(post.date) }}</time>
+    <!-- Same text as the GitHub profile README -->
+    <div class="bio">
+      <p>
+        Software engineer at
+        <a href="https://kmslh.com/" target="_blank" rel="noopener noreferrer">KMS Lighthouse</a>,
+        based in Belgrade. I work on Solr-based search and build AI tooling for our R&amp;D team.
+      </p>
+      <p>
+        Interested in search architecture, Lucene internals, RAG, and agent harnesses for software engineering.
+      </p>
+      <p class="muted">
+        Before moving to Serbia in 2023, I was a PhD student supervised by
+        <a href="https://scholar.google.com/citations?user=qKyxsuIAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Denis Sidorov</a>,
+        working on optimization and ML methods for power systems in collaboration with the Intelligent Power Grid Lab at Inha University.
+      </p>
+      <p class="muted">
+        Two-time 3rd-place winner of the SI Analytics satellite imagery track at JunctionX Seoul:
+        <a href="https://github.com/daredevils-team/SmartMonitor" target="_blank" rel="noopener noreferrer">SmartMonitor</a> (2020),
+        <a href="https://github.com/daredevils-team/SmartChange" target="_blank" rel="noopener noreferrer">SmartChange</a> (2021).
+      </p>
+    </div>
+
+    <SocialLinks class="flex sm:hidden mt-5" />
+
+    <section v-if="contributions?.length" class="mt-10">
+      <h2 class="section-label">Open source</h2>
+      <ul class="group">
+        <li v-for="pr in contributions" :key="pr.url">
+          <a :href="pr.url" target="_blank" rel="noopener noreferrer" class="group-row">
+            <img
+              :src="`https://github.com/${pr.owner}.png?size=40`"
+              alt=""
+              width="20"
+              height="20"
+              loading="lazy"
+              class="org-avatar"
+            >
+            <div class="group-row-body">
+              <div class="row-text">
+                <div class="row-title">{{ pr.title }}</div>
+                <div class="row-subtitle mono">{{ pr.repo }} #{{ pr.number }}</div>
+              </div>
+              <span class="row-status">
+                <span class="dot" :style="{ background: pr.state === 'open' ? 'var(--open)' : 'var(--merged)' }" />
+                <span class="sr-only sm:not-sr-only">{{ pr.state === 'open' ? 'Open' : 'Merged' }}</span>
+              </span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a :href="allContributionsUrl" target="_blank" rel="noopener noreferrer" class="group-row">
+            <Icon name="ph:github-logo" size="20" class="row-chevron" />
+            <div class="group-row-body">
+              <span class="row-text" style="color: var(--text-muted);">All pull requests on GitHub</span>
+              <Icon name="ph:arrow-up-right" size="14" class="row-chevron" />
+            </div>
+          </a>
         </li>
       </ul>
-      <NuxtLink to="/blog" class="inline-block mt-4 text-sm font-medium transition-colors" style="color: var(--accent);">
-        View all posts &rarr;
-      </NuxtLink>
     </section>
 
+    <section v-if="photos.length" class="mt-10" aria-label="Photos">
+      <PhotoStrip />
+    </section>
   </div>
 </template>
 
 <style scoped>
-.wave-icon {
-  display: inline-block;
-  vertical-align: -0.15em;
-  color: var(--accent);
-}
-
-.lang-tag {
-  white-space: nowrap;
-}
-
-.lang-icon {
-  display: inline-block;
-  vertical-align: -0.15em;
-  margin-left: 0.35em;
-  margin-right: 0.15em;
-  color: var(--accent);
-}
-
-.recent-post-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.recent-post-item {
-  display: flex;
-  align-items: baseline;
-  padding: 0.6rem 0;
-  line-height: 1.5rem;
-}
-
-.dot {
-  width: 5px;
-  height: 5px;
-  min-width: 5px;
+.avatar {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #999;
-  position: relative;
-  top: -1px;
-  margin-right: 0.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--border);
 }
 
-.recent-post-title {
-  font-size: 1.05rem;
-  color: var(--heading);
-  text-decoration: none;
+.name {
+  font-size: 1.0625rem;
+  line-height: 1.3;
+}
+
+.role {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.bio {
+  margin-top: 1.25rem;
+  color: var(--text);
+}
+
+.bio p + p {
+  margin-top: 0.75rem;
+}
+
+.bio .muted {
+  color: var(--text-muted);
+}
+
+.org-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.row-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
   white-space: nowrap;
-}
-
-.recent-post-title:hover {
-  color: var(--accent);
-  text-decoration: underline;
-  text-decoration-color: var(--link-underline);
-  text-underline-offset: 3px;
-}
-
-.dash {
-  flex-grow: 1;
-  margin: 0 0.5rem 0.4rem 0.5rem;
-  border-bottom: 2px dotted var(--dash-color);
-}
-
-.recent-post-date {
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .recent-post-title {
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-  }
 }
 </style>

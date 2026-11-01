@@ -30,50 +30,23 @@ defineOgImage({
 
 <template>
   <div>
-    <h1 class="text-3xl font-bold mb-8" style="color: var(--heading);">Tags</h1>
+    <h1 class="page-title">Tags</h1>
+    <p class="page-subtitle">
+      <NuxtLink to="/blog">All posts</NuxtLink>
+    </p>
 
-    <div v-if="tagCounts.length" class="flex flex-wrap gap-3">
-      <NuxtLink
-        v-for="[tag, count] in tagCounts"
-        :key="tag"
-        :to="`/blog/tags/${tag}`"
-        class="tag-pill"
-      >
-        {{ tag }}
-        <span class="tag-count">{{ count }}</span>
-      </NuxtLink>
-    </div>
+    <ul v-if="tagCounts.length" class="group mt-8">
+      <li v-for="[tag, count] in tagCounts" :key="tag">
+        <NuxtLink :to="`/blog/tags/${tag}`" class="group-row">
+          <div class="group-row-body">
+            <span class="row-text row-title">{{ tag }}</span>
+            <span class="row-meta">{{ count }}</span>
+            <Icon name="ph:caret-right" size="14" class="row-chevron" />
+          </div>
+        </NuxtLink>
+      </li>
+    </ul>
 
-    <p v-else style="color: var(--text-muted);">No tags yet.</p>
+    <p v-else class="mt-8" style="color: var(--text-muted);">No tags yet.</p>
   </div>
 </template>
-
-<style scoped>
-.tag-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  border-radius: 0.7em;
-  padding: 6px 10px;
-  line-height: 1.5;
-  font-size: 0.95rem;
-  color: var(--heading);
-  border: 1px solid var(--tag-border);
-  box-shadow: 0 0 3px 0 var(--shadow);
-  text-decoration: none;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.tag-pill:hover {
-  background: var(--tag-hover);
-  border-color: var(--tag-hover);
-  text-decoration: none;
-  color: var(--accent);
-}
-
-.tag-count {
-  font-size: 0.7em;
-  color: var(--text-muted);
-  font-family: 'Lato', sans-serif;
-}
-</style>

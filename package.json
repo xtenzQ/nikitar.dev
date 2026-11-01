@@ -30,5 +30,8 @@
       "better-sqlite3",
       "esbuild"
     ]
+  },
+  "devDependencies": {
+    "@iconify-json/ph": "^1.2.2"
   }
 }

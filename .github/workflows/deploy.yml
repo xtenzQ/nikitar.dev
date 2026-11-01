@@ -5,6 +5,9 @@ on:
     branches:
       - master
   workflow_dispatch:
+  # Rebuild daily so the open source list picks up new pull requests
+  schedule:
+    - cron: '0 6 * * *'
 
 permissions:
   contents: read
@@ -33,6 +36,8 @@ jobs:
 
       - name: Build
         run: npx nuxt build --preset github_pages
+        env:
+          NUXT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

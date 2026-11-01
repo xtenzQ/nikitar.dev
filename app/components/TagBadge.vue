@@ -5,25 +5,26 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink
-    :to="`/blog/tags/${label}`"
-    class="tag-badge inline-block text-xs font-medium px-2.5 py-1 rounded-full transition-colors"
-    style="background: var(--badge-bg); color: var(--badge-text); border: 1px solid var(--tag-border);"
-    @click.stop
-  >
+  <NuxtLink :to="`/blog/tags/${label}`" class="tag-badge" @click.stop>
     {{ label }}
   </NuxtLink>
 </template>
 
 <style scoped>
 .tag-badge {
-  text-decoration: none;
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .tag-badge:hover {
-  background: var(--tag-hover) !important;
-  border-color: var(--tag-hover) !important;
+  background: var(--surface-hover);
+  color: var(--heading);
   text-decoration: none;
-  color: var(--accent) !important;
 }
 </style>

@@ -13,6 +13,12 @@ export default defineNuxtConfig({
   ],
 
   icon: {
+    // Static hosting has no /api/_nuxt_icon route, so ship every icon in the client bundle.
+    // Icons named in app.config.ts are dynamic and invisible to the scanner, so list them here.
+    clientBundle: {
+      scan: true,
+      icons: ['ph:github-logo', 'ph:linkedin-logo', 'ph:graduation-cap', 'ph:envelope-simple', 'ph:x', 'ph:caret-left'],
+    },
     customCollections: [
       {
         prefix: 'custom',
@@ -43,7 +49,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://nikitar.dev',
     name: 'Nikita Rusetskii',
-    description: 'Software & AI Engineer — blog and portfolio',
+    description: 'Software engineer working on search, Lucene, RAG, and agent tooling',
     defaultLocale: 'en',
   },
 
@@ -67,6 +73,11 @@ export default defineNuxtConfig({
     },
   },
 
+  // The about page was folded into the home page
+  routeRules: {
+    '/about': { redirect: '/' },
+  },
+
   nitro: {
     prerender: {
       crawlLinks: true,
@@ -85,11 +96,17 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'icon', type: 'image/png', href: '/favicon.png', sizes: '32x32' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Source+Sans+3:wght@300;400;600;700&display=swap' },
         { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css' },
       ],
+      meta: [
+        { name: 'theme-color', content: '#f5f5f7', media: '(prefers-color-scheme: light)' },
+        { name: 'theme-color', content: '#111113', media: '(prefers-color-scheme: dark)' },
+      ],
     },
+  },
+
+  runtimeConfig: {
+    // Set NUXT_GITHUB_TOKEN at build time to avoid GitHub API rate limits
+    githubToken: '',
   },
 })

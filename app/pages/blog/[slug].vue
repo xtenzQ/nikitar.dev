@@ -44,21 +44,16 @@ useSchemaOrg([
 </script>
 
 <template>
-  <article v-if="post" class="max-w-prose mx-auto">
-    <NuxtLink to="/blog" class="inline-flex items-center gap-1 text-sm mb-6 transition-colors" style="color: var(--text-muted);">
-      <Icon name="mdi:arrow-left" size="16" />
-      Back to blog
-    </NuxtLink>
-
-    <header class="mb-10">
-      <h1 class="text-3xl font-bold" style="color: var(--heading);">{{ post.title }}</h1>
-      <p class="mt-2 text-lg font-light" style="color: var(--text);">{{ post.description }}</p>
-      <div class="flex items-center gap-3 text-sm mt-4" style="color: var(--text-muted);">
-        <time>{{ formatDate(post.date) }}</time>
-        <span>&middot;</span>
+  <article v-if="post">
+    <header class="post-header">
+      <h1 class="post-title">{{ post.title }}</h1>
+      <p class="post-description">{{ post.description }}</p>
+      <div class="post-meta">
+        <time :datetime="post.date">{{ formatDate(post.date) }}</time>
+        <span aria-hidden="true">·</span>
         <span>{{ readingTime }}</span>
       </div>
-      <div v-if="post.tags?.length" class="flex flex-wrap gap-2 mt-4">
+      <div v-if="post.tags?.length" class="flex flex-wrap gap-1.5 mt-4">
         <TagBadge v-for="tag in post.tags" :key="tag" :label="tag" />
       </div>
     </header>
@@ -68,3 +63,40 @@ useSchemaOrg([
     </div>
   </article>
 </template>
+
+<style scoped>
+.post-header {
+  padding-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.post-title {
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 640px) {
+  .post-title {
+    font-size: 2.25rem;
+  }
+}
+
+.post-description {
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+</style>

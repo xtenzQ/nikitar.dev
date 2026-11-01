@@ -12,6 +12,7 @@ defineProps<{
 <template>
   <div class="code-block-wrapper">
     <pre :class="$props.class"><slot /></pre>
+    <span class="code-language">{{ filename || language || 'text' }}</span>
     <button
       class="copy-code-button"
       aria-label="Copy code"

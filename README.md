@@ -21,14 +21,16 @@
 
 ## ✨ Features
 
+- 🗂️ One-page index: a short bio and open source pull requests in a macOS-style grouped list
+- 🐙 Open source section pulled from the GitHub API at build time, refreshed by a daily rebuild (curate it in `app/app.config.ts`)
 - 📝 Markdown-based blog powered by [Nuxt Content](https://content.nuxt.com/)
 - 🌗 Dark / light mode with system preference detection
-- 🏷️ Tag system with tag cloud and per-tag post listings
+- 🏷️ Tags with per-tag post listings
 - 🔢 KaTeX math formula rendering
 - 🎨 Syntax highlighting with [Shiki](https://shiki.style/) (GitHub Light & Dark themes)
 - 📋 One-click code block copy button
 - 🔗 Heading anchor links for easy sharing
-- 📱 Fully responsive design with mobile hamburger menu
+- 📱 Fully responsive design
 - 🔍 SEO optimized (Open Graph, structured data, sitemap)
 - 🚀 Static site generation deployed to GitHub Pages
 
@@ -65,13 +67,13 @@ pnpm preview
 
 ## 📦 Third-Party Assets
 
-- **Fonts:** [Source Sans 3](https://fonts.google.com/specimen/Source+Sans+3) and [Lato](https://fonts.google.com/specimen/Lato) via Google Fonts
-- **Icons:** [Material Design Icons](https://pictogrammers.com/library/mdi/) via [@nuxt/icon](https://nuxt.com/modules/icon)
+- **Fonts:** the system font stack (SF Pro / SF Mono on Apple devices), no web fonts
+- **Icons:** [Phosphor Icons](https://phosphoricons.com/) via [@nuxt/icon](https://nuxt.com/modules/icon)
 - **Math rendering:** [KaTeX](https://katex.org/) CSS via [jsDelivr](https://www.jsdelivr.com/)
 
 ## 🎨 Credits
 
-The design of this site was inspired by the [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) Jekyll theme by [cotes2020](https://github.com/cotes2020), licensed under the [MIT License](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE).
+Earlier versions of this site were inspired by the [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) Jekyll theme by [cotes2020](https://github.com/cotes2020), licensed under the [MIT License](https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE).
 
 ## 🤝 Contribution
 

@@ -7,33 +7,26 @@ const { data: posts } = await useAsyncData('all-posts', () =>
 )
 
 useSeoMeta({
-  title: 'Blog',
-  description: 'Articles on software engineering, AI, and technology by Nikita Rusetskii.',
+  title: 'Writing',
+  description: 'Articles on software engineering, search, and AI by Nikita Rusetskii.',
 })
 
 defineOgImage({
   component: 'NuxtSeo',
-  title: 'Blog',
-  description: 'Articles on software engineering, AI, and technology.',
+  title: 'Writing',
+  description: 'Articles on software engineering, search, and AI.',
 })
 </script>
 
 <template>
   <div>
-    <h1 class="text-3xl font-bold mb-8" style="color: var(--heading);">Blog</h1>
+    <h1 class="page-title">Writing</h1>
+    <p class="page-subtitle">
+      {{ posts?.length ?? 0 }} {{ posts?.length === 1 ? 'post' : 'posts' }} ·
+      <NuxtLink to="/blog/tags">Browse by tag</NuxtLink>
+    </p>
 
-    <div v-if="posts?.length" class="divide-y" style="border-color: var(--border);">
-      <BlogPostCard
-        v-for="post in posts"
-        :key="post.path"
-        :title="post.title"
-        :description="post.description"
-        :date="post.date"
-        :path="post.path"
-        :tags="post.tags"
-      />
-    </div>
-
-    <p v-else style="color: var(--text-muted);">No posts yet. Check back soon!</p>
+    <PostList v-if="posts?.length" :posts="posts" class="mt-8" />
+    <p v-else class="mt-8" style="color: var(--text-muted);">No posts yet.</p>
   </div>
 </template>
