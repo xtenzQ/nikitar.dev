@@ -18,8 +18,16 @@ export interface Contribution {
   date: string
 }
 
+export interface Contributions {
+  /** Newest first, capped at github.limit */
+  pullRequests: Contribution[]
+  /** Counted over every pull request that passes the filters, not just the capped list */
+  merged: number
+  open: number
+}
+
 // Prerendered at build time, so the list is as fresh as the last deploy.
-export default defineEventHandler(async (): Promise<Contribution[]> => {
+export default defineEventHandler(async (): Promise<Contributions> => {
   const { github } = useAppConfig()
   const { githubToken } = useRuntimeConfig()
 
@@ -36,11 +44,11 @@ export default defineEventHandler(async (): Promise<Contribution[]> => {
         q: `is:pr is:public author:${github.username} -user:${github.username}`,
         sort: 'created',
         order: 'desc',
-        per_page: 50,
+        per_page: 100,
       },
     })
 
-    return items
+    const pullRequests = items
       .filter(item => item.state === 'open' || item.pull_request?.merged_at)
       .map((item) => {
         const repo = item.repository_url.replace('https://api.github.com/repos/', '')
@@ -55,10 +63,15 @@ export default defineEventHandler(async (): Promise<Contribution[]> => {
         } satisfies Contribution
       })
       .filter(c => !github.hidden.includes(c.repo) && !github.hidden.includes(`${c.repo}#${c.number}`))
-      .slice(0, github.limit)
+
+    return {
+      pullRequests: pullRequests.slice(0, github.limit),
+      merged: pullRequests.filter(c => c.state === 'merged').length,
+      open: pullRequests.filter(c => c.state === 'open').length,
+    }
   }
   catch (error) {
     console.warn('[contributions] GitHub request failed, rendering an empty list:', error)
-    return []
+    return { pullRequests: [], merged: 0, open: 0 }
   }
 })

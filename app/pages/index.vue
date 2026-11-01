@@ -73,10 +73,20 @@ useSchemaOrg([
 
     <SocialLinks class="flex sm:hidden mt-5" />
 
-    <section v-if="contributions?.length" class="mt-10">
-      <h2 class="section-label">Open source</h2>
+    <section v-if="contributions?.pullRequests.length" class="mt-10">
+      <div class="section-head">
+        <h2 class="section-label">Open source</h2>
+        <p class="section-meta">
+          <span v-if="contributions.merged">
+            <span class="dot" style="background: var(--merged);" />{{ contributions.merged }} merged
+          </span>
+          <span v-if="contributions.open">
+            <span class="dot" style="background: var(--open);" />{{ contributions.open }} open
+          </span>
+        </p>
+      </div>
       <ul class="group">
-        <li v-for="pr in contributions" :key="pr.url">
+        <li v-for="pr in contributions.pullRequests" :key="pr.url">
           <a :href="pr.url" target="_blank" rel="noopener noreferrer" class="group-row">
             <img
               :src="`https://github.com/${pr.owner}.png?size=40`"
@@ -157,6 +167,32 @@ useSchemaOrg([
 
 .bio .muted {
   color: var(--text-muted);
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-head .section-label {
+  margin: 0;
+}
+
+.section-meta {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.section-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  white-space: nowrap;
 }
 
 .org-avatar {
