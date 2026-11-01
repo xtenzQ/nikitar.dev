@@ -91,10 +91,6 @@ Like the website or got inspired by it? Please support it by joining [stargazers
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+The source code is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
-
-Copyright (c) 2026 Nikita Rusetskii
-```
+The MIT License does not cover the photos (`public/photos/`) or the written content (`content/`). They are © Nikita Rusetskii, all rights reserved, and may not be copied or reused without permission.

@@ -54,4 +54,6 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
 
 - No runtime server. Anything under `server/` must be prerenderable.
 - Photo originals never enter git; published photo files carry no EXIF, XMP, or ICC data.
+- MIT covers the source code only. Photos and written content are all rights reserved, as `README.md`
+  states. `LICENSE` stays the plain MIT text so GitHub keeps detecting it.
 - Colours exist only as tokens in `app/assets/css/main.css` ([[module-app]]).
