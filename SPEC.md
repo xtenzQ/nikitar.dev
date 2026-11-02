@@ -14,8 +14,8 @@ papers live on LinkedIn and Google Scholar; the site links there instead of repe
 
 ## Principles
 
-- **His words.** First-person prose is the owner's own; the bio is his GitHub profile README. English is
-  his second language, so an agent never writes or polishes prose in his voice: it proposes, he decides.
+- **His words.** First-person prose is the owner's own, and the site bio is where it lives. English is his
+  second language, so an agent never writes or polishes prose in his voice: it proposes, he decides.
 - **Minimal.** One column, a grey interface, grouped lists. A section earns its place; a dormant one is
   removed from the page, not left thin.
 - **Contributions over own projects.** Pull requests to other people's repos are the proof of work.
@@ -54,6 +54,9 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
    card; home keeps the newest few. Rejected: a subdomain like `oss.nikitar.dev` (GitHub Pages serves
    one domain per repo, so it needs a second repo; a Cloudflare redirect to `/oss` can come later); an
    anchor `/#open-source` (no title or preview card of its own).
+8. **The site is the bio's source** (2026-11). The GitHub profile README keeps the work and interests
+   sentences and links to `/` and `/oss`; company and location sit in the GitHub sidebar. Rejected: the
+   full bio in both places (every edit made twice, and it repeated the sidebar).
 
 ## Invariants
 

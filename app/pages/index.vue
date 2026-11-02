@@ -55,7 +55,7 @@ useSchemaOrg([
       </div>
     </header>
 
-    <!-- Same text as the GitHub profile README -->
+    <!-- The GitHub profile README repeats the work and interests sentences -->
     <div class="bio">
       <p>
         Software engineer at
