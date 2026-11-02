@@ -23,8 +23,7 @@
   --border-strong: rgb(0 0 0 / 0.11);
   --hover: rgb(0 0 0 / 0.035);
   --accent: #0066cc;
-  --accent-hover: #004f9e;
-  --link-underline: rgb(0 102 204 / 0.3);
+  --link-underline: rgb(0 0 0 / 0.25);
   --code-bg: #ffffff;
   --code-header-bg: #fafafa;
   --code-border: var(--border-strong);
@@ -50,8 +49,7 @@
   --border-strong: rgb(255 255 255 / 0.11);
   --hover: rgb(255 255 255 / 0.04);
   --accent: #3b9cff;
-  --accent-hover: #6cb4ff;
-  --link-underline: rgb(59 156 255 / 0.35);
+  --link-underline: rgb(255 255 255 / 0.3);
   --code-bg: #161618;
   --code-header-bg: #1a1a1c;
   --inline-code-bg: rgb(255 255 255 / 0.07);
@@ -90,15 +88,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--link-underline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 
 a:hover {
-  color: var(--accent-hover);
-  text-decoration: underline;
-  text-decoration-color: var(--link-underline);
-  text-underline-offset: 3px;
+  color: var(--heading);
+  text-decoration-color: currentColor;
 }
 
 :focus-visible {
@@ -146,13 +146,13 @@ a:hover {
   gap: 0.75rem;
   padding-left: 1rem;
   color: inherit;
+  text-decoration: none;
   transition: background-color 0.15s ease;
 }
 
 a.group-row:hover {
   background: var(--hover);
   color: inherit;
-  text-decoration: none;
 }
 
 .group-row-body {
@@ -217,20 +217,20 @@ a.group-row:hover {
   border: 1px solid var(--border-strong);
   background: var(--surface);
   color: var(--text-muted);
+  text-decoration: none;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .icon-btn:hover {
   background: var(--surface-hover);
   color: var(--heading);
-  text-decoration: none;
 }
 
 /* ── Prose (article content) Overrides ─────────────────────── */
 .prose {
   --tw-prose-body: var(--text);
   --tw-prose-headings: var(--heading);
-  --tw-prose-links: var(--accent);
+  --tw-prose-links: currentColor;
   --tw-prose-bold: var(--heading);
   --tw-prose-counters: var(--text-muted);
   --tw-prose-bullets: var(--text-tertiary);
@@ -275,15 +275,7 @@ a.group-row:hover {
 }
 
 .prose :where(a):not(:where(.not-prose *)) {
-  color: var(--accent);
-  text-decoration: underline;
-  text-decoration-color: var(--link-underline);
-  text-underline-offset: 3px;
   font-weight: inherit;
-}
-
-.prose :where(a):not(:where(.not-prose *)):hover {
-  color: var(--accent-hover);
 }
 
 /* Heading anchor links */
@@ -310,7 +302,7 @@ a.group-row:hover {
 }
 
 .prose .heading-anchor .anchor-link:hover {
-  color: var(--accent);
+  color: var(--text-muted);
   text-decoration: none;
 }
 
@@ -571,7 +563,7 @@ a.group-row:hover {
 }
 
 .code-expand-toggle:hover .code-expand-text {
-  color: var(--accent);
+  color: var(--heading);
 }
 
 /* ── Callout / Prompt Boxes ────────────────────────────────── */

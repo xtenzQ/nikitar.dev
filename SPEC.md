@@ -16,8 +16,8 @@ papers live on LinkedIn and Google Scholar; the site links there instead of repe
 
 - **His words.** First-person prose is the owner's own; the bio is his GitHub profile README. English is
   his second language, so an agent never writes or polishes prose in his voice: it proposes, he decides.
-- **Minimal.** One column, one accent, grouped lists. A section earns its place; a dormant one is removed
-  from the page, not left thin.
+- **Minimal.** One column, a grey interface, grouped lists. A section earns its place; a dormant one is
+  removed from the page, not left thin.
 - **Contributions over own projects.** Pull requests to other people's repos are the proof of work.
 - **Static and free to host.** Everything is prerendered for GitHub Pages. Data that changes is fetched at
   build time and refreshed by a daily rebuild.

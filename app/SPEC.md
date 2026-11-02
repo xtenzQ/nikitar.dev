@@ -28,8 +28,13 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 
 - **Tokens** (`:root` and `.dark` in `main.css`): `--bg` page and `--surface` groups; `--heading`,
   `--text`, `--text-muted` (secondary, at least 4.5:1) and `--text-tertiary` (decorative only, fails AA);
-  alpha borders `--border` (dividers) and `--border-strong` (outlines); one `--accent`; `--open` and
-  `--merged` for PR state. Blog diagrams read these names too, so renaming a token breaks them.
+  alpha borders `--border` (dividers) and `--border-strong` (outlines); `--accent` for the focus ring and
+  blog diagrams; `--link-underline`; `--open` and `--merged` for PR state. Blog diagrams read these names
+  too, so renaming a token breaks them.
+- **Colour:** the interface is grey: text, icons, and links. Colour comes from content (org avatars,
+  photos, diagrams) and PR state. A text link keeps its paragraph's colour with a `--link-underline`
+  line; on hover it turns `--heading` and the line goes solid. Links styled as rows, buttons, or badges
+  set `text-decoration: none`.
 - **Type:** the system stack (SF Pro and SF Mono on Apple). The index is 15px; article prose is 17px.
   Weights 400/500/600. Dates and repo names are mono; dates are ISO (`2026-02`).
 - **Grouped list** (`.group`, `.group-row`): 12px radius, hairline dividers inset past the leading icon.
@@ -46,3 +51,7 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   (the old theme), an Inter web font.
 - **Native `<dialog>` for the viewer** (2026-11): Esc, focus, and an inert page come with it. Rejected: a
   lightbox library.
+- **Grey underlined links** (2026-11): blue links in the muted bio paragraphs pulled the eye to the least
+  important text, and in light mode blue was about 2:1 against body text with no underline until hover.
+  Rejected: blue accent links; a small company logo inline in the bio (the only image in the prose, and
+  few people know the logo).

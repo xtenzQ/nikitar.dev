@@ -20,11 +20,11 @@ const { profile } = useAppConfig()
   gap: 0.5rem;
   font-weight: 500;
   color: var(--heading);
+  text-decoration: none;
 }
 
 .home-link:hover {
   color: var(--heading);
-  text-decoration: none;
   opacity: 0.8;
 }
 

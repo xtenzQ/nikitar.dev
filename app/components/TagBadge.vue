@@ -19,12 +19,12 @@ defineProps<{
   background: var(--surface);
   font-size: 0.8125rem;
   color: var(--text-muted);
+  text-decoration: none;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .tag-badge:hover {
   background: var(--surface-hover);
   color: var(--heading);
-  text-decoration: none;
 }
 </style>
