@@ -130,7 +130,6 @@ a:hover {
 /* Grouped list (macOS inset style): a rounded surface with hairline dividers inset past the leading icon */
 .group {
   list-style: none;
-  margin: 0;
   padding: 0;
   background: var(--surface);
   border: 1px solid var(--border-strong);
