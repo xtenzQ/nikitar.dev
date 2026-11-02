@@ -22,7 +22,7 @@
 ## ✨ Features
 
 - 🗂️ One-page index: a short bio, open source pull requests, and photos in macOS-style grouped lists
-- 🐙 Open source pull requests pulled from the GitHub API at build time and refreshed by a daily rebuild (curate them in `app/app.config.ts`)
+- 🐙 Open source pull requests pulled from the GitHub API at build time and refreshed by a daily rebuild: the newest on the home page, all of them on `/oss` (curate them in `app/app.config.ts`)
 - 📷 Photos: a featured set on the home page, all of them grouped by trip on `/photos`, with a native `<dialog>` viewer
 - 🧹 Photo pipeline (`pnpm photos`): downscales originals and strips EXIF/GPS before anything reaches the repo
 - 🌗 Dark / light mode with system preference detection

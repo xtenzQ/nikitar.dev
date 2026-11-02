@@ -15,8 +15,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 ## Boundary
 
 - **Pages.** `index` (bio, open source, featured photos) has no header bar; every other page gets
-  `AppHeader` (avatar and name linking home, theme toggle). `photos` lists every group; `blog/**` is
-  [[module-blog]].
+  `AppHeader` (avatar and name linking home, theme toggle). `photos` lists every group; `oss` lists every
+  pull request; `blog/**` is [[module-blog]].
 - **Site data is config, not markup.** Profile, socials, and GitHub settings live in `app/app.config.ts`;
   photos in `app/data/photos.json` ([[module-photos]]). Components read them through `useAppConfig()` and
   `usePhotos()` and never hardcode them.
@@ -39,6 +39,9 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   Weights 400/500/600. Dates and repo names are mono; dates are ISO (`2026-02`).
 - **Grouped list** (`.group`, `.group-row`): 12px radius, hairline dividers inset past the leading icon.
   An "All …" row ends a list and links out.
+- **PR state** is an icon in the state colour (`ph:git-pull-request` open, `ph:git-merge` merged), with
+  the word for screen readers only. `PullRequestRow` is the one row for `/` and `/oss`. On `/` the list
+  ends with an "All pull requests" row to `/oss`, with the total in it only when the list is cut.
 - **Icon buttons:** 32px, 8px radius. Icons are Phosphor (`ph:`). A name that comes from data (socials)
   is invisible to the scanner and must be listed in `icon.clientBundle.icons`; static hosting has no
   icon API, so a missing one 404s after client-side navigation.
@@ -55,3 +58,9 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   important text, and in light mode blue was about 2:1 against body text with no underline until hover.
   Rejected: blue accent links; a small company logo inline in the bio (the only image in the prose, and
   few people know the logo).
+- **PR state as icons, count only when the list is cut** (2026-11): the dot's label was hidden on phones,
+  so state was colour only, and a `2 merged · 4 open` header repeated the six rows below it. The total
+  sits in the "All N pull requests" row, like "All N photos", because `/oss` shows exactly that many.
+  Rejected: dots with labels; icons with tooltips (no hover on touch); `N merged` in the section header
+  (replaced by the row once `/oss` existed); a count on the GitHub search link (it also shows closed
+  pull requests, so the numbers would not match).

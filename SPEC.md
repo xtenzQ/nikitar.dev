@@ -28,6 +28,7 @@ papers live on LinkedIn and Google Scholar; the site links there instead of repe
 ```text
 /          bio, open source pull requests, featured photos   app/pages/index.vue
 /photos    all photos, grouped by trip                       app/pages/photos.vue
+/oss       every open source pull request                    app/pages/oss.vue
 /blog/**   dormant blog, reachable by URL only               content/
 /about     redirects to /                                    nuxt.config.ts routeRules
 ```
@@ -49,6 +50,10 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
    (hides a photo), a horizontal scroll strip (awkward with a mouse, breaks the column).
 6. **Look: macOS / Hugging Face** (2026-11). System fonts, alpha hairline borders, 12px radius, grouped
    lists, mono metadata. Replaced a Chirpy-derived blog theme.
+7. **Open source on its own page, `/oss`** (2026-11): one link to share, with its own title and preview
+   card; home keeps the newest few. Rejected: a subdomain like `oss.nikitar.dev` (GitHub Pages serves
+   one domain per repo, so it needs a second repo; a Cloudflare redirect to `/oss` can come later); an
+   anchor `/#open-source` (no title or preview card of its own).
 
 ## Invariants
 

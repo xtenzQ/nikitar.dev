@@ -100,8 +100,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      // '/' links /photos only when there are more photos than the featured set
-      routes: ['/', '/photos'],
+      // '/' links /photos only when there are more photos than the featured set, and /oss only when GitHub answered
+      routes: ['/', '/photos', '/oss'],
     },
     watchOptions: {
       usePolling: true,

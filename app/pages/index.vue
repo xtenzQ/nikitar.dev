@@ -2,9 +2,15 @@
 const { profile, github } = useAppConfig()
 const { all: allPhotos, featured } = usePhotos()
 
-const { data: contributions } = await useFetch('/api/contributions', { key: 'contributions' })
+const { data: contributions } = await useFetch('/api/contributions', {
+  key: 'contributions-home',
+  transform: all => ({ pullRequests: all.slice(0, github.limit), total: all.length }),
+})
 
-const allContributionsUrl = `https://github.com/search?type=pullrequests&q=${encodeURIComponent(`is:pr author:${github.username} -user:${github.username}`)}`
+const allPullRequestsLabel = computed(() => {
+  const c = contributions.value
+  return c && c.total > c.pullRequests.length ? `All ${c.total} pull requests` : 'All pull requests'
+})
 
 useHead({
   titleTemplate: '%s',
@@ -74,48 +80,17 @@ useSchemaOrg([
     <SocialLinks class="flex sm:hidden mt-5" />
 
     <section v-if="contributions?.pullRequests.length" class="mt-10">
-      <div class="section-head">
-        <h2 class="section-label">Open source</h2>
-        <p class="section-meta">
-          <span v-if="contributions.merged">
-            <span class="dot" style="background: var(--merged);" />{{ contributions.merged }} merged
-          </span>
-          <span v-if="contributions.open">
-            <span class="dot" style="background: var(--open);" />{{ contributions.open }} open
-          </span>
-        </p>
-      </div>
+      <h2 class="section-label">Open source</h2>
       <ul class="group">
-        <li v-for="pr in contributions.pullRequests" :key="pr.url">
-          <a :href="pr.url" target="_blank" rel="noopener noreferrer" class="group-row">
-            <img
-              :src="`https://github.com/${pr.owner}.png?size=40`"
-              alt=""
-              width="20"
-              height="20"
-              loading="lazy"
-              class="org-avatar"
-            >
-            <div class="group-row-body">
-              <div class="row-text">
-                <div class="row-title">{{ pr.title }}</div>
-                <div class="row-subtitle mono">{{ pr.repo }} #{{ pr.number }}</div>
-              </div>
-              <span class="row-status">
-                <span class="dot" :style="{ background: pr.state === 'open' ? 'var(--open)' : 'var(--merged)' }" />
-                <span class="sr-only sm:not-sr-only">{{ pr.state === 'open' ? 'Open' : 'Merged' }}</span>
-              </span>
-            </div>
-          </a>
-        </li>
+        <PullRequestRow v-for="pr in contributions.pullRequests" :key="pr.url" :pr="pr" />
         <li>
-          <a :href="allContributionsUrl" target="_blank" rel="noopener noreferrer" class="group-row">
-            <Icon name="ph:github-logo" size="20" class="row-chevron" />
+          <NuxtLink to="/oss" class="group-row">
+            <Icon name="ph:git-pull-request" size="20" class="row-chevron" />
             <div class="group-row-body">
-              <span class="row-text" style="color: var(--text-muted);">All pull requests on GitHub</span>
-              <Icon name="ph:arrow-up-right" size="14" class="row-chevron" />
+              <span class="row-text" style="color: var(--text-muted);">{{ allPullRequestsLabel }}</span>
+              <Icon name="ph:caret-right" size="14" class="row-chevron" />
             </div>
-          </a>
+          </NuxtLink>
         </li>
       </ul>
     </section>
@@ -167,54 +142,5 @@ useSchemaOrg([
 
 .bio .muted {
   color: var(--text-muted);
-}
-
-.section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.section-head .section-label {
-  margin: 0;
-}
-
-.section-meta {
-  display: flex;
-  gap: 0.75rem;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-}
-
-.section-meta > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  white-space: nowrap;
-}
-
-.org-avatar {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 1px var(--border);
-}
-
-.mono {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-}
-
-.row-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  flex-shrink: 0;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  white-space: nowrap;
 }
 </style>
