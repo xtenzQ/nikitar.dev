@@ -15,7 +15,7 @@ export default defineAppConfig({
 
   github: {
     username: 'xtenzQ',
-    // Pull requests to repos owned by someone else, newest first. Closed-unmerged PRs are dropped.
+    // Pull requests to repos owned by someone else, open before merged. Closed-unmerged PRs are dropped.
     limit: 8,
     // Leave out a whole repo ("owner/repo") or a single pull request ("owner/repo#123")
     hidden: [

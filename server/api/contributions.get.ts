@@ -62,6 +62,7 @@ export default defineEventHandler(async (): Promise<Contribution[]> => {
         } satisfies Contribution
       })
       .filter(c => !github.hidden.includes(c.repo) && !github.hidden.includes(`${c.repo}#${c.number}`))
+      .sort((a, b) => a.state === b.state ? b.date.localeCompare(a.date) : a.state === 'open' ? -1 : 1)
   }
   catch (error) {
     console.warn('[contributions] GitHub request failed, rendering an empty list:', error)

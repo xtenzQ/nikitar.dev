@@ -16,7 +16,7 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 
 - **Pages.** `index` (bio, open source, featured photos) has no header bar; every other page gets
   `AppHeader` (avatar and name linking home, theme toggle). `photos` lists every group; `oss` lists every
-  pull request; `blog/**` is [[module-blog]].
+  pull request with a filter by organization; `blog/**` is [[module-blog]].
 - **Site data is config, not markup.** Profile, socials, and GitHub settings live in `app/app.config.ts`;
   photos in `app/data/photos.json` ([[module-photos]]). Components read them through `useAppConfig()` and
   `usePhotos()` and never hardcode them.
@@ -42,6 +42,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **PR state** is an icon in the state colour (`ph:git-pull-request` open, `ph:git-merge` merged), with
   the word for screen readers only. `PullRequestRow` is the one row for `/` and `/oss`. On `/` the list
   ends with an "All pull requests" row to `/oss`, with the total in it only when the list is cut.
+- **Filter chips** (`/oss`): toggle buttons in the icon-button shape, with the org avatar, `@login`, and a
+  mono count. Pressed is a `--heading` border; pressing it again shows all. Chips wrap, never scroll.
 - **Icon buttons:** 32px, 8px radius. Icons are Phosphor (`ph:`). A name that comes from data (socials)
   is invisible to the scanner and must be listed in `icon.clientBundle.icons`; static hosting has no
   icon API, so a missing one 404s after client-side navigation.
@@ -64,3 +66,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   Rejected: dots with labels; icons with tooltips (no hover on touch); `N merged` in the section header
   (replaced by the row once `/oss` existed); a count on the GitHub search link (it also shows closed
   pull requests, so the numbers would not match).
+- **Organization filter on `/oss`** (2026-11): one chip per owner, like GitHub's org mentions, ordered by
+  count; the subtitle reads "N of M" while one is pressed. Only page state, so the prerendered HTML is the
+  full list. Rejected: a section per org (three short lists with a header each); an "All" chip (a pressed
+  chip already toggles off); the filter in the URL query (a prerendered page can't read it without a
+  hydration mismatch).
