@@ -12,7 +12,6 @@ useSeoMeta({
 })
 
 defineOgImage({
-  component: 'NuxtSeo',
   title: 'Writing',
   description: 'Articles on software engineering, search, and AI.',
 })

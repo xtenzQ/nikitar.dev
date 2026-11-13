@@ -7,7 +7,6 @@ useSeoMeta({
 })
 
 defineOgImage({
-  component: 'NuxtSeo',
   title: 'Photos',
   description: 'Photos by Nikita Rusetskii.',
 })

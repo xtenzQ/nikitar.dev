@@ -24,7 +24,6 @@ useSeoMeta({
 })
 
 defineOgImage({
-  component: 'NuxtSeo',
   title: post.value.title,
   description: post.value.description,
 })

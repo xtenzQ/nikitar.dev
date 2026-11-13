@@ -16,15 +16,16 @@ useHead({
   titleTemplate: '%s',
 })
 
+const description = 'Software engineer at KMS Lighthouse in Belgrade. Solr-based search, Lucene internals, RAG, and agent harnesses for software engineering.'
+
 useSeoMeta({
   title: profile.name,
-  description: 'Software engineer at KMS Lighthouse in Belgrade. Solr-based search, Lucene internals, RAG, and agent harnesses for software engineering.',
+  description,
 })
 
 defineOgImage({
-  component: 'NuxtSeo',
   title: profile.name,
-  description: 'Search, Lucene, RAG, and agent tooling',
+  description,
 })
 
 useSchemaOrg([

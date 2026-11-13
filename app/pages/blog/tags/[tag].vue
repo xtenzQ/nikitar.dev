@@ -19,7 +19,6 @@ useSeoMeta({
 })
 
 defineOgImage({
-  component: 'NuxtSeo',
   title: `Tag: ${tag}`,
   description: `Posts tagged with "${tag}".`,
 })

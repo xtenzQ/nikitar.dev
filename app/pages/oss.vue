@@ -34,7 +34,6 @@ useSeoMeta({
 })
 
 defineOgImage({
-  component: 'NuxtSeo',
   title: 'Open source',
   description: 'Open source pull requests by Nikita Rusetskii.',
 })

@@ -22,7 +22,6 @@ useSeoMeta({
 })
 
 defineOgImage({
-  component: 'NuxtSeo',
   title: 'Tags',
   description: 'Browse all tags on the blog.',
 })

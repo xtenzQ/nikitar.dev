@@ -21,8 +21,9 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   photos in `app/data/photos.json` ([[module-photos]]). Components read them through `useAppConfig()` and
   `usePhotos()` and never hardcode them.
 - **Forbidden:** raw colours outside the token blocks in `assets/css/main.css`, web fonts, and icons
-  fetched at runtime. The one colour exception is the photo viewer's chrome, which sits on a fixed dark
-  backdrop in both themes and uses white with alpha.
+  fetched at runtime. Two colour exceptions: the photo viewer's chrome, which sits on a fixed dark
+  backdrop in both themes and uses white with alpha; and the preview card, which copies the light
+  tokens as hex because its renderer can't read CSS variables.
 
 ## Design system
 
@@ -47,6 +48,10 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Icon buttons:** 32px, 8px radius. Icons are Phosphor (`ph:`). A name that comes from data (socials)
   is invisible to the scanner and must be listed in `icon.clientBundle.icons`; static hosting has no
   icon API, so a missing one 404s after client-side navigation.
+- **Preview card** (`og:image`): `components/OgImage/Card.vue`, the default for every page. The light
+  `--bg`, avatar and `nikitar.dev`, then the page title and its meta description, so the card says what
+  the search snippet says. Inter is the only font the renderer has. Local builds reuse rendered cards
+  from `node_modules/.cache/nuxt/.nuxt/cache/nuxt-og-image`; delete it to see a change (CI starts clean).
 - **Photo grid:** 3:4 tiles, 3 columns from 640px, 2 below. One native `<dialog>` viewer per gallery;
   the arrows walk across groups. Home keeps 3 or 6 featured photos so rows are full.
 
@@ -54,6 +59,9 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 
 - **System fonts** (2026-11): nothing to download and native on Apple. Rejected: Source Sans 3 + Lato
   (the old theme), an Inter web font.
+- **Own preview card** (2026-11): the stock `NuxtSeo` card had a green gradient the site doesn't use and
+  an old tagline. Rejected: the stock card with a grey `theme` (still the stock layout); a card per
+  colour mode (link previews show one image).
 - **Native `<dialog>` for the viewer** (2026-11): Esc, focus, and an inert page come with it. Rejected: a
   lightbox library.
 - **Grey underlined links** (2026-11): blue links in the muted bio paragraphs pulled the eye to the least
