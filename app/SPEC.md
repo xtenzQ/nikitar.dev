@@ -21,9 +21,10 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   photos in `app/data/photos.json` ([[module-photos]]). Components read them through `useAppConfig()` and
   `usePhotos()` and never hardcode them.
 - **Forbidden:** raw colours outside the token blocks in `assets/css/main.css`, web fonts, and icons
-  fetched at runtime. Two colour exceptions: the photo viewer's chrome, which sits on a fixed dark
-  backdrop in both themes and uses white with alpha; and the preview card, which copies the light
-  tokens as hex because its renderer can't read CSS variables.
+  fetched at runtime. Three colour exceptions: the photo viewer's chrome, which sits on a fixed dark
+  backdrop in both themes and uses white with alpha; the preview card, which copies the light tokens as
+  hex because its renderer can't read CSS variables; and the favicons in `public/`, which a browser
+  draws without the page's CSS, so they copy `--heading` and `--bg` as hex.
 
 ## Design system
 
@@ -52,6 +53,11 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   `--bg`, avatar and `nikitar.dev`, then the page title and its meta description, so the card says what
   the search snippet says. Inter is the only font the renderer has. Local builds reuse rendered cards
   from `node_modules/.cache/nuxt/.nuxt/cache/nuxt-og-image`; delete it to see a change (CI starts clean).
+- **Favicon:** a condensed grotesque `n.`, drawn as one path and a square on a 32-unit grid with every
+  stem edge on an even unit, so it is sharp at 16 and 32 px. `favicon.svg` has no container and swaps
+  `--heading` light/dark through `prefers-color-scheme`. `favicon.png` (32px) and `apple-touch-icon.png`
+  (180px) can't switch colour, so they put the same n. (3-unit stems) in light on a `--heading` tile;
+  the PNG tile has the icon-button radius, the touch icon is full bleed because iOS rounds it.
 - **Photo grid:** 3:4 tiles, 3 columns from 640px, 2 below. One native `<dialog>` viewer per gallery;
   the arrows walk across groups. Home keeps 3 or 6 featured photos so rows are full.
 
@@ -62,6 +68,11 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Own preview card** (2026-11): the stock `NuxtSeo` card had a green gradient the site doesn't use and
   an old tagline. Rejected: the stock card with a grey `theme` (still the stock layout); a card per
   colour mode (link previews show one image).
+- **Favicon: a bare condensed `n.`** (2026-11): the largest and sharpest of the options at 16 px (12px
+  tall), a shape of its own without a box, and still a grotesque like the system font. Replaced a blue
+  Lato n. on a dark tile left from the old theme. Rejected: the n. on an icon-button tile (the most
+  common favicon form, the smallest glyph, and it makes the site look like an app); a regular-width n.
+  with a round period larger than the stem (closest to lowercase-and-dot startup logos).
 - **Native `<dialog>` for the viewer** (2026-11): Esc, focus, and an inert page come with it. Rejected: a
   lightbox library.
 - **Grey underlined links** (2026-11): blue links in the muted bio paragraphs pulled the eye to the least

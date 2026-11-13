@@ -1,5 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect x="2" y="4" width="28" height="26" rx="3" fill="#1b1b1e"/>
-  <text x="16" y="25" text-anchor="middle" font-family="Lato, sans-serif" font-weight="700" font-size="20" fill="#8ab4f8">n</text>
-  <rect x="23" y="22" width="2" height="3" rx="0.5" fill="#8ab4f8" opacity="0.8"/>
+  <style>
+    g { fill: #1d1d1f }
+    @media (prefers-color-scheme: dark) { g { fill: #f5f5f7 } }
+  </style>
+  <g>
+    <path d="M6 28V4H10V7.2C11.79 4.96 13.66 4 15.6 4C20.21 4 22 6.1 22 11.5V28H18V13.5C18 9.42 17.03 7.5 14.96 7.5C12.08 7.5 10 10.23 10 14V28Z"/>
+    <rect x="24" y="24" width="4" height="4"/>
+  </g>
 </svg>
