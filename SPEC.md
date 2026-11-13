@@ -57,6 +57,10 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
 8. **The site is the bio's source** (2026-11). The GitHub profile README keeps the work and interests
    sentences and links to `/` and `/oss`; company and location sit in the GitHub sidebar. Rejected: the
    full bio in both places (every edit made twice, and it repeated the sidebar).
+9. **URLs end with a slash** (2026-11). GitHub Pages serves `oss/index.html` at `/oss/` and 301s `/oss`
+   there, so canonical, `og:url`, the sitemap, and every `NuxtLink` use the slash form. Without it Search
+   Console listed sitemap URLs as "Page with redirect". Rejected: flat `oss.html` files served at `/oss`
+   (the slash URLs Google already indexed would 404).
 
 ## Invariants
 
@@ -64,4 +68,4 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
 - Photo originals never enter git; published photo files carry no EXIF, XMP, or ICC data.
 - MIT covers the source code only. Photos and written content are all rights reserved, as `README.md`
   states. `LICENSE` stays the plain MIT text so GitHub keeps detecting it.
-- Colours exist only as tokens in `app/assets/css/main.css` ([[module-app]]).
+- Colours exist only as tokens in `app/assets/css/main.css`, except the two cases [[module-app]] names.

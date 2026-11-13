@@ -51,6 +51,18 @@ export default defineNuxtConfig({
     name: 'Nikita Rusetskii',
     description: 'Software engineer working on search, Lucene, RAG, and agent tooling',
     defaultLocale: 'en',
+    // GitHub Pages answers /oss with a 301 to /oss/, so canonical, og:url, and the sitemap use the slash too
+    trailingSlash: true,
+  },
+
+  experimental: {
+    defaults: {
+      nuxtLink: { trailingSlash: 'append' },
+    },
+  },
+
+  ogImage: {
+    defaults: { component: 'Card' },
   },
 
   // Crawlers that collect AI training data are asked to skip photos; search and AI search stay allowed
