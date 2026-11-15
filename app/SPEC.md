@@ -112,8 +112,12 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Counts, not rows, on `/`** (2026-11): the Open source door shows merged (and open) and a count per
   repository; `/oss` has the rows. Eight near-identical `fix(...)` titles hid the signal, which projects.
   Replaced the newest few rows and an "All N pull requests" row.
-- **Labelled links instead of social icon buttons** (2026-11): four words read faster than four glyphs,
-  and Email comes first. Rejected: the icon row (it needed hover titles, which touch lacks).
+- **Labelled links instead of social icon buttons** (2026-11): four words read faster than four glyphs.
+  CV comes first, then Email. Rejected: the icon row (it needed hover titles, which touch lacks); CV as
+  a door (it has no number or picture to show).
+- **The email address stays plain** (2026-11): it is already public in git history and on other
+  profiles, so hiding it on the site would not stop scraping. Rejected: joining it in the browser from
+  two parts; keeping the CV PDF out of `robots.txt`.
 - **Cross-fade, not slide, between pages** (2026-11). Rejected: a horizontal slide on desktop (the pages
   have no left-to-right order, so a direction would mean nothing); scroll-reveal animations (content is
   hidden at rest); a pulsing status dot (it pulls the eye all the time).

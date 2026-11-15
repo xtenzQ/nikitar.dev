@@ -77,7 +77,8 @@ useSchemaOrg([
       <p class="status-note">{{ profile.status.note }}</p>
     </div>
 
-    <nav aria-label="Elsewhere" class="links">
+    <nav aria-label="Links" class="links">
+      <NuxtLink to="/cv">CV</NuxtLink>
       <a
         v-for="social in socials"
         :key="social.label"

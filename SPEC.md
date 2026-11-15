@@ -27,7 +27,7 @@ the way. Work history is on
 ## Structure
 
 ```text
-/          statement, status, links, doors to /oss, /photos   app/pages/index.vue
+/          statement, status, links (CV first), doors         app/pages/index.vue
 /photos    all photos, grouped by trip                       app/pages/photos.vue
 /oss       every open source pull request                    app/pages/oss.vue
 /cv        experience, open source, skills, education; PDF   app/pages/cv.vue
