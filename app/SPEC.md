@@ -17,7 +17,7 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Pages.** `index` is the statement, the status, links, and doors. Every page but `cv` gets
   `AppHeader` (avatar, name, theme toggle); on `/` the name is the page's `h1`, elsewhere it links home.
   `photos` lists every group; `oss` lists every pull request, grouped by project; `blog/**` is
-  [[module-blog]]. `cv` is the CV with a Download PDF link; it uses the `cv` layout (a "nikitar.dev / cv"
+  [[module-blog]]. `cv` is the CV with an Open PDF link (a new tab); it uses the `cv` layout (a "nikitar.dev / cv"
   breadcrumb and the theme toggle), because its `h1` is the name: the avatar sits beside it, and the
   header's avatar and name grow into them on the way in.
 - **Site data is config, not markup.** Profile (with the status), socials, and GitHub settings live in
@@ -143,6 +143,10 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   line, the Languages row) are small, and one template can't drift from the PDF. Rejected: a separate
   print template or route (the whole CV twice); left section labels on paper (rejected on screen
   too); two pages (most of a second page would be empty).
+- **The CV PDF opens in a new tab** (2026-11): on an iPhone a `download` link asks first and puts the
+  file in Files; the browser's viewer shows it and has its own save, print, and share. The file name
+  (`nikita-rusetskii-cv.pdf`) is the same either way. Rejected: `download` (a file before a look); Open
+  and Download side by side (two buttons for one file).
 - **`/oss` by project** (2026-11): where and how much, with every title in view, in the CV's timeline.
   Chosen from four directions drawn on a canvas. Replaced a grouped list with an organization filter (the
   old settings-page look, the repo repeated on every row, a filter for three owners). Rejected: project

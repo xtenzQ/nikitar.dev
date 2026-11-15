@@ -75,9 +75,9 @@ defineOgImage({
         </p>
       </div>
       <div class="hd-export screen-only">
-        <a class="btn" :href="`/${cv.pdf}`" download>
-          <Icon name="ph:download-simple" size="16" />
-          Download PDF
+        <a class="btn" :href="`/${cv.pdf}`" target="_blank">
+          <Icon name="ph:file-pdf" size="16" />
+          Open PDF
         </a>
       </div>
       <div class="hd-status screen-only">
