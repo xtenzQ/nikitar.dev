@@ -104,6 +104,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   `--heading` light/dark through `prefers-color-scheme`. `favicon.png` (32px) and `apple-touch-icon.png`
   (180px) can't switch colour, so they put the same n. (3-unit stems) in light on a `--heading` tile;
   the PNG tile has the icon-button radius, the touch icon is full bleed because iOS rounds it.
+  `favicon-96.png` is for Google Search, which wants a multiple of 48 px and crops it to a circle, so it
+  is full bleed too.
 - **Photo grid:** 3:4 tiles, 3 columns from 640px, 2 below. One native `<dialog>` viewer per gallery;
   the arrows walk across groups. The Photos door on `/` shows the first two featured photos.
 
