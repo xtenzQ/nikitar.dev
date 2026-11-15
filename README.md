@@ -24,7 +24,7 @@
 - 🗂️ One-page index: a short statement, an availability status, and one door each to open source and photos
 - 🐙 Open source pull requests pulled from the GitHub API at build time and refreshed by a daily rebuild, counted on the home page, all of them on `/oss` grouped by project, with each repository's GitHub description (curate them in `app/app.config.ts`); the home page count moves up into `/oss` through a view transition
 - 📷 Photos: two featured thumbnails on the home page, all of them grouped by trip on `/photos`, with a native `<dialog>` viewer
-- 📄 CV on `/cv` from one data file (`app/data/cv.json`), with a one-page PDF that Chrome prints from the same page at build time (`pnpm cv:pdf`)
+- 📄 CV on `/cv` from one data file (`app/data/cv.json`), with a one-page PDF that Chrome prints from the same page at build time (`pnpm cv:pdf`); the header's avatar and name grow into the CV's title through a view transition
 - 🧹 Photo pipeline (`pnpm photos`): downscales originals and strips EXIF/GPS before anything reaches the repo
 - 🌗 Dark / light mode with system preference detection
 - 🎞️ Pages cross-fade with the View Transitions API (off with reduced motion)

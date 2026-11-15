@@ -1,7 +1,7 @@
 export default defineAppConfig({
   profile: {
     name: 'Nikita Rusetskii',
-    avatar: 'https://avatars.githubusercontent.com/u/10103127?s=96&v=4',
+    avatar: 'https://avatars.githubusercontent.com/u/10103127?s=168&v=4',
     // The GitHub profile README repeats this status, so a change goes to both
     status: {
       label: 'Open to new roles',

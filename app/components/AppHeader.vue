@@ -7,12 +7,12 @@ const isHome = computed(() => route.path === '/')
 <template>
   <header class="site-header w-full max-w-2xl mx-auto px-5 pt-6 sm:pt-10 flex items-center justify-between gap-4">
     <h1 v-if="isHome" class="home-link">
-      <img :src="profile.avatar" alt="" width="28" height="28" class="avatar">
-      <span>{{ profile.name }}</span>
+      <img :src="profile.avatar" alt="" width="28" height="28" class="avatar vt-me-avatar">
+      <span class="vt-me-name">{{ profile.name }}</span>
     </h1>
     <NuxtLink v-else to="/" class="home-link">
-      <img :src="profile.avatar" alt="" width="28" height="28" class="avatar">
-      <span>{{ profile.name }}</span>
+      <img :src="profile.avatar" alt="" width="28" height="28" class="avatar vt-me-avatar">
+      <span class="vt-me-name">{{ profile.name }}</span>
     </NuxtLink>
 
     <ThemeToggle />
@@ -27,7 +27,7 @@ const isHome = computed(() => route.path === '/')
   margin: 0;
   font-size: 15px;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.1;
   letter-spacing: -0.01em;
   color: var(--heading);
   text-decoration: none;

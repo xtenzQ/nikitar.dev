@@ -1,11 +1,15 @@
-// Names the / ↔ /oss transitions so main.css can stage them; other routes keep the plain cross-fade
+// Names the / ↔ /oss and into/out of /cv transitions so main.css can stage them; other routes keep the plain cross-fade
 export default defineNuxtPlugin((nuxtApp) => {
   const page = (path: string) => path.replace(/\/+$/, '') || '/'
   let types: string[] = []
 
   useRouter().beforeEach((to, from) => {
-    const route = `${page(from.path)} ${page(to.path)}`
-    types = route === '/ /oss' ? ['oss-open'] : route === '/oss /' ? ['oss-close'] : []
+    const [a, b] = [page(from.path), page(to.path)]
+    if (b === '/cv' && a !== b) types = ['cv-open']
+    else if (a === '/cv' && a !== b) types = ['cv-close']
+    else if (a === '/' && b === '/oss') types = ['oss-open']
+    else if (a === '/oss' && b === '/') types = ['oss-close']
+    else types = []
   })
 
   nuxtApp.hook('page:view-transition:start', (transition) => {

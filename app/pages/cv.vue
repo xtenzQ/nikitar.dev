@@ -62,9 +62,12 @@ defineOgImage({
 
 <template>
   <article class="cv">
-    <header class="hd">
+    <header class="hd vt-cv-intro">
       <div class="hd-id">
-        <h1 class="name">{{ profile.name }}</h1>
+        <div class="hd-me">
+          <img :src="profile.avatar" alt="" width="56" height="56" class="avatar vt-me-avatar screen-only">
+          <h1 class="name"><span class="vt-me-name">{{ profile.name }}</span></h1>
+        </div>
         <p class="headline">{{ cv.headline }}</p>
         <p class="location screen-only">{{ cv.location }} · {{ cv.workMode }}</p>
         <p class="contacts print-only">
@@ -227,6 +230,20 @@ defineOgImage({
   display: none;
 }
 
+.hd-me {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
 .name {
   font-size: 2rem;
   font-weight: 600;
@@ -234,8 +251,12 @@ defineOgImage({
   letter-spacing: -0.025em;
 }
 
+.name span {
+  display: inline-block;
+}
+
 .headline {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   font-size: 17px;
   line-height: 1.45;
   color: var(--heading);
@@ -261,6 +282,7 @@ defineOgImage({
 
 .hd-export {
   grid-area: export;
+  padding-top: 10px;
 }
 
 .hd-status {
@@ -579,6 +601,10 @@ strong {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "id" "status" "export";
     padding-top: 3rem;
+  }
+
+  .hd-export {
+    padding-top: 0;
   }
 
   .hd-status {

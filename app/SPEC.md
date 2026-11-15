@@ -18,7 +18,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   `AppHeader` (avatar, name, theme toggle); on `/` the name is the page's `h1`, elsewhere it links home.
   `photos` lists every group; `oss` lists every pull request, grouped by project; `blog/**` is
   [[module-blog]]. `cv` is the CV with a Download PDF link; it uses the `cv` layout (a "nikitar.dev / cv"
-  breadcrumb and the theme toggle), because its `h1` is the name and an avatar would repeat it.
+  breadcrumb and the theme toggle), because its `h1` is the name: the avatar sits beside it, and the
+  header's avatar and name grow into them on the way in.
 - **Site data is config, not markup.** Profile (with the status), socials, and GitHub settings live in
   `app/app.config.ts`; photos in `app/data/photos.json` ([[module-photos]]); the CV in
   `app/data/cv.json`. Components read them through `useAppConfig()`, `usePhotos()`, and `useCv()` and
@@ -48,7 +49,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   second in `--text-muted`. It is the largest text on the site; a future post title can reuse it.
 - **Status pill:** `StatusPill`, `profile.status.label` with a still `--open` dot. `/` follows it with
   the note in `--text-muted`; `/cv` with the links.
-- **CV** (`/cv`): one column on the grey page. Section labels are 13px 600 in `--heading`, heavier than
+- **CV** (`/cv`): one column on the grey page. The name has the 56px avatar beside it, the header's
+  pair at CV size; the PDF leaves the avatar out. Section labels are 13px 600 in `--heading`, heavier than
   `.section-label`, because a reader scans a CV by section. Experience is a timeline: a circle with
   the company's monogram, a line down to the next one, and a dot per role when a company has more than
   one (filled for the current role). Dates read "May 2026 – now", not ISO: recruiters and résumé
@@ -65,7 +67,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   link. An auto-fit grid (min 12rem) takes a new door (Writing, CV) without a layout change; stacked
   doors drop the fixed visual height. A door with nothing to show is not rendered.
 - **Page transitions:** route changes cross-fade in 180ms through the View Transitions API
-  (`experimental.viewTransition`). `.site-header` has its own `view-transition-name`, so it holds still.
+  (`experimental.viewTransition`). `.site-header` (and the CV bar) has its own `view-transition-name`,
+  so it holds still.
   Nuxt skips the transition under `prefers-reduced-motion`; browsers without the API just navigate.
 - **Door to `/oss`:** the Open source door's label, number, and unit share `view-transition-name`s with
   the `/oss` header, so they move up in 0.4s and the number shrinks from 64 to 32px. The rest of `/oss`
@@ -73,6 +76,11 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   `/` appears after it. `plugins/view-transition-types.client.ts` tags these two navigations with view
   transition types (`oss-open`, `oss-close`), so the staging in `main.css` touches no other route. Sizes
   and line-heights of the shared pieces stay in em, so the scale doesn't distort them.
+- **Header to `/cv`:** the header's avatar and name share `view-transition-name`s with the CV's, so going
+  to `/cv` they move down and grow (0.4s, the door's curve) while the old page leaves in 0.12s; the CV
+  header rises in at 0.34s and the rest of the page at 0.40s. Leaving `/cv` the name goes back into the
+  header and the next page appears after it (0.34s). The plugin tags any navigation into `/cv` `cv-open`
+  and out of it `cv-close`. Both names keep a 1.1em line-height, so the scale doesn't distort them.
 - **Grouped list** (`.group`, `.group-row`): 12px radius, hairline dividers inset past the leading icon.
   An "All …" row ends a list and links out.
 - **PR state** is an icon in the state colour (`ph:git-pull-request` open, `ph:git-merge` merged), with
@@ -146,6 +154,10 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   the number; 32px is the CV's name size, the largest type on a page other than `/`. Rejected: keeping
   64px for a pure move (a dashboard figure over a list); dropping the number (the transition has nothing
   to carry).
+- **Avatar beside the CV name** (2026-11): every page shows the avatar and name together, and the
+  transition from home has one thing to carry. Chosen on a canvas. Replaced: a CV header with the name
+  alone. Rejected: the site header on `/cv` (the name twice, one above the other); the transition
+  without the avatar (it would vanish while the name moves).
 - **Staged door transition** (2026-11): the list waits for the number. Rejected: the list rising while the
   number moves (the number crossed the rows and the caption); delaying `/oss` on every route (from `/cv` it
   would wait for a number that doesn't move).

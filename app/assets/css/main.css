@@ -218,6 +218,53 @@ html:active-view-transition-type(oss-close)::view-transition-new(root) {
   animation-delay: 0.34s;
 }
 
+/* The header's avatar and name share these names with the /cv title: they move down and grow into it */
+.vt-me-avatar {
+  view-transition-name: me-avatar;
+}
+
+.vt-me-name {
+  view-transition-name: me-name;
+}
+
+.vt-cv-intro {
+  view-transition-name: cv-intro;
+}
+
+::view-transition-group(me-avatar),
+::view-transition-group(me-name) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Into /cv the old page leaves at once and the CV rises after the name; out of /cv the next page waits for it */
+html:active-view-transition-type(cv-open, cv-close)::view-transition-old(*) {
+  animation-duration: 0.12s;
+}
+
+html:active-view-transition-type(cv-open)::view-transition-new(cv-intro) {
+  animation: oss-rise 0.28s cubic-bezier(0.2, 0, 0, 1) 0.34s both;
+}
+
+html:active-view-transition-type(cv-open)::view-transition-new(root) {
+  animation: oss-rise 0.28s cubic-bezier(0.2, 0, 0, 1) 0.4s both;
+}
+
+html:active-view-transition-type(cv-close)::view-transition-new(*) {
+  animation-duration: 0.18s;
+  animation-delay: 0.34s;
+}
+
+html:active-view-transition-type(cv-open, cv-close)::view-transition-old(me-avatar),
+html:active-view-transition-type(cv-open, cv-close)::view-transition-new(me-avatar),
+html:active-view-transition-type(cv-open, cv-close)::view-transition-old(me-name),
+html:active-view-transition-type(cv-open, cv-close)::view-transition-new(me-name),
+html:active-view-transition-type(cv-open, cv-close)::view-transition-old(site-header),
+html:active-view-transition-type(cv-open, cv-close)::view-transition-new(site-header) {
+  animation-duration: inherit;
+  animation-delay: inherit;
+}
+
 @keyframes oss-rise {
   from {
     opacity: 0;
