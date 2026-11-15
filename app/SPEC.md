@@ -55,7 +55,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   the company's monogram, a line down to the next one, and a dot per role when a company has more than
   one (filled for the current role). Dates read "May 2026 – now", not ISO: recruiters and résumé
   parsers expect that; they stay mono and right-aligned on screen. Education shows its first entry and
-  folds the rest behind a row of small circles; Research and awards are rows with years on the right.
+  folds the rest behind a row of small circles; they open and close in 300ms, at once under reduced
+  motion. Research and awards are rows with years on the right.
   Type steps are 32 / 17 / 15 / 13 / 12 mono.
 - **CV print** (the PDF): the same DOM with a print stylesheet, A4 with 12 mm / 15 mm margins. Sans
   dates with tabular figures, labels in small spaced capitals, no rules between sections, contacts
@@ -165,3 +166,6 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Staged door transition** (2026-11): the list waits for the number. Rejected: the list rising while the
   number moves (the number crossed the rows and the caption); delaying `/oss` on every route (from `/cv` it
   would wait for a number that doesn't move).
+- **Education folds by grid rows** (2026-11): each folded entry is a one-row grid that goes from `0fr` to
+  `1fr`, which every current browser animates without JS. Replaced: `display: none` (it jumped).
+  Rejected: `interpolate-size` with `height: auto` (Chromium only); a measured height in JS.

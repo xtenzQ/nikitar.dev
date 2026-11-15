@@ -171,13 +171,16 @@ defineOgImage({
         <li
           v-for="(item, index) in cv.education"
           :key="item.degree"
-          class="item"
           :class="{ 'edu-more': index > 0 }"
         >
-          <span class="logo" aria-hidden="true">{{ item.monogram }}</span>
-          <div class="head">
-            <p><span class="item-title">{{ item.degree }}</span><span class="item-place">{{ item.institution }}<template v-if="item.detail"> · {{ item.detail }}</template></span></p>
-            <span class="row-meta">{{ formatCvRange(item.start, item.end) }}</span>
+          <div class="edu-clip">
+            <div class="item">
+              <span class="logo" aria-hidden="true">{{ item.monogram }}</span>
+              <div class="head">
+                <p><span class="item-title">{{ item.degree }}</span><span class="item-place">{{ item.institution }}<template v-if="item.detail"> · {{ item.detail }}</template></span></p>
+                <span class="row-meta">{{ formatCvRange(item.start, item.end) }}</span>
+              </div>
+            </div>
           </div>
         </li>
       </ul>
@@ -546,10 +549,6 @@ strong {
   align-items: flex-start;
 }
 
-.item + .item {
-  margin-top: 1rem;
-}
-
 .item .head {
   flex: 1;
   min-width: 0;
@@ -566,8 +565,34 @@ strong {
   color: var(--text-muted);
 }
 
-.edu:not(.open) .edu-more {
-  display: none;
+.edu-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition: grid-template-rows 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease, visibility 0s 0.3s;
+}
+
+.edu.open .edu-more {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.edu-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.edu-more .item {
+  margin-top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edu-more {
+    transition: none;
+  }
 }
 
 .more {
@@ -852,11 +877,14 @@ strong {
     display: none;
   }
 
-  .edu:not(.open) .edu-more {
-    display: flex;
+  .edu-more {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    transition: none;
   }
 
-  .item + .item {
+  .edu-more .item {
     margin-top: 2px;
   }
 
