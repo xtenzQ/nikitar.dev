@@ -14,11 +14,12 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 
 ## Boundary
 
-- **Pages.** `index` (bio, open source, featured photos) has no header bar; every other page gets
-  `AppHeader` (avatar and name linking home, theme toggle). `photos` lists every group; `oss` lists every
-  pull request with a filter by organization; `blog/**` is [[module-blog]].
-- **Site data is config, not markup.** Profile, socials, and GitHub settings live in `app/app.config.ts`;
-  photos in `app/data/photos.json` ([[module-photos]]). Components read them through `useAppConfig()` and
+- **Pages.** `index` is the statement, the status, links, and doors. Every page gets `AppHeader`
+  (avatar, name, theme toggle); on `/` the name is the page's `h1`, elsewhere it links home. `photos`
+  lists every group; `oss` lists every pull request with a filter by organization; `blog/**` is
+  [[module-blog]].
+- **Site data is config, not markup.** Profile (with the status), socials, and GitHub settings live in
+  `app/app.config.ts`; photos in `app/data/photos.json` ([[module-photos]]). Components read them through `useAppConfig()` and
   `usePhotos()` and never hardcode them.
 - **Forbidden:** raw colours outside the token blocks in `assets/css/main.css`, web fonts, and icons
   fetched at runtime. Three colour exceptions: the photo viewer's chrome, which sits on a fixed dark
@@ -39,16 +40,25 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   set `text-decoration: none`.
 - **Type:** the system stack (SF Pro and SF Mono on Apple). The index is 15px; article prose is 17px.
   Weights 400/500/600. Dates and repo names are mono; dates are ISO (`2026-02`).
+- **Statement** (`/`): the two bio sentences at 22–28px, weight 500, the first in `--heading` and the
+  second in `--text-muted`. It is the largest text on the site; a future post title can reuse it.
+- **Status pill:** `profile.status.label` with a still `--open` dot, then the note in `--text-muted`.
+- **Doors** (`/`): a link with →, a 112px visual (a number or thumbnails, bottom-aligned), and a mono
+  caption, over a `--border-strong` hairline. The link's `::after` covers the door, so the door is one
+  link. An auto-fit grid (min 12rem) takes a new door (Writing, CV) without a layout change; stacked
+  doors drop the fixed visual height. A door with nothing to show is not rendered.
+- **Page transitions:** route changes cross-fade in 180ms through the View Transitions API
+  (`experimental.viewTransition`). `.site-header` has its own `view-transition-name`, so it holds still.
+  Nuxt skips the transition under `prefers-reduced-motion`; browsers without the API just navigate.
 - **Grouped list** (`.group`, `.group-row`): 12px radius, hairline dividers inset past the leading icon.
   An "All …" row ends a list and links out.
 - **PR state** is an icon in the state colour (`ph:git-pull-request` open, `ph:git-merge` merged), with
-  the word for screen readers only. `PullRequestRow` is the one row for `/` and `/oss`. On `/` the list
-  ends with an "All pull requests" row to `/oss`, with the total in it only when the list is cut.
+  the word for screen readers only. `PullRequestRow` is the row on `/oss`; `/` shows only counts.
 - **Filter chips** (`/oss`): toggle buttons in the icon-button shape, with the org avatar, `@login`, and a
   mono count. Pressed is a `--heading` border; pressing it again shows all. Chips wrap, never scroll.
-- **Icon buttons:** 32px, 8px radius. Icons are Phosphor (`ph:`). A name that comes from data (socials)
-  is invisible to the scanner and must be listed in `icon.clientBundle.icons`; static hosting has no
-  icon API, so a missing one 404s after client-side navigation.
+- **Icon buttons:** 32px, 8px radius. Icons are Phosphor (`ph:`). Static hosting has no icon API, so
+  every icon ships in the client bundle; a name the scanner can't see in a template must be listed in
+  `icon.clientBundle.icons`, or it 404s after client-side navigation.
 - **Preview card** (`og:image`): `components/OgImage/Card.vue`, the default for every page. The light
   `--bg`, avatar and `nikitar.dev`, then the page title and its meta description, so the card says what
   the search snippet says. Inter is the only font the renderer has. Local builds reuse rendered cards
@@ -59,7 +69,7 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   (180px) can't switch colour, so they put the same n. (3-unit stems) in light on a `--heading` tile;
   the PNG tile has the icon-button radius, the touch icon is full bleed because iOS rounds it.
 - **Photo grid:** 3:4 tiles, 3 columns from 640px, 2 below. One native `<dialog>` viewer per gallery;
-  the arrows walk across groups. Home keeps 3 or 6 featured photos so rows are full.
+  the arrows walk across groups. The Photos door on `/` shows the first two featured photos.
 
 ## Decisions
 
@@ -79,12 +89,17 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   important text, and in light mode blue was about 2:1 against body text with no underline until hover.
   Rejected: blue accent links; a small company logo inline in the bio (the only image in the prose, and
   few people know the logo).
-- **PR state as icons, count only when the list is cut** (2026-11): the dot's label was hidden on phones,
-  so state was colour only, and a `2 merged · 4 open` header repeated the six rows below it. The total
-  sits in the "All N pull requests" row, like "All N photos", because `/oss` shows exactly that many.
-  Rejected: dots with labels; icons with tooltips (no hover on touch); `N merged` in the section header
-  (replaced by the row once `/oss` existed); a count on the GitHub search link (it also shows closed
-  pull requests, so the numbers would not match).
+- **PR state as icons** (2026-11): the dot's label was hidden on phones, so state was colour only.
+  Rejected: dots with labels; icons with tooltips (no hover on touch); a count on the GitHub search link
+  (it also shows closed pull requests, so the numbers would not match).
+- **Counts, not rows, on `/`** (2026-11): the Open source door shows merged (and open) and a count per
+  repository; `/oss` has the rows. Eight near-identical `fix(...)` titles hid the signal, which projects.
+  Replaced the newest few rows and an "All N pull requests" row.
+- **Labelled links instead of social icon buttons** (2026-11): four words read faster than four glyphs,
+  and Email comes first. Rejected: the icon row (it needed hover titles, which touch lacks).
+- **Cross-fade, not slide, between pages** (2026-11). Rejected: a horizontal slide on desktop (the pages
+  have no left-to-right order, so a direction would mean nothing); scroll-reveal animations (content is
+  hidden at rest); a pulsing status dot (it pulls the eye all the time).
 - **Organization filter on `/oss`** (2026-11): one chip per owner, like GitHub's org mentions, ordered by
   count; the subtitle reads "N of M" while one is pressed. Only page state, so the prerendered HTML is the
   full list. Rejected: a section per org (three short lists with a header each); an "All" chip (a pressed

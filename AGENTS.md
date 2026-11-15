@@ -14,8 +14,8 @@ Nuxt 4 and Nuxt Content, prerendered to GitHub Pages.
 ## Voice and content
 
 - Never write or rewrite first-person prose for the owner. Propose wording and let him decide. The site
-  bio is the source; his GitHub profile README (`xtenzQ/xtenzQ`) repeats two of its sentences and links
-  here, so a change to those sentences goes to both.
+  bio is the source; his GitHub profile README (`xtenzQ/xtenzQ`) repeats two of its sentences and the
+  status (`profile.status`) and links here, so a change to either goes to both.
 - English is his second language. Prefer plain words; avoid idioms and flourishes ("keeps me hooked",
   "a few things I'm glad I did").
 - Don't add sections or content to fill space.

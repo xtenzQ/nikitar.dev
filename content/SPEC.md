@@ -16,8 +16,8 @@ Markdown posts in `content/blog/`, rendered at `/blog/<slug>`, with per-tag list
 Dormant since 2026-11: the only post (2026-02) is out of date. The routes stay prerendered and in the
 sitemap so existing links work, but no page links to the blog. `draft: true` unpublishes a post.
 
-When writing resumes, add back a Writing grouped list on the home page (title and `yyyy-mm`) and a
-Writing link in `AppHeader`.
+When writing resumes, add a Writing door on the home page (the latest post's title and `yyyy-mm`); the
+doors grid takes it without a layout change.
 
 ## Boundary
 

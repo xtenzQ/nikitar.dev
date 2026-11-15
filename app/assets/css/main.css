@@ -107,6 +107,17 @@ a:hover {
   border-radius: 6px;
 }
 
+/* ── Page Transitions ──────────────────────────────────────── */
+/* Route changes cross-fade (experimental.viewTransition) while the header stays in place */
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.18s;
+}
+
 /* ── Page Primitives ───────────────────────────────────────── */
 .page-title {
   font-size: 1.75rem;

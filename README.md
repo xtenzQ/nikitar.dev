@@ -21,11 +21,12 @@
 
 ## ✨ Features
 
-- 🗂️ One-page index: a short bio, open source pull requests, and photos in macOS-style grouped lists
-- 🐙 Open source pull requests pulled from the GitHub API at build time and refreshed by a daily rebuild, open ones before merged: the latest few on the home page, all of them on `/oss` with a filter by organization (curate them in `app/app.config.ts`)
-- 📷 Photos: a featured set on the home page, all of them grouped by trip on `/photos`, with a native `<dialog>` viewer
+- 🗂️ One-page index: a short statement, an availability status, and one door each to open source and photos
+- 🐙 Open source pull requests pulled from the GitHub API at build time and refreshed by a daily rebuild, counted on the home page, all of them on `/oss` (open ones first) with a filter by organization (curate them in `app/app.config.ts`)
+- 📷 Photos: two featured thumbnails on the home page, all of them grouped by trip on `/photos`, with a native `<dialog>` viewer
 - 🧹 Photo pipeline (`pnpm photos`): downscales originals and strips EXIF/GPS before anything reaches the repo
 - 🌗 Dark / light mode with system preference detection
+- 🎞️ Pages cross-fade with the View Transitions API (off with reduced motion)
 - 🔤 System fonts (SF Pro on Apple devices), no web fonts
 - 📱 Fully responsive design
 - 🔍 SEO optimized (Open Graph, structured data, sitemap); `robots.txt` asks AI training crawlers to skip `/photos`

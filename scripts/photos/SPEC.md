@@ -31,7 +31,7 @@ photos-src/<group>/*.{heic,jpg,png,webp}     originals, gitignored
 `photos.json` holds `groups[]` of `{ id, title, photos[] }`; `id` matches the source folder and `title`
 is what the page shows ("Korea, 2025"). A photo is `{ name, caption, alt, width, height, featured?,
 focus? }`: `width`/`height` are the large file's, `focus` is an `object-position` for the tile crop.
-File order is display order. New entries arrive with an empty caption and alt and the group title
+File order is display order; the Photos door on `/` shows the first two `featured` photos. New entries arrive with an empty caption and alt and the group title
 defaults to the folder name; fill them in before publishing. Captions are "Place, year".
 
 ## Invariants

@@ -14,10 +14,10 @@ export default defineNuxtConfig({
 
   icon: {
     // Static hosting has no /api/_nuxt_icon route, so ship every icon in the client bundle.
-    // Icons named in app.config.ts are dynamic and invisible to the scanner, so list them here.
+    // The scanner finds names in templates; list any it can't see here.
     clientBundle: {
       scan: true,
-      icons: ['ph:github-logo', 'ph:linkedin-logo', 'ph:graduation-cap', 'ph:envelope-simple', 'ph:x', 'ph:caret-left'],
+      icons: ['ph:x', 'ph:caret-left'],
     },
     customCollections: [
       {
@@ -56,6 +56,7 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    viewTransition: true,
     defaults: {
       nuxtLink: { trailingSlash: 'append' },
     },
@@ -112,7 +113,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      // '/' links /photos only when there are more photos than the featured set, and /oss only when GitHub answered
+      // '/' links /oss only when GitHub answered
       routes: ['/', '/photos', '/oss'],
     },
     watchOptions: {

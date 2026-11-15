@@ -1,16 +1,32 @@
 <script setup lang="ts">
-const { profile, github } = useAppConfig()
+const { profile, socials } = useAppConfig()
 const { all: allPhotos, featured } = usePhotos()
 
-const { data: contributions } = await useFetch('/api/contributions', {
+const { data: openSource } = await useFetch('/api/contributions', {
   key: 'contributions-home',
-  transform: all => ({ pullRequests: all.slice(0, github.limit), total: all.length }),
+  transform: (all) => {
+    const counts = new Map<string, number>()
+    for (const pr of all) counts.set(pr.repo, (counts.get(pr.repo) ?? 0) + 1)
+    // Stable sort: equal counts keep the route's order, newest first
+    const repos = [...counts]
+      .map(([repo, count]) => ({ name: repo.split('/')[1]!, count }))
+      .sort((a, b) => b.count - a.count)
+    return {
+      merged: all.filter(pr => pr.state === 'merged').length,
+      open: all.filter(pr => pr.state === 'open').length,
+      repos,
+    }
+  },
 })
 
-const allPullRequestsLabel = computed(() => {
-  const c = contributions.value
-  return c && c.total > c.pullRequests.length ? `All ${c.total} pull requests` : 'All pull requests'
+const repoCaption = computed(() => {
+  const repos = openSource.value?.repos ?? []
+  const shown = repos.slice(0, 4).map(repo => `${repo.name} ${repo.count}`)
+  if (repos.length > 4) shown.push(`+${repos.length - 4}`)
+  return shown.join(' · ')
 })
+
+const thumbs = featured.slice(0, 2)
 
 useHead({
   titleTemplate: '%s',
@@ -44,104 +60,223 @@ useSchemaOrg([
 
 <template>
   <div>
-    <header class="flex items-center gap-4">
-      <img :src="profile.avatar" alt="" width="44" height="44" class="avatar">
-      <div class="flex-1 min-w-0">
-        <h1 class="name">{{ profile.name }}</h1>
-        <p class="role">{{ profile.role }} · {{ profile.location }}</p>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <SocialLinks class="hidden sm:flex" />
-        <ThemeToggle />
-      </div>
-    </header>
-
     <!-- The GitHub profile README repeats the work and interests sentences -->
-    <div class="bio">
+    <div class="statement">
       <p>
         Software engineer at
         <a href="https://kmslh.com/" target="_blank" rel="noopener noreferrer">KMS Lighthouse</a>,
         based in Belgrade. I work on Solr-based search and build AI tooling for our R&amp;D team.
       </p>
-      <p>
+      <p class="statement-muted">
         Interested in search architecture, Lucene internals, RAG, and agent harnesses for software engineering.
-      </p>
-      <p class="muted">
-        Before moving to Serbia in 2023, I was a PhD student supervised by
-        <a href="https://scholar.google.com/citations?user=qKyxsuIAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Denis Sidorov</a>,
-        working on optimization and ML methods for power systems in collaboration with the Intelligent Power Grid Lab at Inha University.
-      </p>
-      <p class="muted">
-        Two-time 3rd-place winner of the SI Analytics satellite imagery track at JunctionX Seoul:
-        <a href="https://github.com/daredevils-team/SmartMonitor" target="_blank" rel="noopener noreferrer">SmartMonitor</a> (2020),
-        <a href="https://github.com/daredevils-team/SmartChange" target="_blank" rel="noopener noreferrer">SmartChange</a> (2021).
       </p>
     </div>
 
-    <SocialLinks class="flex sm:hidden mt-5" />
+    <div v-if="profile.status" class="status">
+      <span class="pill"><span class="dot" aria-hidden="true" />{{ profile.status.label }}</span>
+      <p class="status-note">{{ profile.status.note }}</p>
+    </div>
 
-    <section v-if="contributions?.pullRequests.length" class="mt-10">
-      <h2 class="section-label">Open source</h2>
-      <ul class="group">
-        <PullRequestRow v-for="pr in contributions.pullRequests" :key="pr.url" :pr="pr" />
-        <li>
-          <NuxtLink to="/oss" class="group-row">
-            <Icon name="ph:git-pull-request" size="20" class="row-chevron" />
-            <div class="group-row-body">
-              <span class="row-text" style="color: var(--text-muted);">{{ allPullRequestsLabel }}</span>
-              <Icon name="ph:caret-right" size="14" class="row-chevron" />
-            </div>
-          </NuxtLink>
-        </li>
-      </ul>
-    </section>
+    <nav aria-label="Elsewhere" class="links">
+      <a
+        v-for="social in socials"
+        :key="social.label"
+        :href="social.url"
+        :target="social.url.startsWith('mailto:') ? undefined : '_blank'"
+        rel="noopener noreferrer"
+      >{{ social.label }}</a>
+    </nav>
 
-    <section v-if="featured.length" class="mt-10" aria-label="Photos">
-      <PhotoGallery :groups="[{ photos: featured }]" />
-      <ul v-if="allPhotos.length > featured.length" class="group mt-4">
-        <li>
-          <NuxtLink to="/photos" class="group-row">
-            <Icon name="ph:images" size="20" class="row-chevron" />
-            <div class="group-row-body">
-              <span class="row-text" style="color: var(--text-muted);">All {{ allPhotos.length }} photos</span>
-              <Icon name="ph:caret-right" size="14" class="row-chevron" />
-            </div>
-          </NuxtLink>
-        </li>
-      </ul>
-    </section>
+    <div class="doors">
+      <section v-if="openSource?.repos.length" class="door" aria-labelledby="door-oss">
+        <NuxtLink id="door-oss" to="/oss" class="door-link">
+          Open source <span class="door-arrow" aria-hidden="true">→</span>
+        </NuxtLink>
+        <p class="door-visual">
+          <span class="door-number">{{ openSource.merged }}</span>
+          <span class="door-unit">merged<template v-if="openSource.open"> · {{ openSource.open }} open</template></span>
+        </p>
+        <p class="door-caption">{{ repoCaption }}</p>
+      </section>
+
+      <section v-if="thumbs.length" class="door" aria-labelledby="door-photos">
+        <NuxtLink id="door-photos" to="/photos" class="door-link">
+          Photos <span class="door-arrow" aria-hidden="true">→</span>
+        </NuxtLink>
+        <div class="door-visual">
+          <img
+            v-for="photo in thumbs"
+            :key="photo.name"
+            :src="`/photos/${photo.name}.webp`"
+            alt=""
+            :style="{ objectPosition: photo.focus }"
+            width="84"
+            height="112"
+            decoding="async"
+          >
+        </div>
+        <p class="door-caption">{{ allPhotos.length }} photos</p>
+      </section>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 1px var(--border);
-}
-
-.name {
-  font-size: 1.0625rem;
+.statement {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: clamp(1.375rem, 1.1rem + 1.2vw, 1.75rem);
+  font-weight: 500;
   line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--heading);
+  text-wrap: pretty;
 }
 
-.role {
+.statement-muted {
+  color: var(--text-muted);
+}
+
+.status {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 28px;
+  padding: 0 0.75rem 0 0.625rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--heading);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--open);
+}
+
+.status-note {
+  flex: 1 1 18rem;
+  min-width: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.links {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.25rem;
+}
+
+.links a {
+  padding-block: 0.25rem;
+  color: var(--heading);
+}
+
+.doors {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 2rem;
+}
+
+.door {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--border-strong);
+}
+
+.door-link {
+  align-self: flex-start;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--heading);
+  text-decoration: none;
+}
+
+/* The whole door is the link's click target */
+.door-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.door-arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.door:hover .door-arrow {
+  transform: translateX(2px);
+}
+
+.door-visual {
+  height: 112px;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.375rem;
+}
+
+.door-number {
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.door-unit {
+  margin-left: 0.25rem;
+  padding-bottom: 0.25rem;
   font-size: 0.875rem;
   color: var(--text-muted);
 }
 
-.bio {
-  margin-top: 1.25rem;
-  color: var(--text);
+.door-visual img {
+  width: 84px;
+  height: 112px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--surface);
+  outline: 1px solid var(--border);
+  outline-offset: -1px;
+  transition: opacity 0.15s ease;
 }
 
-.bio p + p {
-  margin-top: 0.75rem;
+.door:hover .door-visual img {
+  opacity: 0.9;
 }
 
-.bio .muted {
+.door-caption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+/* Stacked doors don't need matching visual heights */
+@media (max-width: 28.5rem) {
+  .door-visual {
+    height: auto;
+  }
 }
 </style>
