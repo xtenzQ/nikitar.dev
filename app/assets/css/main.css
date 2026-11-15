@@ -60,6 +60,29 @@
   --selection: rgb(59 156 255 / 0.25);
 }
 
+/* Print (and the CV PDF) is light on white in either colour mode; rules a little darker for paper */
+@media print {
+  :root,
+  .dark {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --heading: #1d1d1f;
+    --text: #3a3a3c;
+    --text-muted: #6e6e73;
+    --text-tertiary: #a1a1a6;
+    --border: rgb(0 0 0 / 0.1);
+    --border-strong: rgb(0 0 0 / 0.16);
+    --link-underline: rgb(0 0 0 / 0.25);
+    --open: #1a7f37;
+    --merged: #8250df;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 12mm 15mm;
+}
+
 /* ── Base Styles ───────────────────────────────────────────── */
 html {
   overflow-y: scroll;

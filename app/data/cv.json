@@ -1,0 +1,123 @@
+{
+  "updated": "2026-11-15",
+  "pdf": "nikita-rusetskii-cv.pdf",
+  "headline": "Software engineer: search, backend, AI developer tooling",
+  "location": "Belgrade, Serbia",
+  "workMode": "remote or on-site",
+  "experience": [
+    {
+      "name": "KMS Lighthouse",
+      "url": "https://kmslh.com/",
+      "monogram": "K",
+      "location": "Belgrade, Serbia · hybrid",
+      "roles": [
+        {
+          "title": "Backend Developer, Architects’ team",
+          "start": "2026-05",
+          "bullets": [
+            "Designed and currently maintaining an agent workspace to automate all manual work and make it easier to deliver tasks E2E",
+            "Created unattended agent workflow that reuses the agentic workspace to fix bugs E2E and post PRs for a human code review",
+            "Research of AI-DLC practices and incorporating them",
+            "Working on the architect scope for search team"
+          ]
+        },
+        {
+          "title": "Backend Developer, Search team",
+          "start": "2022-01",
+          "end": "2026-05",
+          "bullets": [
+            "Decreased memory consumption during indexing of large files by 1.5x",
+            "Integrated agentic RAG into the search workflow",
+            "Optimized folder lookup for immediate document update from O(n²) to O(1)",
+            "Created blue/green indexer configuration"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transneft",
+      "monogram": "T",
+      "location": "Irkutsk, Russia",
+      "roles": [
+        {
+          "title": "Backend Developer",
+          "start": "2020-10",
+          "end": "2021-12",
+          "summary": "Developed new components and maintained existing ones across electronic document management systems on Java 7/8, Spring and Hibernate. Also worked on the front end with GWT, Dojo and JavaScript when the feature needed both ends."
+        }
+      ]
+    },
+    {
+      "name": "ISPsystem",
+      "monogram": "I",
+      "location": "Irkutsk, Russia",
+      "roles": [
+        {
+          "title": "Backend Developer Intern",
+          "start": "2020-02",
+          "end": "2020-04",
+          "summary": "Worked with a senior engineer on the import service for a virtualization management product, in Go with Docker and Linux."
+        }
+      ]
+    }
+  ],
+  "notablePullRequests": ["apache/solr#1829", "JetBrains/thinkrail#1018"],
+  "skills": [
+    { "group": "Search", "items": "Apache Solr, Lucene, RAG" },
+    { "group": "Backend", "items": "Java, Spring Boot, Hibernate, Apache Kafka, Go" },
+    { "group": "AI tooling", "items": "Claude Code skills and subagents, MCP, Anthropic API" },
+    { "group": "Tools", "items": "Docker, Linux, Git" }
+  ],
+  "education": [
+    {
+      "degree": "MSc, Computer Science & Engineering",
+      "short": "MSc",
+      "institution": "Irkutsk National Research Technical University",
+      "monogram": "IR",
+      "start": "2018",
+      "end": "2020"
+    },
+    {
+      "degree": "PhD studies, not completed",
+      "short": "PhD studies",
+      "institution": "Irkutsk National Research Technical University",
+      "detail": "ML for power systems",
+      "monogram": "IR",
+      "start": "2020",
+      "end": "2022"
+    },
+    {
+      "degree": "Exchange semester",
+      "short": "exchange in Korea",
+      "institution": "Inha University, South Korea",
+      "monogram": "인",
+      "start": "2019",
+      "end": "2019"
+    },
+    {
+      "degree": "BSc with honours, Computer Science & Engineering",
+      "short": "BSc",
+      "institution": "Irkutsk National Research Technical University",
+      "monogram": "IR",
+      "start": "2014",
+      "end": "2018"
+    }
+  ],
+  "papers": {
+    "count": 4,
+    "topic": "machine learning and optimization for power systems",
+    "start": "2020",
+    "end": "2021"
+  },
+  "awards": [
+    { "title": "3rd place, JunctionX Seoul hackathon", "note": "satellite imagery track", "years": "2020, 2021" },
+    { "title": "Bronze award, IEEE Seoul Section Student Paper Contest", "years": "2020" },
+    { "title": "Excellence award, KIEE Summer Conference", "years": "2021" }
+  ],
+  "languages": [
+    { "name": "English", "level": "full professional" },
+    { "name": "Russian", "level": "native" },
+    { "name": "Serbian", "level": "elementary" },
+    { "name": "Korean", "level": "elementary" }
+  ]
+}

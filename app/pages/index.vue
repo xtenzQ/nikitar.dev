@@ -73,7 +73,7 @@ useSchemaOrg([
     </div>
 
     <div v-if="profile.status" class="status">
-      <span class="pill"><span class="dot" aria-hidden="true" />{{ profile.status.label }}</span>
+      <StatusPill :label="profile.status.label" />
       <p class="status-note">{{ profile.status.note }}</p>
     </div>
 
@@ -144,28 +144,6 @@ useSchemaOrg([
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 0.75rem;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  height: 28px;
-  padding: 0 0.75rem 0 0.625rem;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--heading);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--open);
 }
 
 .status-note {

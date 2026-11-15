@@ -34,6 +34,7 @@ owning spec. A change that moves a decision or boundary updates that spec in the
   and check `/` plus every changed page in light, dark, and a 375px viewport, with no horizontal scroll.
 - Photo changes: open the viewer (arrows, Esc, click outside) and confirm new files hold only a `VP8`
   chunk with `webpinfo -summary`.
+- CV changes: run `pnpm cv:pdf` after the build; it must report 1 page. Look at the PDF too.
 - There is no test suite; don't invent one for a localized change.
 
 ## Handoff hygiene

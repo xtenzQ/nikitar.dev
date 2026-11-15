@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import cv from './app/data/cv.json'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -66,6 +67,11 @@ export default defineNuxtConfig({
     defaults: { component: 'Card' },
   },
 
+  // scripts/cv-pdf.mjs writes the CV PDF after the build, so the link checker can't see it yet
+  linkChecker: {
+    excludeLinks: [`/${cv.pdf}`],
+  },
+
   // Crawlers that collect AI training data are asked to skip photos; search and AI search stay allowed
   robots: {
     groups: [
@@ -114,7 +120,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       // '/' links /oss only when GitHub answered
-      routes: ['/', '/photos', '/oss'],
+      routes: ['/', '/photos', '/oss', '/cv'],
     },
     watchOptions: {
       usePolling: true,

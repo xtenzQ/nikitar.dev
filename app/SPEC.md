@@ -14,13 +14,16 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 
 ## Boundary
 
-- **Pages.** `index` is the statement, the status, links, and doors. Every page gets `AppHeader`
-  (avatar, name, theme toggle); on `/` the name is the page's `h1`, elsewhere it links home. `photos`
-  lists every group; `oss` lists every pull request with a filter by organization; `blog/**` is
-  [[module-blog]].
+- **Pages.** `index` is the statement, the status, links, and doors. Every page but `cv` gets
+  `AppHeader` (avatar, name, theme toggle); on `/` the name is the page's `h1`, elsewhere it links home.
+  `photos` lists every group; `oss` lists every pull request with a filter by organization; `blog/**` is
+  [[module-blog]]. `cv` is the CV with a Download PDF link; it uses the `cv` layout (a "nikitar.dev / cv"
+  breadcrumb and the theme toggle), because its `h1` is the name and an avatar would repeat it.
 - **Site data is config, not markup.** Profile (with the status), socials, and GitHub settings live in
-  `app/app.config.ts`; photos in `app/data/photos.json` ([[module-photos]]). Components read them through `useAppConfig()` and
-  `usePhotos()` and never hardcode them.
+  `app/app.config.ts`; photos in `app/data/photos.json` ([[module-photos]]); the CV in
+  `app/data/cv.json`. Components read them through `useAppConfig()`, `usePhotos()`, and `useCv()` and
+  never hardcode them. Open source counts and the CV's notable pull requests come from
+  [[module-contributions]], so a notable one that is hidden or missing just isn't shown.
 - **Forbidden:** raw colours outside the token blocks in `assets/css/main.css`, web fonts, and icons
   fetched at runtime. Three colour exceptions: the photo viewer's chrome, which sits on a fixed dark
   backdrop in both themes and uses white with alpha; the preview card, which copies the light tokens as
@@ -33,7 +36,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   `--text`, `--text-muted` (secondary, at least 4.5:1) and `--text-tertiary` (decorative only, fails AA);
   alpha borders `--border` (dividers) and `--border-strong` (outlines); `--accent` for the focus ring and
   blog diagrams; `--link-underline`; `--open` and `--merged` for PR state. Blog diagrams read these names
-  too, so renaming a token breaks them.
+  too, so renaming a token breaks them. A print block resets them to light on white, with rules a
+  little darker, so printing in dark mode still gives a light page.
 - **Colour:** the interface is grey: text, icons, and links. Colour comes from content (org avatars,
   photos, diagrams) and PR state. A text link keeps its paragraph's colour with a `--link-underline`
   line; on hover it turns `--heading` and the line goes solid. Links styled as rows, buttons, or badges
@@ -42,7 +46,20 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   Weights 400/500/600. Dates and repo names are mono; dates are ISO (`2026-02`).
 - **Statement** (`/`): the two bio sentences at 22–28px, weight 500, the first in `--heading` and the
   second in `--text-muted`. It is the largest text on the site; a future post title can reuse it.
-- **Status pill:** `profile.status.label` with a still `--open` dot, then the note in `--text-muted`.
+- **Status pill:** `StatusPill`, `profile.status.label` with a still `--open` dot. `/` follows it with
+  the note in `--text-muted`; `/cv` with the links.
+- **CV** (`/cv`): one column on the grey page. Section labels are 13px 600 in `--heading`, heavier than
+  `.section-label`, because a reader scans a CV by section. Experience is a timeline: a circle with
+  the company's monogram, a line down to the next one, and a dot per role when a company has more than
+  one (filled for the current role). Dates read "May 2026 – now", not ISO: recruiters and résumé
+  parsers expect that; they stay mono and right-aligned on screen. Education shows its first entry and
+  folds the rest behind a row of small circles; Research and awards are rows with years on the right.
+  Type steps are 32 / 17 / 15 / 13 / 12 mono.
+- **CV print** (the PDF): the same DOM with a print stylesheet, A4 with 12 mm / 15 mm margins. Sans
+  dates with tabular figures, labels in small spaced capitals, no rules between sections, contacts
+  spelled out in one line, a single role on its company's line, Languages as a Skills row, every
+  education entry, and no letters in the circles (a parser would read "K KMS Lighthouse"). It must fit
+  one page; `pnpm cv:pdf` prints the page count.
 - **Doors** (`/`): a link with →, a 112px visual (a number or thumbnails, bottom-aligned), and a mono
   caption, over a `--border-strong` hairline. The link's `::after` covers the door, so the door is one
   link. An auto-fit grid (min 12rem) takes a new door (Writing, CV) without a layout change; stacked
@@ -100,6 +117,10 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Cross-fade, not slide, between pages** (2026-11). Rejected: a horizontal slide on desktop (the pages
   have no left-to-right order, so a direction would mean nothing); scroll-reveal animations (content is
   hidden at rest); a pulsing status dot (it pulls the eye all the time).
+- **CV print from the page's own DOM** (2026-11): print-only bits (contacts as text, the single-role
+  line, the Languages row) are small, and one template can't drift from the PDF. Rejected: a separate
+  print template or route (the whole CV twice); left section labels on paper (rejected on screen
+  too); two pages (most of a second page would be empty).
 - **Organization filter on `/oss`** (2026-11): one chip per owner, like GitHub's org mentions, ordered by
   count; the subtitle reads "N of M" while one is pressed. Only page state, so the prerendered HTML is the
   full list. Rejected: a section per org (three short lists with a header each); an "All" chip (a pressed

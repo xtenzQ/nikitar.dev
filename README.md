@@ -24,6 +24,7 @@
 - 🗂️ One-page index: a short statement, an availability status, and one door each to open source and photos
 - 🐙 Open source pull requests pulled from the GitHub API at build time and refreshed by a daily rebuild, counted on the home page, all of them on `/oss` (open ones first) with a filter by organization (curate them in `app/app.config.ts`)
 - 📷 Photos: two featured thumbnails on the home page, all of them grouped by trip on `/photos`, with a native `<dialog>` viewer
+- 📄 CV on `/cv` from one data file (`app/data/cv.json`), with a one-page PDF that Chrome prints from the same page at build time (`pnpm cv:pdf`)
 - 🧹 Photo pipeline (`pnpm photos`): downscales originals and strips EXIF/GPS before anything reaches the repo
 - 🌗 Dark / light mode with system preference detection
 - 🎞️ Pages cross-fade with the View Transitions API (off with reduced motion)
@@ -66,13 +67,16 @@ pnpm preview
 
 # Process new photos from photos-src/<trip>/ (macOS; needs `brew install webp`)
 pnpm photos
+
+# Print /cv/ to a PDF in .output/public after a build (needs Google Chrome)
+pnpm cv:pdf
 ```
 
 Agent and contributor docs: `AGENTS.md`, plus a `SPEC.md` per module (start with the root one).
 
 ## 📦 Third-Party Assets
 
-- **Fonts:** the system font stack (SF Pro / SF Mono on Apple devices), no web fonts
+- **Fonts:** the system font stack (SF Pro / SF Mono on Apple devices), no web fonts; the CV PDF built in CI is set in [Inter](https://rsms.me/inter/) (SIL Open Font License), installed on the runner
 - **Icons:** [Phosphor Icons](https://phosphoricons.com/) via [@nuxt/icon](https://nuxt.com/modules/icon)
 - **Math rendering:** [KaTeX](https://katex.org/) CSS via [jsDelivr](https://www.jsdelivr.com/)
 
@@ -92,4 +96,4 @@ Like the website or got inspired by it? Please support it by joining [stargazers
 
 The source code is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-The MIT License does not cover the photos (`public/photos/`) or the written content (`content/`). They are © Nikita Rusetskii, all rights reserved, and may not be copied or reused without permission.
+The MIT License does not cover the photos (`public/photos/`) or the written content (`content/`, and the CV in `app/data/cv.json` and its PDF). They are © Nikita Rusetskii, all rights reserved, and may not be copied or reused without permission.
