@@ -16,7 +16,7 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 
 - **Pages.** `index` is the statement, the status, links, and doors. Every page but `cv` gets
   `AppHeader` (avatar, name, theme toggle); on `/` the name is the page's `h1`, elsewhere it links home.
-  `photos` lists every group; `oss` lists every pull request with a filter by organization; `blog/**` is
+  `photos` lists every group; `oss` lists every pull request, grouped by project; `blog/**` is
   [[module-blog]]. `cv` is the CV with a Download PDF link; it uses the `cv` layout (a "nikitar.dev / cv"
   breadcrumb and the theme toggle), because its `h1` is the name and an avatar would repeat it.
 - **Site data is config, not markup.** Profile (with the status), socials, and GitHub settings live in
@@ -67,12 +67,22 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Page transitions:** route changes cross-fade in 180ms through the View Transitions API
   (`experimental.viewTransition`). `.site-header` has its own `view-transition-name`, so it holds still.
   Nuxt skips the transition under `prefers-reduced-motion`; browsers without the API just navigate.
+- **Door to `/oss`:** the Open source door's label, number, and unit share `view-transition-name`s with
+  the `/oss` header, so they move up in 0.4s and the number shrinks from 64 to 32px. The rest of `/oss`
+  rises in once the number has landed (0.34s, then 40ms apart for the first three projects); going back,
+  `/` appears after it. `plugins/view-transition-types.client.ts` tags these two navigations with view
+  transition types (`oss-open`, `oss-close`), so the staging in `main.css` touches no other route. Sizes
+  and line-heights of the shared pieces stay in em, so the scale doesn't distort them.
 - **Grouped list** (`.group`, `.group-row`): 12px radius, hairline dividers inset past the leading icon.
   An "All …" row ends a list and links out.
 - **PR state** is an icon in the state colour (`ph:git-pull-request` open, `ph:git-merge` merged), with
-  the word for screen readers only. `PullRequestRow` is the row on `/oss`; `/` shows only counts.
-- **Filter chips** (`/oss`): toggle buttons in the icon-button shape, with the org avatar, `@login`, and a
-  mono count. Pressed is a `--heading` border; pressing it again shows all. Chips wrap, never scroll.
+  the word for screen readers only. On `/oss` the icon sits on the timeline; `/` shows only counts.
+- **Open source** (`/oss`): the door's label and `OpenSourceCount` (64px on the door, 32px here) head the
+  page, then a mono caption (projects and years) and a "Pull requests" label with the GitHub link. Below,
+  a timeline like the CV's: per repository the org avatar (36px, 9px radius), its name linking to the repo,
+  mono counts and years, the owner and the GitHub description; per pull request the state icon on the
+  line, the title without its `fix(scope):` prefix, and a mono `#number`. Most pull requests first. Type
+  steps are the CV's: 32 / 17 / 15 / 13 / 12 mono.
 - **Icon buttons:** 32px, 8px radius. Icons are Phosphor (`ph:`). Static hosting has no icon API, so
   every icon ships in the client bundle; a name the scanner can't see in a template must be listed in
   `icon.clientBundle.icons`, or it 404s after client-side navigation.
@@ -125,8 +135,17 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   line, the Languages row) are small, and one template can't drift from the PDF. Rejected: a separate
   print template or route (the whole CV twice); left section labels on paper (rejected on screen
   too); two pages (most of a second page would be empty).
-- **Organization filter on `/oss`** (2026-11): one chip per owner, like GitHub's org mentions, ordered by
-  count; the subtitle reads "N of M" while one is pressed. Only page state, so the prerendered HTML is the
-  full list. Rejected: a section per org (three short lists with a header each); an "All" chip (a pressed
-  chip already toggles off); the filter in the URL query (a prerendered page can't read it without a
-  hydration mismatch).
+- **`/oss` by project** (2026-11): where and how much, with every title in view, in the CV's timeline.
+  Chosen from four directions drawn on a canvas. Replaced a grouped list with an organization filter (the
+  old settings-page look, the repo repeated on every row, a filter for three owners). Rejected: project
+  doors that filter a flat list (a "2" set large reads as little); selected pull requests first (each
+  needs a line in the owner's words); a table of counts that unfolds (titles hidden behind clicks); a log
+  by month (12 of 14 merged in one month); a contribution heatmap (mostly empty, counts over work); star
+  counts (other people's numbers).
+- **The count shrinks on `/oss`** (2026-11): 64px there outweighed the projects and made the page about
+  the number; 32px is the CV's name size, the largest type on a page other than `/`. Rejected: keeping
+  64px for a pure move (a dashboard figure over a list); dropping the number (the transition has nothing
+  to carry).
+- **Staged door transition** (2026-11): the list waits for the number. Rejected: the list rising while the
+  number moves (the number crossed the rows and the caption); delaying `/oss` on every route (from `/cv` it
+  would wait for a number that doesn't move).

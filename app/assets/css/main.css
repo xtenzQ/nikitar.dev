@@ -141,6 +141,96 @@ a:hover {
   animation-duration: 0.18s;
 }
 
+/* The Open source door on / and the /oss header share these names: the label and count move between them, the number shrinks */
+.vt-oss-label {
+  view-transition-name: oss-label;
+}
+
+.vt-oss-number {
+  view-transition-name: oss-number;
+}
+
+.vt-oss-unit {
+  view-transition-name: oss-unit;
+}
+
+::view-transition-group(oss-label),
+::view-transition-group(oss-number),
+::view-transition-group(oss-unit) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Staged by the types from plugins/view-transition-types: the rest waits until the count has landed */
+.vt-oss-caption {
+  view-transition-name: oss-caption;
+}
+
+.vt-oss-head {
+  view-transition-name: oss-head;
+}
+
+.vt-oss-project:nth-child(1) {
+  view-transition-name: oss-project-1;
+}
+
+.vt-oss-project:nth-child(2) {
+  view-transition-name: oss-project-2;
+}
+
+.vt-oss-project:nth-child(3) {
+  view-transition-name: oss-project-3;
+}
+
+html:active-view-transition-type(oss-open)::view-transition-old(root) {
+  animation-duration: 0.12s;
+}
+
+html:active-view-transition-type(oss-open)::view-transition-new(oss-caption),
+html:active-view-transition-type(oss-open)::view-transition-new(oss-head),
+html:active-view-transition-type(oss-open)::view-transition-new(oss-project-1),
+html:active-view-transition-type(oss-open)::view-transition-new(oss-project-2),
+html:active-view-transition-type(oss-open)::view-transition-new(oss-project-3) {
+  animation: oss-rise 0.28s cubic-bezier(0.2, 0, 0, 1) 0.34s both;
+}
+
+html:active-view-transition-type(oss-open)::view-transition-new(oss-project-1) {
+  animation-delay: 0.38s;
+}
+
+html:active-view-transition-type(oss-open)::view-transition-new(oss-project-2) {
+  animation-delay: 0.42s;
+}
+
+html:active-view-transition-type(oss-open)::view-transition-new(oss-project-3) {
+  animation-delay: 0.46s;
+}
+
+::view-transition-old(oss-caption),
+::view-transition-old(oss-head),
+::view-transition-old(oss-project-1),
+::view-transition-old(oss-project-2),
+::view-transition-old(oss-project-3) {
+  animation: oss-fade-out 0.12s ease-out both;
+}
+
+html:active-view-transition-type(oss-close)::view-transition-new(root) {
+  animation-delay: 0.34s;
+}
+
+@keyframes oss-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes oss-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
 /* ── Page Primitives ───────────────────────────────────────── */
 .page-title {
   font-size: 1.75rem;

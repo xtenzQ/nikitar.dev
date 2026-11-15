@@ -91,11 +91,10 @@ useSchemaOrg([
     <div class="doors">
       <section v-if="openSource?.repos.length" class="door" aria-labelledby="door-oss">
         <NuxtLink id="door-oss" to="/oss" class="door-link">
-          Open source <span class="door-arrow" aria-hidden="true">→</span>
+          <span class="vt-oss-label">Open source</span> <span class="door-arrow" aria-hidden="true">→</span>
         </NuxtLink>
         <p class="door-visual">
-          <span class="door-number">{{ openSource.merged }}</span>
-          <span class="door-unit">merged<template v-if="openSource.open"> · {{ openSource.open }} open</template></span>
+          <OpenSourceCount :merged="openSource.merged" :open="openSource.open" />
         </p>
         <p class="door-caption">{{ repoCaption }}</p>
       </section>
@@ -192,10 +191,11 @@ useSchemaOrg([
   text-decoration: none;
 }
 
-/* The whole door is the link's click target */
+/* The whole door is the link's click target, over the count's own stacking context */
 .door-link::after {
   content: '';
   position: absolute;
+  z-index: 1;
   inset: 0;
 }
 
@@ -213,22 +213,6 @@ useSchemaOrg([
   display: flex;
   align-items: flex-end;
   gap: 0.375rem;
-}
-
-.door-number {
-  font-size: 4rem;
-  font-weight: 600;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  color: var(--heading);
-  font-variant-numeric: tabular-nums;
-}
-
-.door-unit {
-  margin-left: 0.25rem;
-  padding-bottom: 0.25rem;
-  font-size: 0.875rem;
-  color: var(--text-muted);
 }
 
 .door-visual img {

@@ -21,13 +21,7 @@ export interface Contribution {
 // Prerendered at build time, so the list is as fresh as the last deploy.
 export default defineEventHandler(async (): Promise<Contribution[]> => {
   const { github } = useAppConfig()
-  const { githubToken } = useRuntimeConfig()
-
-  const headers: Record<string, string> = {
-    'Accept': 'application/vnd.github+json',
-    'User-Agent': 'nikitar.dev',
-  }
-  if (githubToken) headers.Authorization = `Bearer ${githubToken}`
+  const headers = githubHeaders()
 
   try {
     const items: SearchItem[] = []

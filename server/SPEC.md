@@ -16,12 +16,16 @@ dropped. The list is filtered by `github.hidden` (a whole `owner/repo` or one `o
 `app/app.config.ts`. The route returns the whole list; `/` counts it (merged, open, per repository) and `/oss`
 shows all of it. The search pages through every result, up to the API's 1000.
 
+`/api/repositories` returns the GitHub description of each repository in that list, keyed by `owner/repo`,
+for the project headers on `/oss`.
+
 ## Boundary
 
-- **Build time only.** Prerendering `/` and `/oss` calls the route; the result is inlined into the page and its
-  `_payload.json`. GitHub Pages has no server, so the route itself is never served.
+- **Build time only.** Prerendering `/` and `/oss` calls the routes; the result is inlined into the page and
+  its `_payload.json`. GitHub Pages has no server, so the routes themselves are never served.
 - **GitHub search API.** `NUXT_GITHUB_TOKEN` raises the rate limit; CI passes `GITHUB_TOKEN`.
-- **Fails soft.** Any error returns `[]` and the section hides. A build never fails because GitHub is down.
+- **Fails soft.** Any error returns `[]` and the section hides; a failed repository request leaves out only
+  its description. A build never fails because GitHub is down.
 
 ## Decisions
 
@@ -35,3 +39,7 @@ shows all of it. The search pages through every result, up to the API's 1000.
 - **Hidden repos stay hidden on GitHub too** (2026-11): the "All pull requests on GitHub" link on `/oss`
   adds `-repo:` for each hidden repo. A hidden single pull request has no search qualifier, so GitHub
   still shows it, and closed-unmerged ones show there as well.
+- **Descriptions in their own route** (2026-11): only `/oss` needs them, so `/` and `/cv` keep the plain
+  list. The route reads `/api/contributions`, which costs one more search request per build. Rejected: a
+  description on every pull request (the same text in each row); an object from `/api/contributions`
+  (three pages changed for one page's need).
