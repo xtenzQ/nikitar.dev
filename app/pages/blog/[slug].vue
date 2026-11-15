@@ -36,7 +36,7 @@ useSchemaOrg([
     'datePublished': post.value.date,
     'author': {
       name: 'Nikita Rusetskii',
-      url: 'https://nikitar.dev',
+      url: 'https://nikitar.dev/',
     },
   }),
 ])

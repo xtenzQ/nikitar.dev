@@ -63,9 +63,12 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
    pill and its note are `profile.status`, and the README repeats them too. Rejected: the
    full bio in both places (every edit made twice, and it repeated the sidebar).
 9. **URLs end with a slash** (2026-11). GitHub Pages serves `oss/index.html` at `/oss/` and 301s `/oss`
-   there, so canonical, `og:url`, the sitemap, and every `NuxtLink` use the slash form. Without it Search
+   there, so canonical, `og:url`, the sitemap, schema.org `url`s, and every `NuxtLink` use the slash form. Without it Search
    Console listed sitemap URLs as "Page with redirect". Rejected: flat `oss.html` files served at `/oss`
    (the slash URLs Google already indexed would 404).
+   The sitemap lists only images on `nikitar.dev` (`server/plugins/sitemap.ts`): GitHub avatars and org
+   logos are not ours to index, and the module mangled their URLs (`/?s=168&amp;amp;v=4`). The preset's
+   SPA fallback `/200.html` is `noindex`. Rejected: `discoverImages: false` (drops the photos too).
 
 10. **Home: a statement with doors** (2026-11). The two bio sentences set large, the status, labelled
    links, then one door per section. The PhD and hackathon lines left home: history belongs to LinkedIn

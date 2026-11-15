@@ -114,6 +114,8 @@ export default defineNuxtConfig({
   // The about page was folded into the home page
   routeRules: {
     '/about': { redirect: '/' },
+    // The github_pages preset writes an SPA fallback that GitHub Pages serves as a plain page
+    '/200.html': { robots: false },
   },
 
   nitro: {

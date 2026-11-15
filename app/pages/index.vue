@@ -47,7 +47,7 @@ defineOgImage({
 useSchemaOrg([
   definePerson({
     name: profile.name,
-    url: 'https://nikitar.dev',
+    url: 'https://nikitar.dev/',
     jobTitle: 'Software Engineer',
     sameAs: [
       'https://github.com/xtenzQ',
