@@ -73,7 +73,7 @@ pnpm photos
 pnpm cv:pdf
 ```
 
-Agent and contributor docs: `AGENTS.md`, plus a `SPEC.md` per module (start with the root one).
+Agent and contributor docs: `AGENTS.md`, then `goal-and-requirements.md` and `architecture.md`, with a spec beside each module. `pnpm check:specs` checks the links between them.
 
 ## 📦 Third-Party Assets
 

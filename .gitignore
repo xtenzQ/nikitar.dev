@@ -28,3 +28,6 @@ photos-src/
 
 # Local Claude Code settings
 .claude/settings.local.json
+
+# Task-specs: working notes for one change
+.tasks/

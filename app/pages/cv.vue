@@ -12,7 +12,6 @@ const openSource = computed(() => {
   if (!all.length) return null
   const counts = new Map<string, number>()
   for (const pr of all) counts.set(pr.repo, (counts.get(pr.repo) ?? 0) + 1)
-  // humanlayer/humanlayer reads as "humanlayer"
   const repos = [...counts]
     .sort((a, b) => b[1] - a[1])
     .map(([repo]) => {
@@ -34,7 +33,6 @@ const siteHost = site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
 const scholar = socials.find(social => social.label === 'Google Scholar')
 const fromPdf = '?utm_source=cv-pdf'
 
-// Paper has no hover, so the PDF spells links out; the Scholar URL is too long to print
 const printLinks = [
   ...socials.filter(social => social.url.startsWith('mailto:')).map(social => ({ url: social.url, text: social.url.slice('mailto:'.length) })),
   { url: `/${fromPdf}`, text: siteHost },
@@ -107,7 +105,6 @@ defineOgImage({
                 <a v-if="company.url" :href="company.url" target="_blank" rel="noopener noreferrer">{{ company.name }}</a>
                 <template v-else>{{ company.name }}</template>
               </h3>
-              <!-- The PDF puts a single role on the company line -->
               <span v-if="company.roles.length === 1" class="tl-only-role print-only"> · {{ company.roles[0]!.title }}</span>
               <p class="tl-loc">{{ company.location }}</p>
             </div>

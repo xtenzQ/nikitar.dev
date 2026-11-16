@@ -11,7 +11,6 @@ export default defineContentConfig({
         date: z.string(),
         tags: z.array(z.string()).default([]),
         draft: z.boolean().default(false),
-        // Populated by Nuxt Content with the raw markdown; used for reading time
         rawbody: z.string(),
       }),
     }),

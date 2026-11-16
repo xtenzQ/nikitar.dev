@@ -14,8 +14,7 @@ export default defineNuxtConfig({
   ],
 
   icon: {
-    // Static hosting has no /api/_nuxt_icon route, so ship every icon in the client bundle.
-    // The scanner finds names in templates; list any it can't see here.
+    // Static hosting has no icon API: list icon names the scanner can't see in templates
     clientBundle: {
       scan: true,
       icons: ['ph:x', 'ph:caret-left'],
@@ -52,7 +51,6 @@ export default defineNuxtConfig({
     name: 'Nikita Rusetskii',
     description: 'Software engineer working on search, Lucene, RAG, and agent tooling',
     defaultLocale: 'en',
-    // GitHub Pages answers /oss with a 301 to /oss/, so canonical, og:url, and the sitemap use the slash too
     trailingSlash: true,
   },
 
@@ -67,12 +65,10 @@ export default defineNuxtConfig({
     defaults: { component: 'Card' },
   },
 
-  // scripts/cv-pdf.mjs writes the CV PDF after the build, so the link checker can't see it yet
   linkChecker: {
     excludeLinks: [`/${cv.pdf}`],
   },
 
-  // Crawlers that collect AI training data are asked to skip photos; search and AI search stay allowed
   robots: {
     groups: [
       {
@@ -111,10 +107,8 @@ export default defineNuxtConfig({
     },
   },
 
-  // The about page was folded into the home page
   routeRules: {
     '/about': { redirect: '/' },
-    // The github_pages preset writes an SPA fallback that GitHub Pages serves as a plain page
     '/200.html': { robots: false },
     '/blog/tags/**': { robots: false },
   },
@@ -122,9 +116,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
-      // '/' links /oss only when GitHub answered
       routes: ['/', '/photos', '/oss', '/cv'],
-      // The CV PDF's links carry utm_source; they are the same pages
       ignore: [/[?&]utm_/],
     },
     watchOptions: {
@@ -159,7 +151,6 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Set NUXT_GITHUB_TOKEN at build time to avoid GitHub API rate limits
     githubToken: '',
   },
 })

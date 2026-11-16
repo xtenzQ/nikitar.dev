@@ -5,14 +5,12 @@ const props = defineProps<{
   groups: { title?: string, photos: Photo[] }[]
 }>()
 
-// The door's thumbnails on / move into these tiles
 const { door } = usePhotos()
 function doorClass(name: string) {
   const i = door.findIndex(photo => photo.name === name)
   return i < 0 ? undefined : `vt-photo-${i + 1}`
 }
 
-// One viewer for the whole gallery, so the arrows walk across groups
 const photos = computed(() => props.groups.flatMap(group => group.photos))
 const offsets = computed(() => props.groups.map((_, i) =>
   props.groups.slice(0, i).reduce((sum, group) => sum + group.photos.length, 0)))
@@ -42,7 +40,6 @@ function onKeydown(e: KeyboardEvent) {
   else if (e.key === 'ArrowLeft') step(-1)
 }
 
-// The dialog fills the viewport, so a click that lands on it directly is a click outside the photo
 function onClick(e: MouseEvent) {
   if (e.target === dialog.value) close()
 }
@@ -99,7 +96,6 @@ function onTouchEnd(e: TouchEvent) {
       </button>
 
       <figure v-if="isOpen" class="lightbox-figure">
-        <!-- The thumbnail is already cached, so it shows instantly while the large one loads -->
         <img
           :key="photo.name"
           :src="`/photos/${photo.name}-large.webp`"

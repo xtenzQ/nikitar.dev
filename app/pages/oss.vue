@@ -16,7 +16,6 @@ function years(prs: Contribution[]): string {
   return first === last ? `${first}` : `${first} – ${last}`
 }
 
-// Most pull requests first; equal counts keep the route's order, like the door on /
 const projects = computed(() => {
   const byRepo = new Map<string, Contribution[]>()
   for (const pr of all.value) byRepo.set(pr.repo, [...(byRepo.get(pr.repo) ?? []), pr])
@@ -144,7 +143,6 @@ defineOgImage({
   margin-top: 3rem;
 }
 
-/* The rule belongs to the head so it arrives with it in the view transition */
 .sec-head {
   padding-top: 1rem;
   border-top: 1px solid var(--border-strong);
@@ -192,7 +190,6 @@ defineOgImage({
   bottom: 0;
 }
 
-/* Hides the line below the last icon when its title wraps */
 .tl-co:last-child .pr:last-child::after {
   content: '';
   position: absolute;

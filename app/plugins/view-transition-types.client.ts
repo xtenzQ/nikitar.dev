@@ -1,4 +1,3 @@
-// Names the / ↔ /oss, / ↔ /photos, and into/out of /cv transitions so main.css can stage them; other routes keep the plain cross-fade
 export default defineNuxtPlugin((nuxtApp) => {
   const page = (path: string) => path.replace(/\/+$/, '') || '/'
   let types: string[] = []

@@ -3,7 +3,7 @@ id: module-contributions
 type: module-design
 status: active
 title: Open source contributions from GitHub
-parent: site
+parent: architecture
 references: [module-deploy]
 tags: [data, github]
 ---

@@ -1,11 +1,9 @@
-// Prints the prerendered /cv/ to a PDF next to it. Run after `nuxt build`.
 import { readFile, stat, writeFile } from 'node:fs/promises'
 import { extname, join, normalize } from 'node:path'
 import { chromium } from 'playwright-core'
 
 const root = '.output/public'
 const { pdf } = JSON.parse(await readFile('app/data/cv.json', 'utf8'))
-// The page is opened at the real origin and served from disk, so its relative links become full URLs in the PDF
 const origin = `https://${(await readFile('public/CNAME', 'utf8')).trim()}`
 const types = {
   '.html': 'text/html; charset=utf-8',
@@ -30,7 +28,6 @@ async function serve(route) {
   }
 }
 
-// The installed Chrome: GitHub's Ubuntu runners and most desktops have it, so nothing is downloaded
 const browser = await chromium.launch({ channel: 'chrome' })
 try {
   const page = await browser.newPage()

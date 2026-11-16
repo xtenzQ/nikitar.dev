@@ -1,5 +1,3 @@
-// Usage: swift resize.swift <input> <output.png> <maxPixelSize>
-// Prints "<width> <height>" of the written image.
 import Foundation
 import ImageIO
 import UniformTypeIdentifiers

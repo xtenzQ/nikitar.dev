@@ -10,6 +10,7 @@
     "preview": "nuxt preview",
     "photos": "node scripts/photos/process.mjs",
     "cv:pdf": "node scripts/cv-pdf.mjs",
+    "check:specs": "node scripts/check-specs.mjs",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {

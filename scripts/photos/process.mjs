@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-// Turns originals in photos-src/<group>/ into published WebP files and data entries. See SPEC.md.
 import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -61,7 +60,6 @@ try {
       const largePng = join(tmp, `${name}-large.png`)
       const large = resize(input, largePng, LARGE_MAX)
 
-      // The thumbnail covers a 3:4 tile, so landscape photos keep enough height to crop
       const scale = Math.max(THUMB_BOX.width / large.width, THUMB_BOX.height / large.height)
       const thumbPng = join(tmp, `${name}.png`)
       resize(input, thumbPng, Math.ceil(Math.max(large.width, large.height) * scale))

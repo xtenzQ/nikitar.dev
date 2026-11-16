@@ -7,7 +7,6 @@ const { data: openSource } = await useFetch('/api/contributions', {
   transform: (all) => {
     const counts = new Map<string, number>()
     for (const pr of all) counts.set(pr.repo, (counts.get(pr.repo) ?? 0) + 1)
-    // Stable sort: equal counts keep the route's order, newest first
     const repos = [...counts]
       .map(([repo, count]) => ({ name: repo.split('/')[1]!, count }))
       .sort((a, b) => b.count - a.count)
@@ -236,7 +235,6 @@ useSchemaOrg([
   color: var(--text-muted);
 }
 
-/* Stacked doors don't need matching visual heights */
 @media (max-width: 28.5rem) {
   .door-visual {
     height: auto;

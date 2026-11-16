@@ -3,7 +3,6 @@ export default defineNuxtPlugin(() => {
 
   function copyToClipboard(text: string): Promise<void> {
     if (navigator.clipboard?.writeText) {
-      // Race clipboard API with a timeout — if it doesn't resolve in 200ms, use fallback
       const clipboardPromise = navigator.clipboard.writeText(text)
       const timeout = new Promise<void>((_, reject) => setTimeout(() => reject(), 200))
       return Promise.race([clipboardPromise, timeout]).catch(() => fallbackCopy(text))
@@ -61,7 +60,6 @@ export default defineNuxtPlugin(() => {
       const naturalHeight = pre.scrollHeight
       if (naturalHeight <= CODE_COLLAPSE_HEIGHT) return
 
-      // Mark as collapsible and store full height for CSS transition
       wrapper.classList.add('is-collapsible')
       ;(wrapper as HTMLElement).style.setProperty('--code-full-height', `${naturalHeight}px`)
 

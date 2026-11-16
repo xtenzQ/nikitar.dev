@@ -4,11 +4,9 @@ export interface Photo {
   name: string
   caption: string
   alt: string
-  /** Size of the large version; the thumbnail has the same aspect ratio */
   width: number
   height: number
   featured?: boolean
-  /** object-position for the 3:4 tile crop, e.g. "70% 50%" */
   focus?: string
 }
 

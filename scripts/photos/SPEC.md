@@ -3,7 +3,7 @@ id: module-photos
 type: module-design
 status: active
 title: Photo pipeline and photo data
-parent: site
+parent: architecture
 tags: [photos, privacy]
 ---
 

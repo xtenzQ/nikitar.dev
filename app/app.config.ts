@@ -18,7 +18,6 @@ export default defineAppConfig({
 
   github: {
     username: 'xtenzQ',
-    // Leave out a whole repo ("owner/repo") or a single pull request ("owner/repo#123")
     hidden: [
       'emmabostian/developer-portfolios',
       'abhisheknaiidu/awesome-github-profile-readme',

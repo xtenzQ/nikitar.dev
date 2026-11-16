@@ -16,6 +16,7 @@ Read `scripts/photos/SPEC.md` first.
    - For a landscape photo or an off-centre subject, set `focus` (an `object-position` such as
      `"70% 50%"`) so the 3:4 tile keeps the subject in frame.
    - For a new group, set `title` ("Korea, 2025").
-4. Ask which photos to feature on the home page; keep 3 or 6 `featured` so rows are full.
+4. Ask which two photos the Photos door on the home page shows: it shows the first two `featured` photos
+   in file order.
 5. Verify as `AGENTS.md` describes: build, check `/` and `/photos` and the viewer, and confirm the new
    files hold only a `VP8` chunk with `webpinfo -summary public/photos/<name>*.webp`.

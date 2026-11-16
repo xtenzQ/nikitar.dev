@@ -1,4 +1,3 @@
-// GitHub descriptions of the repos in /api/contributions, keyed by "owner/repo". Prerendered like it.
 export default defineEventHandler(async (): Promise<Record<string, string>> => {
   const contributions = await $fetch('/api/contributions')
   const repos = [...new Set(contributions.map(pr => pr.repo))]

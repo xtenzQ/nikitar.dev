@@ -1,8 +1,9 @@
 @import 'tailwindcss';
+@source not '../../../*.md';
+@source not '../../../**/*SPEC.md';
 @plugin '@tailwindcss/typography';
 
 /* ── Fonts ─────────────────────────────────────────────────── */
-/* System stack: SF Pro / SF Mono on Apple devices, Segoe / Consolas elsewhere. No web font download. */
 @theme {
   --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', system-ui, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, 'JetBrains Mono', Consolas, monospace;
@@ -60,7 +61,6 @@
   --selection: rgb(59 156 255 / 0.25);
 }
 
-/* Print (and the CV PDF) is light on white in either colour mode; rules a little darker for paper */
 @media print {
   :root,
   .dark {
@@ -88,7 +88,6 @@ html {
   overflow-y: scroll;
 }
 
-/* Keep the page still behind an open modal (the photo viewer) */
 html:has(dialog[open]) {
   overflow: hidden;
 }
@@ -131,7 +130,6 @@ a:hover {
 }
 
 /* ── Page Transitions ──────────────────────────────────────── */
-/* Route changes cross-fade (experimental.viewTransition) while the header stays in place */
 .site-header {
   view-transition-name: site-header;
 }
@@ -141,7 +139,7 @@ a:hover {
   animation-duration: 0.18s;
 }
 
-/* The Open source door on / and the /oss header share these names: the label and count move between them, the number shrinks */
+/* Door ↔ /oss */
 .vt-oss-label {
   view-transition-name: oss-label;
 }
@@ -161,7 +159,6 @@ a:hover {
   animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Staged by the types from plugins/view-transition-types: the rest waits until the count has landed */
 .vt-oss-caption {
   view-transition-name: oss-caption;
 }
@@ -218,7 +215,6 @@ html:active-view-transition-type(oss-close, photos-close)::view-transition-new(r
   animation-delay: 0.34s;
 }
 
-/* The other door's pieces have no partner on the far page, so they leave and arrive with the page around them */
 html:active-view-transition-type(oss-open, photos-open)::view-transition-old(*):only-child {
   animation-duration: 0.12s;
 }
@@ -228,7 +224,7 @@ html:active-view-transition-type(oss-close, photos-close)::view-transition-new(*
   animation-delay: 0.34s;
 }
 
-/* The header's avatar and name share these names with the /cv title: they move down and grow into it */
+/* Header ↔ /cv */
 .vt-me-avatar {
   view-transition-name: me-avatar;
 }
@@ -247,7 +243,6 @@ html:active-view-transition-type(oss-close, photos-close)::view-transition-new(*
   animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Into /cv the old page leaves at once and the CV rises after the name; out of /cv the next page waits for it */
 html:active-view-transition-type(cv-open, cv-close)::view-transition-old(*) {
   animation-duration: 0.12s;
 }
@@ -275,7 +270,7 @@ html:active-view-transition-type(cv-open, cv-close)::view-transition-new(site-he
   animation-delay: inherit;
 }
 
-/* The Photos door on / and the /photos title share these names: the label grows into the title, the thumbnails into their tiles */
+/* Door ↔ /photos */
 .vt-photos-label {
   view-transition-name: photos-label;
 }
@@ -344,7 +339,7 @@ html:active-view-transition-type(photos-open)::view-transition-new(root) {
   color: var(--text-muted);
 }
 
-/* Grouped list (macOS inset style): a rounded surface with hairline dividers inset past the leading icon */
+/* Grouped list */
 .group {
   list-style: none;
   padding: 0;
@@ -414,7 +409,7 @@ a.group-row:hover {
   color: var(--text-tertiary);
 }
 
-/* Square icon button, like a macOS toolbar item */
+/* Icon button */
 .icon-btn {
   display: inline-flex;
   align-items: center;
@@ -523,14 +518,13 @@ a.group-row:hover {
   font-size: 1em;
 }
 
-/* On small screens, hide anchor links */
 @media (max-width: 768px) {
   .prose .heading-anchor .anchor-link {
     display: none;
   }
 }
 
-/* Heading content links (non-anchor links inside headings) */
+/* Links inside headings */
 .prose :where(h1, h2, h3, h4, h5, h6) a:not(.anchor-link) {
   color: inherit;
   text-decoration: none;
@@ -639,7 +633,7 @@ a.group-row:hover {
   border-bottom: 1px solid var(--border);
 }
 
-/* Language label, sits in the header bar */
+/* Language label */
 .prose .code-block-wrapper .code-language {
   position: absolute;
   top: 1px;
@@ -662,8 +656,7 @@ a.group-row:hover {
   background: transparent !important;
 }
 
-/* Plain text code blocks — Shiki skips highlighting so text inherits
-   the muted prose color.  Force it to be readable in both themes. */
+/* Plain text code blocks */
 .prose .code-block-wrapper pre.language-text > code {
   color: var(--heading);
 }
@@ -727,7 +720,7 @@ a.group-row:hover {
   max-height: var(--code-full-height);
 }
 
-/* Fade overlay — hidden by default, shown when collapsible */
+/* Fade overlay */
 .code-expand-toggle {
   display: none;
   position: absolute;
@@ -832,7 +825,6 @@ pre.shiki.shiki-themes .shiki-dark {
   display: inline;
 }
 
-/* Override shiki background since we use our own */
 pre.shiki {
   background-color: var(--code-bg) !important;
 }

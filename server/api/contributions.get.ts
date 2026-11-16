@@ -18,14 +18,12 @@ export interface Contribution {
   date: string
 }
 
-// Prerendered at build time, so the list is as fresh as the last deploy.
 export default defineEventHandler(async (): Promise<Contribution[]> => {
   const { github } = useAppConfig()
   const headers = githubHeaders()
 
   try {
     const items: SearchItem[] = []
-    // The search API stops at 1000 results
     for (let page = 1; page <= 10; page++) {
       const { items: batch } = await $fetch<{ items: SearchItem[] }>('https://api.github.com/search/issues', {
         headers,

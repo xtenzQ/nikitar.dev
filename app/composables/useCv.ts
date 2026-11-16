@@ -2,7 +2,6 @@ import data from '~/data/cv.json'
 
 export interface CvRole {
   title: string
-  /** "YYYY-MM"; no end means the current role */
   start: string
   end?: string
   bullets?: string[]
@@ -12,7 +11,6 @@ export interface CvRole {
 export interface CvCompany {
   name: string
   url?: string
-  /** Letters in the company's circle */
   monogram: string
   location: string
   roles: CvRole[]
@@ -20,7 +18,6 @@ export interface CvCompany {
 
 export interface CvEducation {
   degree: string
-  /** Named in the collapsed "3 more: …" line */
   short: string
   institution: string
   detail?: string
@@ -31,13 +28,11 @@ export interface CvEducation {
 
 export interface Cv {
   updated: string
-  /** File name of the PDF that scripts/cv-pdf.mjs writes next to the site */
   pdf: string
   headline: string
   location: string
   workMode: string
   experience: CvCompany[]
-  /** "owner/repo#number"; shown only while the pull request is in /api/contributions */
   notablePullRequests: string[]
   skills: { group: string, items: string }[]
   education: CvEducation[]
@@ -53,7 +48,6 @@ function label(date: string): string {
   return month ? `${months[Number(month) - 1]} ${year}` : year!
 }
 
-// "2022-01".."2026-05" → "Jan 2022 – May 2026"; one year is written once: "Feb – Apr 2020"
 export function formatCvRange(start: string, end?: string): string {
   if (!end) return `${label(start)} – now`
   if (start === end) return label(start)

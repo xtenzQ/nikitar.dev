@@ -1,145 +1,70 @@
 ---
 id: module-app
 type: module-design
-status: active
-title: Pages, components, and design system
-parent: site
+status: draft
+title: Pages, layouts, and components
+parent: architecture
 depends-on: [module-contributions, module-photos, module-blog]
-tags: [ui, design-system]
+tags: [ui]
 ---
 
 ## Responsibility
 
-The Nuxt app: pages, the default layout, components, and the design system they share.
+The Nuxt app: pages, layouts, components, and the site data they render. Three parts have their own
+spec: [[submodule-app-design]] (tokens and shared look), [[submodule-app-transitions]] (page
+transitions), and [[submodule-app-cv]] (`/cv` and its PDF).
 
 ## Boundary
 
 - **Pages.** `index` is the statement, the status, links, and doors. Every page but `cv` gets
   `AppHeader` (avatar, name, theme toggle); on `/` the name is the page's `h1`, elsewhere it links home.
   `photos` lists every group; `oss` lists every pull request, grouped by project; `blog/**` is
-  [[module-blog]]. `cv` is the CV with an Open PDF link (a new tab); it uses the `cv` layout (a "nikitar.dev / cv"
-  breadcrumb and the theme toggle), because its `h1` is the name: the avatar sits beside it, and the
-  header's avatar and name grow into them on the way in.
+  [[module-blog]]; `cv` is [[submodule-app-cv]].
 - **Site data is config, not markup.** Profile (with the status), socials, and GitHub settings live in
   `app/app.config.ts`; photos in `app/data/photos.json` ([[module-photos]]); the CV in
   `app/data/cv.json`. Components read them through `useAppConfig()`, `usePhotos()`, and `useCv()` and
   never hardcode them. Open source counts and the CV's notable pull requests come from
   [[module-contributions]], so a notable one that is hidden or missing just isn't shown.
 - **Click events.** Open PDF and every socials link carry `data-umami-event`, which Umami counts
-  ([[site]] decision 12). A new link to a profile or file gets one too. The PDF's links back to the
-  site carry `?utm_source=cv-pdf`.
-- **Forbidden:** raw colours outside the token blocks in `assets/css/main.css`, web fonts, and icons
-  fetched at runtime. Three colour exceptions: the photo viewer's chrome, which sits on a fixed dark
-  backdrop in both themes and uses white with alpha; the preview card, which copies the light tokens as
-  hex because its renderer can't read CSS variables; and the favicons in `public/`, which a browser
-  draws without the page's CSS, so they copy `--heading` and `--bg` as hex.
+  ([[architecture]] decision 2). A new link to a profile or file gets one too. The PDF's links back to
+  the site carry `?utm_source=cv-pdf`.
+- **Forbidden:** raw colours outside the tokens ([[submodule-app-design]] names the exceptions), web
+  fonts, and icons fetched at runtime.
 
-## Design system
+## Pages
 
-- **Tokens** (`:root` and `.dark` in `main.css`): `--bg` page and `--surface` groups; `--heading`,
-  `--text`, `--text-muted` (secondary, at least 4.5:1) and `--text-tertiary` (decorative only, fails AA);
-  alpha borders `--border` (dividers) and `--border-strong` (outlines); `--accent` for the focus ring and
-  blog diagrams; `--link-underline`; `--open` and `--merged` for PR state. Blog diagrams read these names
-  too, so renaming a token breaks them. A print block resets them to light on white, with rules a
-  little darker, so printing in dark mode still gives a light page.
-- **Colour:** the interface is grey: text, icons, and links. Colour comes from content (org avatars,
-  photos, diagrams) and PR state. A text link keeps its paragraph's colour with a `--link-underline`
-  line; on hover it turns `--heading` and the line goes solid. Links styled as rows, buttons, or badges
-  set `text-decoration: none`.
-- **Type:** the system stack (SF Pro and SF Mono on Apple). The index is 15px; article prose is 17px.
-  Weights 400/500/600. Dates and repo names are mono; dates are ISO (`2026-02`).
 - **Statement** (`/`): the two bio sentences at 22–28px, weight 500, the first in `--heading` and the
-  second in `--text-muted`. It is the largest text on the site; a future post title can reuse it.
-- **Status pill:** `StatusPill`, `profile.status.label` with a still `--open` dot. `/` follows it with
-  the note in `--text-muted`; `/cv` with the links.
-- **CV** (`/cv`): one column on the grey page. The name has the 56px avatar beside it, the header's
-  pair at CV size; the PDF leaves the avatar out. Section labels are 13px 600 in `--heading`, heavier than
-  `.section-label`, because a reader scans a CV by section. Experience is a timeline: a circle with
-  the company's monogram, a line down to the next one, and a dot per role when a company has more than
-  one (filled for the current role). Dates read "May 2026 – now", not ISO: recruiters and résumé
-  parsers expect that; they stay mono and right-aligned on screen. Education shows its first entry and
-  folds the rest behind a row of small circles; they open and close in 300ms, at once under reduced
-  motion. Research and awards are rows with years on the right.
-  Type steps are 32 / 17 / 15 / 13 / 12 mono.
-- **CV print** (the PDF): the same DOM with a print stylesheet, A4 with 12 mm / 15 mm margins. Sans
-  dates with tabular figures, labels in small spaced capitals, no rules between sections, contacts
-  spelled out in one line, a single role on its company's line, Languages as a Skills row, every
-  education entry, and no letters in the circles (a parser would read "K KMS Lighthouse"). It must fit
-  one page; `pnpm cv:pdf` prints the page count.
+  second in `--text-muted`. It is the largest text on the site; a future post title can reuse it. The
+  status pill follows, then its note in `--text-muted`.
 - **Doors** (`/`): a link with →, a 112px visual (a number or thumbnails, bottom-aligned), and a mono
   caption, over a `--border-strong` hairline. The link's `::after` covers the door, so the door is one
-  link. An auto-fit grid (min 12rem) takes a new door (Writing, CV) without a layout change; stacked
+  link. An auto-fit grid (min 12rem) takes a new door (a Writing door) without a layout change; stacked
   doors drop the fixed visual height. A door with nothing to show is not rendered.
-- **Page transitions:** route changes cross-fade in 180ms through the View Transitions API
-  (`experimental.viewTransition`). `.site-header` (and the CV bar) has its own `view-transition-name`,
-  so it holds still.
-  Nuxt skips the transition under `prefers-reduced-motion`; browsers without the API just navigate.
-- **Door to `/oss`:** the Open source door's label, number, and unit share `view-transition-name`s with
-  the `/oss` header, so they move up in 0.4s and the number shrinks from 64 to 32px. The rest of `/oss`
-  rises in once the number has landed (0.34s, then 40ms apart for the first three projects); going back,
-  `/` appears after it. `plugins/view-transition-types.client.ts` tags these two navigations with view
-  transition types (`oss-open`, `oss-close`), so the staging in `main.css` touches no other route. Sizes
-  and line-heights of the shared pieces stay in em, so the scale doesn't distort them.
-- **Door to `/photos`:** the Photos door's label and two thumbnails share `view-transition-name`s with the
-  `/photos` title and those photos' tiles, so the label grows from 14 to 28px and the thumbnails into their
-  tiles (0.4s, the door's curve) while the old page leaves in 0.12s. The subtitle rises in at 0.34s and the
-  rest of the page at 0.40s; going back, `/` appears after them (0.34s). The plugin tags these
-  `photos-open` and `photos-close`. `usePhotos().door` is the one list both pages name from. On either
-  door's route the other door's pieces have no partner, so they leave and arrive with the page
-  (`:only-child`).
-- **Header to `/cv`:** the header's avatar and name share `view-transition-name`s with the CV's, so going
-  to `/cv` they move down and grow (0.4s, the door's curve) while the old page leaves in 0.12s; the CV
-  header rises in at 0.34s and the rest of the page at 0.40s. Leaving `/cv` the name goes back into the
-  header and the next page appears after it (0.34s). The plugin tags any navigation into `/cv` `cv-open`
-  and out of it `cv-close`. Both names keep a 1.1em line-height, so the scale doesn't distort them.
-- **Grouped list** (`.group`, `.group-row`): 12px radius, hairline dividers inset past the leading icon.
-  An "All …" row ends a list and links out.
-- **PR state** is an icon in the state colour (`ph:git-pull-request` open, `ph:git-merge` merged), with
-  the word for screen readers only. On `/oss` the icon sits on the timeline; `/` shows only counts.
 - **Open source** (`/oss`): the door's label and `OpenSourceCount` (64px on the door, 32px here) head the
   page, then a mono caption (projects and years) and a "Pull requests" label with the GitHub link. Below,
-  a timeline like the CV's: per repository the org avatar (36px, 9px radius), its name linking to the repo,
-  mono counts and years, the owner and the GitHub description; per pull request the state icon on the
-  line, the title without its `fix(scope):` prefix, and a mono `#number`. Most pull requests first. Type
+  a timeline like the CV's: per repository the org avatar (36px, 9px radius), its name linking to the
+  repo, mono counts and years, the owner and the GitHub description; per pull request the state icon on
+  the line, the title without its `fix(scope):` prefix (a key like `SOLR-6853:` stays), and a mono
+  `#number`. The line ends at the last icon, even when its title wraps. Most pull requests first. Type
   steps are the CV's: 32 / 17 / 15 / 13 / 12 mono.
-- **Icon buttons:** 32px, 8px radius. Icons are Phosphor (`ph:`). Static hosting has no icon API, so
-  every icon ships in the client bundle; a name the scanner can't see in a template must be listed in
-  `icon.clientBundle.icons`, or it 404s after client-side navigation.
-- **Preview card** (`og:image`): `components/OgImage/Card.vue`, the default for every page. The light
-  `--bg`, avatar and `nikitar.dev`, then the page title and its meta description, so the card says what
-  the search snippet says. Inter is the only font the renderer has. Local builds reuse rendered cards
-  from `node_modules/.cache/nuxt/.nuxt/cache/nuxt-og-image`; delete it to see a change (CI starts clean).
-- **Favicon:** a condensed grotesque `n.`, drawn as one path and a square on a 32-unit grid with every
-  stem edge on an even unit, so it is sharp at 16 and 32 px. `favicon.svg` has no container and swaps
-  `--heading` light/dark through `prefers-color-scheme`. `favicon.png` (32px) and `apple-touch-icon.png`
-  (180px) can't switch colour, so they put the same n. (3-unit stems) in light on a `--heading` tile;
-  the PNG tile has the icon-button radius, the touch icon is full bleed because iOS rounds it.
-  `favicon-96.png` is for Google Search, which wants a multiple of 48 px and crops it to a circle, so it
-  is full bleed too.
-- **Photo grid:** 3:4 tiles, 3 columns from 640px, 2 below. One native `<dialog>` viewer per gallery;
-  the arrows walk across groups. The Photos door on `/` shows the first two featured photos.
+- **Photos** (`/photos`): 3:4 tiles, 3 columns from 640px, 2 below. One native `<dialog>` viewer per
+  gallery; the arrows walk across groups. The viewer fills the viewport, so a click on the dialog itself,
+  not the photo, closes it; the page behind stays still. The large file has the cached thumbnail as its
+  background, so the photo shows at once while it loads. The Photos door on `/` shows the first two
+  featured photos.
 
 ## Decisions
 
-- **System fonts** (2026-11): nothing to download and native on Apple. Rejected: Source Sans 3 + Lato
-  (the old theme), an Inter web font.
-- **Own preview card** (2026-11): the stock `NuxtSeo` card had a green gradient the site doesn't use and
-  an old tagline. Rejected: the stock card with a grey `theme` (still the stock layout); a card per
-  colour mode (link previews show one image).
-- **Favicon: a bare condensed `n.`** (2026-11): the largest and sharpest of the options at 16 px (12px
-  tall), a shape of its own without a box, and still a grotesque like the system font. Replaced a blue
-  Lato n. on a dark tile left from the old theme. Rejected: the n. on an icon-button tile (the most
-  common favicon form, the smallest glyph, and it makes the site look like an app); a regular-width n.
-  with a round period larger than the stem (closest to lowercase-and-dot startup logos).
-- **Native `<dialog>` for the viewer** (2026-11): Esc, focus, and an inert page come with it. Rejected: a
-  lightbox library.
-- **Grey underlined links** (2026-11): blue links in the muted bio paragraphs pulled the eye to the least
-  important text, and in light mode blue was about 2:1 against body text with no underline until hover.
-  Rejected: blue accent links; a small company logo inline in the bio (the only image in the prose, and
-  few people know the logo).
-- **PR state as icons** (2026-11): the dot's label was hidden on phones, so state was colour only.
-  Rejected: dots with labels; icons with tooltips (no hover on touch); a count on the GitHub search link
-  (it also shows closed pull requests, so the numbers would not match).
+- **Home: a statement with doors** (2026-11). The two bio sentences set large, the status, labelled
+  links, then one door per section. The PhD and hackathon lines left home: home says only what is true
+  now, and history is on `/cv`. Chosen from six directions drawn on a canvas. Rejected: a README-like
+  profile with repo cards (the same settings-page look); a man page (mono paragraphs read worse, and
+  outside engineering it reads as a joke); a label/value index (read as a CV); an activity log of PRs and
+  photos (thin in a quiet month); a bento grid (the most common pattern of 2024–26, and fixed slots make
+  a new section a re-layout).
+- **Photos: a door on home, all of them on `/photos`** (2026-11). The door shows two featured thumbnails
+  and the count. Replaced a featured grid of 3 or 6 that took about half of home. Rejected: a "+N"
+  overlay tile (hides a photo), a horizontal scroll strip (awkward with a mouse, breaks the column).
 - **Counts, not rows, on `/`** (2026-11): the Open source door shows merged (and open) and a count per
   repository; `/oss` has the rows. Eight near-identical `fix(...)` titles hid the signal, which projects.
   Replaced the newest few rows and an "All N pull requests" row.
@@ -149,17 +74,6 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **The email address stays plain** (2026-11): it is already public in git history and on other
   profiles, so hiding it on the site would not stop scraping. Rejected: joining it in the browser from
   two parts; keeping the CV PDF out of `robots.txt`.
-- **Cross-fade, not slide, between pages** (2026-11). Rejected: a horizontal slide on desktop (the pages
-  have no left-to-right order, so a direction would mean nothing); scroll-reveal animations (content is
-  hidden at rest); a pulsing status dot (it pulls the eye all the time).
-- **CV print from the page's own DOM** (2026-11): print-only bits (contacts as text, the single-role
-  line, the Languages row) are small, and one template can't drift from the PDF. Rejected: a separate
-  print template or route (the whole CV twice); left section labels on paper (rejected on screen
-  too); two pages (most of a second page would be empty).
-- **The CV PDF opens in a new tab** (2026-11): on an iPhone a `download` link asks first and puts the
-  file in Files; the browser's viewer shows it and has its own save, print, and share. The file name
-  (`nikita-rusetskii-cv.pdf`) is the same either way. Rejected: `download` (a file before a look); Open
-  and Download side by side (two buttons for one file).
 - **`/oss` by project** (2026-11): where and how much, with every title in view, in the CV's timeline.
   Chosen from four directions drawn on a canvas. Replaced a grouped list with an organization filter (the
   old settings-page look, the repo repeated on every row, a filter for three owners). Rejected: project
@@ -171,17 +85,5 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   the number; 32px is the CV's name size, the largest type on a page other than `/`. Rejected: keeping
   64px for a pure move (a dashboard figure over a list); dropping the number (the transition has nothing
   to carry).
-- **Avatar beside the CV name** (2026-11): every page shows the avatar and name together, and the
-  transition from home has one thing to carry. Chosen on a canvas. Replaced: a CV header with the name
-  alone. Rejected: the site header on `/cv` (the name twice, one above the other); the transition
-  without the avatar (it would vanish while the name moves).
-- **Staged door transition** (2026-11): the list waits for the number. Rejected: the list rising while the
-  number moves (the number crossed the rows and the caption); delaying `/oss` on every route (from `/cv` it
-  would wait for a number that doesn't move).
-- **Photos door moves like the Open source door** (2026-11): a thumbnail and its tile are the same file in
-  the same 3:4 crop, so it scales without distortion. Replaced: the plain cross-fade. Rejected: sharing the caption
-  (mono 12px and sans 15px don't scale into each other); naming every tile (each would be its own layer
-  on every route from `/photos`).
-- **Education folds by grid rows** (2026-11): each folded entry is a one-row grid that goes from `0fr` to
-  `1fr`, which every current browser animates without JS. Replaced: `display: none` (it jumped).
-  Rejected: `interpolate-size` with `height: auto` (Chromium only); a measured height in JS.
+- **Native `<dialog>` for the viewer** (2026-11): Esc, focus, and an inert page come with it. Rejected: a
+  lightbox library.
