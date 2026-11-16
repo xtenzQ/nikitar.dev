@@ -145,6 +145,14 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#f5f5f7', media: '(prefers-color-scheme: light)' },
         { name: 'theme-color', content: '#111113', media: '(prefers-color-scheme: dark)' },
       ],
+      script: [
+        {
+          'src': 'https://cloud.umami.is/script.js',
+          'defer': true,
+          'data-website-id': 'abaa2bca-a838-4899-be80-48d3282f33b4',
+          'data-domains': 'nikitar.dev',
+        },
+      ],
     },
   },
 

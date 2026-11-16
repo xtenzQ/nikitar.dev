@@ -30,6 +30,7 @@
 - 🎞️ Pages cross-fade with the View Transitions API (off with reduced motion)
 - 🔤 System fonts (SF Pro on Apple devices), no web fonts
 - 📱 Fully responsive design
+- 📊 Visit counts with [Umami Cloud](https://umami.is/): no cookies, so no consent banner; clicks on the CV PDF and profile links count as events
 - 🔍 SEO optimized (Open Graph, structured data, sitemap); `robots.txt` asks AI training crawlers to skip `/photos`
 - 🚀 Static site generation deployed to GitHub Pages
 

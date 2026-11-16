@@ -75,7 +75,7 @@ defineOgImage({
         </p>
       </div>
       <div class="hd-export screen-only">
-        <a class="btn" :href="`/${cv.pdf}`" target="_blank">
+        <a class="btn" :href="`/${cv.pdf}`" target="_blank" data-umami-event="CV PDF">
           <Icon name="ph:file-pdf" size="16" />
           Open PDF
         </a>
@@ -89,6 +89,7 @@ defineOgImage({
             :href="social.url"
             :target="social.url.startsWith('mailto:') ? undefined : '_blank'"
             rel="noopener noreferrer"
+            :data-umami-event="social.label"
           >{{ social.label }}</a>
         </span>
       </div>

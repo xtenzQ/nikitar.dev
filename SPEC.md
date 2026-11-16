@@ -84,6 +84,11 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
    section labels in a left column (a ledger); the home page's statement, doors, and stacked cards; an
    A4 sheet on a grey desk; two columns (résumé parsers misread the order); a separate print template
    (the content twice).
+12. **Visit counts: Umami Cloud** (2026-11). One script in `nuxt.config.ts`, free plan, EU data region.
+   It sets no cookies, so there is no consent banner. `data-domains` limits it to `nikitar.dev`, so local
+   previews and forks send nothing. Clicks on Open PDF and the socials are events (`data-umami-event`,
+   named after the link). Rejected: Google Analytics 4 and Yandex Metrica (cookies need a consent banner
+   for EU visitors; a heavy script); Cloudflare Web Analytics (page views only, no events).
 
 ## Invariants
 

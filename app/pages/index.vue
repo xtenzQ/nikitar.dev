@@ -85,6 +85,7 @@ useSchemaOrg([
         :href="social.url"
         :target="social.url.startsWith('mailto:') ? undefined : '_blank'"
         rel="noopener noreferrer"
+        :data-umami-event="social.label"
       >{{ social.label }}</a>
     </nav>
 

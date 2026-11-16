@@ -22,7 +22,8 @@ tags: [ci]
 - CV PDF: `scripts/cv-pdf.mjs` (`pnpm cv:pdf`) then prints the prerendered `/cv/` with the runner's
   Chrome through `playwright-core` and writes the file named in `app/data/cv.json` next to the site. It
   opens the page at the real origin and serves it from disk, so relative links become full URLs in the
-  PDF, and it logs the page count. The runner installs `fonts-inter`: SF Pro is Apple-only, and Inter is
+  PDF, and it logs the page count. Requests to other origins are aborted, so the print never loads the
+  Umami script and counts no visit. The runner installs `fonts-inter`: SF Pro is Apple-only, and Inter is
   next in the font stack. A missing package is a warning, not a failed deploy.
 - The build needs no secret beyond `GITHUB_TOKEN`.
 - "Enforce HTTPS" is on in the repo's Pages settings, outside this repo's files. While it was off,

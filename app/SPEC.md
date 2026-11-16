@@ -25,6 +25,8 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   `app/data/cv.json`. Components read them through `useAppConfig()`, `usePhotos()`, and `useCv()` and
   never hardcode them. Open source counts and the CV's notable pull requests come from
   [[module-contributions]], so a notable one that is hidden or missing just isn't shown.
+- **Click events.** Open PDF and every socials link carry `data-umami-event`, which Umami counts
+  ([[site]] decision 12). A new link to a profile or file gets one too.
 - **Forbidden:** raw colours outside the token blocks in `assets/css/main.css`, web fonts, and icons
   fetched at runtime. Three colour exceptions: the photo viewer's chrome, which sits on a fixed dark
   backdrop in both themes and uses white with alpha; the preview card, which copies the light tokens as
