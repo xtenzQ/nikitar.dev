@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15",
+  "updated": "2026-11-16",
   "pdf": "nikita-rusetskii-cv.pdf",
   "headline": "Software engineer: search, backend, AI developer tooling",
   "location": "Belgrade, Serbia",
@@ -61,7 +61,7 @@
       ]
     }
   ],
-  "notablePullRequests": ["apache/solr#1829", "JetBrains/thinkrail#1018"],
+  "notablePullRequests": ["JetBrains/thinkrail#1137", "apache/solr#1829"],
   "skills": [
     { "group": "Search", "items": "Apache Solr, Lucene, RAG" },
     { "group": "Backend", "items": "Java, Spring Boot, Hibernate, Apache Kafka, Go" },
