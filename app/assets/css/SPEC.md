@@ -22,6 +22,9 @@ the specs out of the scan (`@source not`); otherwise a word in a spec becomes a 
   blog diagrams; `--link-underline`; `--open` and `--merged` for PR state. Blog diagrams read these names
   too, so renaming a token breaks them. A print block resets them to light on white, with rules a
   little darker, so printing in dark mode still gives a light page.
+- **Theme switch** is instant: `colorMode.disableTransition` turns every transition off for the frame
+  the `.dark` class changes, so every colour changes in the same frame and no hover fade runs on a
+  switch.
 - **Colour:** the interface is grey: text, icons, and links. Colour comes from content (org avatars,
   photos, diagrams) and PR state. A text link keeps its paragraph's colour with a `--link-underline`
   line; on hover it turns `--heading` and the line goes solid. Links styled as rows, buttons, or badges
@@ -69,6 +72,12 @@ The system stack (SF Pro and SF Mono on Apple). The index is 15px; article prose
   important text, and in light mode blue was about 2:1 against body text with no underline until hover.
   Rejected: blue accent links; a small company logo inline in the bio (the only image in the prose, and
   few people know the logo).
+- **Instant theme switch** (2026-11): the body faded its colours over 0.2s while headings changed at
+  once, so for 50–100ms text was nearly the colour of the background (down to 1:1). Rejected: every
+  colour fading together (light and dark both pass through the same grey, so headings still drop below
+  3:1 for about 40ms); the new theme spreading in a circle from the toggle through View Transitions (a
+  script and a transition type for a small control, and the header's own transition name gets in the
+  way).
 - **PR state as icons** (2026-11): the dot's label was hidden on phones, so state was colour only.
   Rejected: dots with labels; icons with tooltips (no hover on touch); a count on the GitHub search link
   (it also shows closed pull requests, so the numbers would not match).
