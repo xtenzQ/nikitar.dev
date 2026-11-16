@@ -30,6 +30,7 @@ export interface Cv {
   updated: string
   pdf: string
   headline: string
+  careerStart: string
   location: string
   workMode: string
   experience: CvCompany[]
@@ -49,7 +50,7 @@ function label(date: string): string {
 }
 
 export function formatCvRange(start: string, end?: string): string {
-  if (!end) return `${label(start)} – now`
+  if (!end) return `${label(start)} – Present`
   if (start === end) return label(start)
   const [startYear, startMonth] = start.split('-')
   const [endYear, endMonth] = end.split('-')
@@ -57,6 +58,13 @@ export function formatCvRange(start: string, end?: string): string {
   return `${label(start)} – ${label(end)}`
 }
 
+function yearsSince(start: string, now: Date): number {
+  const [year, month] = start.split('-').map(Number)
+  return Math.floor(((now.getFullYear() - year!) * 12 + now.getMonth() + 1 - month!) / 12)
+}
+
 export function useCv(): Cv {
-  return data as Cv
+  const cv = data as Cv
+  const years = useState('cv-years', () => yearsSince(cv.careerStart, new Date()))
+  return { ...cv, headline: cv.headline.replace('{years}', String(years.value)) }
 }

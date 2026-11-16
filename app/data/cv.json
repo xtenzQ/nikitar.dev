@@ -1,7 +1,8 @@
 {
   "updated": "2026-11-16",
   "pdf": "nikita-rusetskii-cv.pdf",
-  "headline": "Software engineer: search, backend, AI developer tooling",
+  "headline": "Backend engineer: Java, {years} years · search (Apache Solr, vector and hybrid search) · AI developer tooling",
+  "careerStart": "2020-10",
   "location": "Belgrade, Serbia",
   "workMode": "remote or on-site",
   "experience": [
@@ -15,10 +16,10 @@
           "title": "Backend Developer, Architects’ team",
           "start": "2026-05",
           "bullets": [
+            "Working on the architect scope for search team",
             "Designed and currently maintaining an agent workspace to automate all manual work and make it easier to deliver tasks E2E",
             "Created unattended agent workflow that reuses the agentic workspace to fix bugs E2E and post PRs for a human code review",
-            "Research of AI-DLC practices and incorporating them",
-            "Working on the architect scope for search team"
+            "Research of AI-DLC practices and incorporating them"
           ]
         },
         {
@@ -63,9 +64,9 @@
   ],
   "notablePullRequests": ["JetBrains/thinkrail#1137", "apache/solr#1829"],
   "skills": [
-    { "group": "Search", "items": "Apache Solr, Lucene, RAG" },
-    { "group": "Backend", "items": "Java, Spring Boot, Hibernate, Apache Kafka, Go" },
-    { "group": "AI tooling", "items": "Claude Code skills and subagents, MCP, Anthropic API" },
+    { "group": "Backend", "items": "Java, Spring Boot, Hibernate, Apache Kafka" },
+    { "group": "Search", "items": "Apache Solr, Lucene, vector search, embeddings, hybrid search, RAG (retrieval-augmented generation)" },
+    { "group": "AI tooling", "items": "LLM agents, AI coding agents (Claude Code), MCP, Anthropic API" },
     { "group": "Tools", "items": "Docker, Linux, Git" }
   ],
   "education": [

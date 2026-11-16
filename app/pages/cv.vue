@@ -46,7 +46,7 @@ const [firstEducation, ...moreEducation] = cv.education
 
 const languages = cv.languages.map(language => `${language.name}, ${language.level}`).join(' · ')
 
-const description = 'CV of Nikita Rusetskii: search, backend, and AI developer tooling. Experience, open source, skills, and education, with a PDF to download.'
+const description = 'CV of Nikita Rusetskii: Java backend, search, and AI developer tooling. Experience, open source, skills, and education, with a PDF to download.'
 
 useSeoMeta({
   title: 'CV',
@@ -687,6 +687,16 @@ strong {
 
   .print-only {
     display: revert;
+  }
+
+  /* The PDF stores text in paint order, and positioned boxes paint after the flow */
+  .cv > * {
+    position: relative;
+  }
+
+  .vt-cv-intro,
+  .vt-me-name {
+    view-transition-name: none;
   }
 
   .cv a {
