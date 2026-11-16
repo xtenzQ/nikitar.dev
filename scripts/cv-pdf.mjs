@@ -11,6 +11,7 @@ try {
   await serveBuild(page)
   await page.emulateMedia({ media: 'print', colorScheme: 'light' })
   await page.goto(`${origin}/cv/`, { waitUntil: 'load' })
+  await page.evaluate(() => document.fonts.ready)
   const bytes = await page.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true })
   await writeFile(join(root, pdf), bytes)
   const pages = bytes.toString('latin1').match(/\/Type\s*\/Page\b/g)?.length ?? 0

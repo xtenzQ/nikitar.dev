@@ -80,7 +80,7 @@ Agent and contributor docs: `AGENTS.md`, then `goal-and-requirements.md` and `ar
 
 ## 📦 Third-Party Assets
 
-- **Fonts:** the system font stack (SF Pro / SF Mono on Apple devices), no web fonts; the CV PDF built in CI is set in [Inter](https://rsms.me/inter/) (SIL Open Font License), installed on the runner
+- **Fonts:** the system font stack (SF Pro / SF Mono on Apple devices), no web fonts; the printed CV and its PDF are set in [Inter](https://rsms.me/inter/) (SIL Open Font License, `public/fonts`), loaded only for print
 - **Icons:** [Phosphor Icons](https://phosphoricons.com/) via [@nuxt/icon](https://nuxt.com/modules/icon)
 - **Math rendering:** [KaTeX](https://katex.org/) CSS via [jsDelivr](https://www.jsdelivr.com/)
 

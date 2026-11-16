@@ -48,11 +48,22 @@ tags: [cv]
 ## Print
 
 - The same DOM with a print stylesheet, A4 with 12 mm / 15 mm margins. Sans dates with tabular figures,
-  labels in small spaced capitals, no rules between sections, every education entry, and no letters in
-  the circles (a parser would read "K KMS Lighthouse"). The PDF leaves the avatar out.
+  labels in small spaced capitals, no rules between sections, and every education entry, newest first.
+  The PDF leaves the avatar out.
+- Set in static Inter (`public/fonts`: Regular, Medium, SemiBold), declared by the page and used only in
+  print, so a visitor downloads it only to print. Type steps 26 / 14 / 12 / 11 / 10 (name; headline and
+  company; body and role titles at 500; contacts, dates, repos, and footer; labels). The headline is
+  balanced over its lines; a no-break space in `cv.json` keeps "Apache Solr" together.
+- A company is a small solid dot on the timeline line: no letters (a parser would read "K KMS
+  Lighthouse") and no ring (an empty ring reads as a missing logo). The line and dots are
+  `--text-tertiary`, so they survive an office printer.
 - Paper has no hover, so the contacts are spelled out in one line: email, the site, and the profiles.
-  Google Scholar stays a link on the papers row: its URL is too long to print.
-- A company with a single role puts it on the company's line. Languages is a Skills row.
+  The papers row ends with a "Google Scholar" link: its URL is too long to print, and the name tells a
+  reader on paper where to look. The notable pull requests sit on a two-column grid like Skills.
+- A company with a single role puts it on the company's line. Languages is a Skills row. The footer
+  date has a month name, like the rest.
+- Education's print order is an inline `order` on each entry. A custom property there (`--print-order`)
+  made the prerender write a stray `>` after `</html>`, which printed as a second page.
 - It must fit one page; `pnpm cv:pdf` prints the page count.
 - The PDF's text runs in reading order, because some parsers read the file in order. Chrome paints
   positioned boxes, and boxes with a `view-transition-name`, after the rest of the flow, so in print every
@@ -68,6 +79,19 @@ the print never loads the Umami script and counts no visit. The link checker ski
 the file appears only after the build.
 
 ## Decisions
+
+- **Static Inter for print** (2026-11): Chrome embeds a variable font as Type 3, and in that PDF macOS
+  PDFKit split the name and email ("Ni / k / ita", "dev4nick / @gmail.com") and `pdftotext -raw` dropped
+  the spaces in 600-weight text ("NikitaRusetskii"). Static Inter embeds as TrueType, and the PDF is the
+  same whether CI or a Mac prints it. Replaced: `fonts-inter` from apt on the runner (variable). Rejected:
+  the system stack (SF is variable too); a static system font such as Arial (another look).
+- **Bullets for every role, no company links** (2026-11): every job reads the same way, and recruiters
+  scan bullets. Only KMS Lighthouse had a link, and it looked like plain text on the page and the PDF.
+  Replaced: a summary paragraph for the older jobs. Rejected: linking every company (the build's link
+  checker would depend on those sites answering GitHub's runners).
+- **Education newest first on paper only** (2026-11): the PDF's date column read 2020, 2022, 2019, 2018.
+  The site keeps the MSc first, since it is the entry shown before the fold. Rejected: newest first on
+  the site (the fold would show the unfinished PhD); the old order in print.
 
 - **One data file, one page, printed** (2026-11). The look is the grey site with a timeline of company
   circles, labels above sections, and less important entries folded behind a row of circles. Chosen from

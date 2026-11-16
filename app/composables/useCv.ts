@@ -4,13 +4,11 @@ export interface CvRole {
   title: string
   start: string
   end?: string
-  bullets?: string[]
-  summary?: string
+  bullets: string[]
 }
 
 export interface CvCompany {
   name: string
-  url?: string
   monogram: string
   location: string
   roles: CvRole[]
@@ -44,18 +42,18 @@ export interface Cv {
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
-function label(date: string): string {
+export function formatCvMonth(date: string): string {
   const [year, month] = date.split('-')
   return month ? `${months[Number(month) - 1]} ${year}` : year!
 }
 
 export function formatCvRange(start: string, end?: string): string {
-  if (!end) return `${label(start)} – Present`
-  if (start === end) return label(start)
+  if (!end) return `${formatCvMonth(start)} – Present`
+  if (start === end) return formatCvMonth(start)
   const [startYear, startMonth] = start.split('-')
   const [endYear, endMonth] = end.split('-')
-  if (startMonth && endMonth && startYear === endYear) return `${months[Number(startMonth) - 1]} – ${label(end)}`
-  return `${label(start)} – ${label(end)}`
+  if (startMonth && endMonth && startYear === endYear) return `${months[Number(startMonth) - 1]} – ${formatCvMonth(end)}`
+  return `${formatCvMonth(start)} – ${formatCvMonth(end)}`
 }
 
 function yearsSince(start: string, now: Date): number {

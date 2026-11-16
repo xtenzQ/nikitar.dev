@@ -43,6 +43,7 @@ const printLinks = [
 
 const educationOpen = ref(false)
 const [firstEducation, ...moreEducation] = cv.education
+const educationNewestFirst = cv.education.toSorted((a, b) => b.end.localeCompare(a.end) || b.start.localeCompare(a.start))
 
 const languages = cv.languages.map(language => `${language.name}, ${language.level}`).join(' · ')
 
@@ -101,10 +102,7 @@ defineOgImage({
           <span class="logo tl-logo" aria-hidden="true"><span class="logo-letters">{{ company.monogram }}</span></span>
           <div class="tl-head">
             <div>
-              <h3 class="tl-name">
-                <a v-if="company.url" :href="company.url" target="_blank" rel="noopener noreferrer">{{ company.name }}</a>
-                <template v-else>{{ company.name }}</template>
-              </h3>
+              <h3 class="tl-name">{{ company.name }}</h3>
               <span v-if="company.roles.length === 1" class="tl-only-role print-only"> · {{ company.roles[0]!.title }}</span>
               <p class="tl-loc">{{ company.location }}</p>
             </div>
@@ -122,10 +120,9 @@ defineOgImage({
                 <p class="role-title">{{ role.title }}</p>
                 <span class="row-meta">{{ formatCvRange(role.start, role.end) }}</span>
               </div>
-              <ul v-if="role.bullets" class="bullets">
+              <ul class="bullets">
                 <li v-for="bullet in role.bullets" :key="bullet">{{ bullet }}</li>
               </ul>
-              <p v-if="role.summary" class="summary">{{ role.summary }}</p>
             </li>
           </ol>
         </li>
@@ -171,6 +168,7 @@ defineOgImage({
           v-for="(item, index) in cv.education"
           :key="item.degree"
           :class="{ 'edu-more': index > 0 }"
+          :style="{ order: educationNewestFirst.indexOf(item) }"
         >
           <div class="edu-clip">
             <div class="item">
@@ -205,7 +203,7 @@ defineOgImage({
       <h2 id="cv-research" class="label">Research and awards</h2>
       <ul class="rows">
         <li class="head">
-          <span><a v-if="scholar" :href="scholar.url" target="_blank" rel="noopener noreferrer">{{ cv.papers.count }} papers</a><template v-else>{{ cv.papers.count }} papers</template> on {{ cv.papers.topic }}</span>
+          <span><a v-if="scholar" :href="scholar.url" target="_blank" rel="noopener noreferrer">{{ cv.papers.count }} papers</a><template v-else>{{ cv.papers.count }} papers</template> on {{ cv.papers.topic }}<span v-if="scholar" class="muted print-only"> · <a :href="scholar.url">Google Scholar</a></span></span>
           <span class="row-meta">{{ formatCvRange(cv.papers.start, cv.papers.end) }}</span>
         </li>
         <li v-for="award in cv.awards" :key="award.title" class="head">
@@ -221,7 +219,7 @@ defineOgImage({
     </section>
 
     <footer class="print-foot print-only">
-      <span>Updated {{ cv.updated }}</span>
+      <span>Updated {{ formatCvMonth(cv.updated) }}</span>
       <span>Latest version: <a :href="`/cv/${fromPdf}`">{{ siteHost }}/cv</a></span>
     </footer>
   </article>
@@ -435,10 +433,6 @@ strong {
   letter-spacing: 0;
 }
 
-.tl-name a {
-  text-decoration: none;
-}
-
 .tl-loc {
   font-size: 0.8125rem;
   line-height: 1.5;
@@ -493,10 +487,6 @@ strong {
   height: 4px;
   border-radius: 50%;
   background: var(--text-tertiary);
-}
-
-.summary {
-  margin-top: 0.5rem;
 }
 
 .prs {
@@ -673,8 +663,30 @@ strong {
   }
 }
 
+@font-face {
+  font-family: 'Inter Print';
+  font-weight: 400;
+  font-display: block;
+  src: url('/fonts/Inter-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter Print';
+  font-weight: 500;
+  font-display: block;
+  src: url('/fonts/Inter-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter Print';
+  font-weight: 600;
+  font-display: block;
+  src: url('/fonts/Inter-SemiBold.woff2') format('woff2');
+}
+
 @media print {
   .cv {
+    font-family: 'Inter Print', var(--font-sans);
     font-size: 12px;
     line-height: 1.4;
     print-color-adjust: exact;
@@ -716,11 +728,12 @@ strong {
   .headline {
     margin-top: 4px;
     font-size: 14px;
+    text-wrap: balance;
   }
 
   .contacts {
     margin-top: 4px;
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--text-muted);
   }
 
@@ -744,7 +757,7 @@ strong {
   }
 
   .row-meta {
-    font-family: var(--font-sans);
+    font-family: inherit;
     font-size: 11px;
     font-variant-numeric: tabular-nums;
   }
@@ -758,19 +771,23 @@ strong {
   }
 
   .tl-co + .tl-co {
-    margin-top: 9px;
+    margin-top: 12px;
   }
 
   .tl-co:not(:last-child)::before {
     left: 9.5px;
-    top: 19px;
-    bottom: -9px;
+    top: 10px;
+    bottom: -18px;
+    background: var(--text-tertiary);
   }
 
   .tl-logo {
-    top: 1px;
-    width: 18px;
-    height: 18px;
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    background: var(--text-tertiary);
+    box-shadow: none;
   }
 
   .logo-letters {
@@ -786,7 +803,7 @@ strong {
 
   .tl-name {
     display: inline;
-    font-size: 13.5px;
+    font-size: 14px;
   }
 
   .tl-only-role {
@@ -832,10 +849,6 @@ strong {
     box-shadow: 0 0 0 2px var(--bg);
   }
 
-  .role-title {
-    font-weight: 600;
-  }
-
   .bullets {
     margin-top: 1px;
     gap: 1px;
@@ -851,16 +864,17 @@ strong {
     height: 3.5px;
   }
 
-  .summary {
-    margin-top: 1px;
-  }
-
   .prs {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 0 12px;
+    align-items: baseline;
     margin-top: 2px;
   }
 
-  .pr + .pr {
-    margin-top: 0;
+  .pr,
+  .pr > span:last-child {
+    display: contents;
   }
 
   .pr-icon {
@@ -893,8 +907,14 @@ strong {
     transition: none;
   }
 
+  .edu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
   .edu-more .item {
-    margin-top: 2px;
+    margin-top: 0;
   }
 
   .item-title {
@@ -928,7 +948,7 @@ strong {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    font-size: 10.5px;
+    font-size: 11px;
     color: var(--text-muted);
   }
 }

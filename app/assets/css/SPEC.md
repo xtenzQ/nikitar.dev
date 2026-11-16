@@ -38,7 +38,8 @@ the specs out of the scan (`@source not`); otherwise a word in a spec becomes a 
 
 The system stack (SF Pro and SF Mono on Apple). The index is 15px; article prose is 17px. Weights
 400/500/600. Dates and repo names are mono; dates are ISO (`2026-02`), except on the CV
-([[submodule-app-cv]]).
+([[submodule-app-cv]]). The CV's print is the one place with a font file: static Inter, because the
+system fonts are variable and print as Type 3.
 
 ## Shared parts
 

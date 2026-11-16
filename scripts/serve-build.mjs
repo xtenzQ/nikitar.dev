@@ -11,6 +11,7 @@ const types = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.webp': 'image/webp',
+  '.woff2': 'font/woff2',
 }
 
 export async function serveBuild(page, { pass = [] } = {}) {

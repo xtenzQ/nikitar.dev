@@ -1,14 +1,13 @@
 {
   "updated": "2026-11-16",
   "pdf": "nikita-rusetskii-cv.pdf",
-  "headline": "Backend engineer: Java, {years} years · search (Apache Solr, vector and hybrid search) · AI developer tooling",
+  "headline": "Backend engineer: Java, {years} years · search (Apache Solr, vector and hybrid search) · AI developer tooling",
   "careerStart": "2020-10",
   "location": "Belgrade, Serbia",
   "workMode": "remote or on-site",
   "experience": [
     {
       "name": "KMS Lighthouse",
-      "url": "https://kmslh.com/",
       "monogram": "K",
       "location": "Belgrade, Serbia · hybrid",
       "roles": [
@@ -17,9 +16,9 @@
           "start": "2026-05",
           "bullets": [
             "Working on the architect scope for search team",
-            "Designed and currently maintaining an agent workspace to automate all manual work and make it easier to deliver tasks E2E",
-            "Created unattended agent workflow that reuses the agentic workspace to fix bugs E2E and post PRs for a human code review",
-            "Research of AI-DLC practices and incorporating them"
+            "Designed and currently maintaining an agent workspace to automate all manual work and make it easier to deliver tasks end to end",
+            "Created unattended agent workflow that reuses the agentic workspace to fix bugs end to end and post PRs for a human code review",
+            "Research of AI-driven development lifecycle (AI-DLC) practices and incorporating them"
           ]
         },
         {
@@ -44,7 +43,10 @@
           "title": "Backend Developer",
           "start": "2020-10",
           "end": "2021-12",
-          "summary": "Developed new components and maintained existing ones across electronic document management systems on Java 7/8, Spring and Hibernate. Also worked on the front end with GWT, Dojo and JavaScript when the feature needed both ends."
+          "bullets": [
+            "Developed new components and maintained existing ones across electronic document management systems on Java 7/8, Spring and Hibernate",
+            "Also worked on the front end with GWT, Dojo and JavaScript when the feature needed both ends"
+          ]
         }
       ]
     },
@@ -57,7 +59,9 @@
           "title": "Backend Developer Intern",
           "start": "2020-02",
           "end": "2020-04",
-          "summary": "Worked with a senior engineer on the import service for a virtualization management product, in Go with Docker and Linux."
+          "bullets": [
+            "Worked with a senior engineer on the import service for a virtualization management product, in Go with Docker and Linux"
+          ]
         }
       ]
     }
