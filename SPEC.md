@@ -87,8 +87,10 @@ data), [[module-photos]] (photo pipeline and data), [[module-blog]] (posts), [[m
 12. **Visit counts: Umami Cloud** (2026-11). One script in `nuxt.config.ts`, free plan, EU data region.
    It sets no cookies, so there is no consent banner. `data-domains` limits it to `nikitar.dev`, so local
    previews and forks send nothing. Clicks on Open PDF and the socials are events (`data-umami-event`,
-   named after the link). Rejected: Google Analytics 4 and Yandex Metrica (cookies need a consent banner
-   for EU visitors; a heavy script); Cloudflare Web Analytics (page views only, no events).
+   named after the link). Links back to the site from the CV PDF and the GitHub profile README carry
+   `utm_source` (`cv-pdf`, `github`): a PDF and mobile apps send no referrer, and GitHub sends only its
+   domain. Rejected: Google Analytics 4 and Yandex Metrica (cookies need a consent banner for EU
+   visitors; a heavy script); Cloudflare Web Analytics (page views only, no events).
 
 ## Invariants
 

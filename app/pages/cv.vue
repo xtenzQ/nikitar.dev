@@ -32,11 +32,12 @@ const openSource = computed(() => {
 
 const siteHost = site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
 const scholar = socials.find(social => social.label === 'Google Scholar')
+const fromPdf = '?utm_source=cv-pdf'
 
 // Paper has no hover, so the PDF spells links out; the Scholar URL is too long to print
 const printLinks = [
   ...socials.filter(social => social.url.startsWith('mailto:')).map(social => ({ url: social.url, text: social.url.slice('mailto:'.length) })),
-  { url: '/', text: siteHost },
+  { url: `/${fromPdf}`, text: siteHost },
   ...socials
     .filter(social => social.url.startsWith('http') && social !== scholar)
     .map(social => ({ url: social.url, text: social.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '') })),
@@ -150,7 +151,7 @@ defineOgImage({
         <NuxtLink to="/oss/" class="nowrap">All {{ openSource.total }} pull requests →</NuxtLink>
       </p>
       <p class="all print-only">
-        All of them: <a href="/oss/">{{ siteHost }}/oss</a>
+        All of them: <a :href="`/oss/${fromPdf}`">{{ siteHost }}/oss</a>
       </p>
     </section>
 
@@ -224,7 +225,7 @@ defineOgImage({
 
     <footer class="print-foot print-only">
       <span>Updated {{ cv.updated }}</span>
-      <span>Latest version: <a href="/cv/">{{ siteHost }}/cv</a></span>
+      <span>Latest version: <a :href="`/cv/${fromPdf}`">{{ siteHost }}/cv</a></span>
     </footer>
   </article>
 </template>

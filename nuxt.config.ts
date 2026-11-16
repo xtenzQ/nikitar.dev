@@ -124,6 +124,8 @@ export default defineNuxtConfig({
       crawlLinks: true,
       // '/' links /oss only when GitHub answered
       routes: ['/', '/photos', '/oss', '/cv'],
+      // The CV PDF's links carry utm_source; they are the same pages
+      ignore: [/[?&]utm_/],
     },
     watchOptions: {
       usePolling: true,
