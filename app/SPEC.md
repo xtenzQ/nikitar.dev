@@ -80,6 +80,13 @@ The Nuxt app: pages, the default layout, components, and the design system they 
   `/` appears after it. `plugins/view-transition-types.client.ts` tags these two navigations with view
   transition types (`oss-open`, `oss-close`), so the staging in `main.css` touches no other route. Sizes
   and line-heights of the shared pieces stay in em, so the scale doesn't distort them.
+- **Door to `/photos`:** the Photos door's label and two thumbnails share `view-transition-name`s with the
+  `/photos` title and those photos' tiles, so the label grows from 14 to 28px and the thumbnails into their
+  tiles (0.4s, the door's curve) while the old page leaves in 0.12s. The subtitle rises in at 0.34s and the
+  rest of the page at 0.40s; going back, `/` appears after them (0.34s). The plugin tags these
+  `photos-open` and `photos-close`. `usePhotos().door` is the one list both pages name from. On either
+  door's route the other door's pieces have no partner, so they leave and arrive with the page
+  (`:only-child`).
 - **Header to `/cv`:** the header's avatar and name share `view-transition-name`s with the CV's, so going
   to `/cv` they move down and grow (0.4s, the door's curve) while the old page leaves in 0.12s; the CV
   header rises in at 0.34s and the rest of the page at 0.40s. Leaving `/cv` the name goes back into the
@@ -171,6 +178,10 @@ The Nuxt app: pages, the default layout, components, and the design system they 
 - **Staged door transition** (2026-11): the list waits for the number. Rejected: the list rising while the
   number moves (the number crossed the rows and the caption); delaying `/oss` on every route (from `/cv` it
   would wait for a number that doesn't move).
+- **Photos door moves like the Open source door** (2026-11): a thumbnail and its tile are the same file in
+  the same 3:4 crop, so it scales without distortion. Replaced: the plain cross-fade. Rejected: sharing the caption
+  (mono 12px and sans 15px don't scale into each other); naming every tile (each would be its own layer
+  on every route from `/photos`).
 - **Education folds by grid rows** (2026-11): each folded entry is a one-row grid that goes from `0fr` to
   `1fr`, which every current browser animates without JS. Replaced: `display: none` (it jumped).
   Rejected: `interpolate-size` with `height: auto` (Chromium only); a measured height in JS.

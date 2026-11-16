@@ -5,6 +5,13 @@ const props = defineProps<{
   groups: { title?: string, photos: Photo[] }[]
 }>()
 
+// The door's thumbnails on / move into these tiles
+const { door } = usePhotos()
+function doorClass(name: string) {
+  const i = door.findIndex(photo => photo.name === name)
+  return i < 0 ? undefined : `vt-photo-${i + 1}`
+}
+
 // One viewer for the whole gallery, so the arrows walk across groups
 const photos = computed(() => props.groups.flatMap(group => group.photos))
 const offsets = computed(() => props.groups.map((_, i) =>
@@ -63,6 +70,7 @@ function onTouchEnd(e: TouchEvent) {
               <img
                 :src="`/photos/${item.name}.webp`"
                 :alt="item.alt"
+                :class="doorClass(item.name)"
                 :style="{ objectPosition: item.focus }"
                 width="600"
                 height="800"

@@ -182,7 +182,7 @@ a:hover {
   view-transition-name: oss-project-3;
 }
 
-html:active-view-transition-type(oss-open)::view-transition-old(root) {
+html:active-view-transition-type(oss-open, photos-open)::view-transition-old(root) {
   animation-duration: 0.12s;
 }
 
@@ -214,7 +214,17 @@ html:active-view-transition-type(oss-open)::view-transition-new(oss-project-3) {
   animation: oss-fade-out 0.12s ease-out both;
 }
 
-html:active-view-transition-type(oss-close)::view-transition-new(root) {
+html:active-view-transition-type(oss-close, photos-close)::view-transition-new(root) {
+  animation-delay: 0.34s;
+}
+
+/* The other door's pieces have no partner on the far page, so they leave and arrive with the page around them */
+html:active-view-transition-type(oss-open, photos-open)::view-transition-old(*):only-child {
+  animation-duration: 0.12s;
+}
+
+html:active-view-transition-type(oss-close, photos-close)::view-transition-new(*):only-child {
+  animation-duration: 0.18s;
   animation-delay: 0.34s;
 }
 
@@ -263,6 +273,42 @@ html:active-view-transition-type(cv-open, cv-close)::view-transition-old(site-he
 html:active-view-transition-type(cv-open, cv-close)::view-transition-new(site-header) {
   animation-duration: inherit;
   animation-delay: inherit;
+}
+
+/* The Photos door on / and the /photos title share these names: the label grows into the title, the thumbnails into their tiles */
+.vt-photos-label {
+  view-transition-name: photos-label;
+}
+
+.vt-photo-1 {
+  view-transition-name: photo-1;
+}
+
+.vt-photo-2 {
+  view-transition-name: photo-2;
+}
+
+.vt-photos-caption {
+  view-transition-name: photos-caption;
+}
+
+::view-transition-group(photos-label),
+::view-transition-group(photo-1),
+::view-transition-group(photo-2) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+html:active-view-transition-type(photos-open)::view-transition-new(photos-caption) {
+  animation: oss-rise 0.28s cubic-bezier(0.2, 0, 0, 1) 0.34s both;
+}
+
+html:active-view-transition-type(photos-open)::view-transition-new(root) {
+  animation: oss-rise 0.28s cubic-bezier(0.2, 0, 0, 1) 0.4s both;
+}
+
+::view-transition-old(photos-caption) {
+  animation: oss-fade-out 0.12s ease-out both;
 }
 
 @keyframes oss-rise {

@@ -21,6 +21,6 @@ export interface PhotoGroup {
 export function usePhotos() {
   const groups = data.groups as PhotoGroup[]
   const all = groups.flatMap(group => group.photos)
-  const featured = all.filter(photo => photo.featured)
-  return { groups, all, featured }
+  const door = all.filter(photo => photo.featured).slice(0, 2)
+  return { groups, all, door }
 }

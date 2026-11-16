@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { profile, socials } = useAppConfig()
-const { all: allPhotos, featured } = usePhotos()
+const { all: allPhotos, door: thumbs } = usePhotos()
 
 const { data: openSource } = await useFetch('/api/contributions', {
   key: 'contributions-home',
@@ -25,8 +25,6 @@ const repoCaption = computed(() => {
   if (repos.length > 4) shown.push(`+${repos.length - 4}`)
   return shown.join(' · ')
 })
-
-const thumbs = featured.slice(0, 2)
 
 useHead({
   titleTemplate: '%s',
@@ -102,12 +100,13 @@ useSchemaOrg([
 
       <section v-if="thumbs.length" class="door" aria-labelledby="door-photos">
         <NuxtLink id="door-photos" to="/photos" class="door-link">
-          Photos <span class="door-arrow" aria-hidden="true">→</span>
+          <span class="vt-photos-label">Photos</span> <span class="door-arrow" aria-hidden="true">→</span>
         </NuxtLink>
         <div class="door-visual">
           <img
-            v-for="photo in thumbs"
+            v-for="(photo, i) in thumbs"
             :key="photo.name"
+            :class="`vt-photo-${i + 1}`"
             :src="`/photos/${photo.name}.webp`"
             alt=""
             :style="{ objectPosition: photo.focus }"

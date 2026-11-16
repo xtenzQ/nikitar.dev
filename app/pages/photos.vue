@@ -14,8 +14,8 @@ defineOgImage({
 
 <template>
   <div>
-    <h1 class="page-title">Photos</h1>
-    <p class="page-subtitle">{{ all.length }} photos</p>
+    <h1 class="page-title"><span class="vt-photos-label">Photos</span></h1>
+    <p class="page-subtitle vt-photos-caption">{{ all.length }} photos</p>
 
     <PhotoGallery :groups="groups" class="mt-8" />
   </div>
