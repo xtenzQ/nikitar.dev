@@ -48,6 +48,16 @@ the [[submodule-app-design]] tokens. [[module-deploy]] runs the build, then the 
    `utm_source` (`cv-pdf`, `github`): a PDF and mobile apps send no referrer, and GitHub sends only its
    domain. Rejected: Google Analytics 4 and Yandex Metrica (cookies need a consent banner for EU
    visitors; a heavy script); Cloudflare Web Analytics (page views only, no events).
+3. **README GIF recorded from the build** (2026-11). `docs/preview.gif` shows the home page, both door
+   transitions there and back, and the theme toggle; the static screenshot before it showed none of the
+   motion. `scripts/readme-gif.mjs` (`pnpm readme:gif`) opens the build in Chrome the way the CV print
+   does ([[submodule-app-cv]]), through `scripts/serve-build.mjs`, but lets GitHub images through. It
+   keeps Chrome's screencast frames at 2x and encodes them with `ffmpeg`: 800px wide, 25 fps, one
+   palette, about 3.3 MB. Each recording stays in git history, so it is re-recorded only when the owner
+   agrees.
+   Rejected: an MP4 or WebM (GitHub plays a README video only when it is uploaded through its web
+   editor, outside the repo); animated WebP (the local `ffmpeg` has no WebP encoder); 1200 or 1600px
+   (6.5 and 7.9 MB); Playwright's `recordVideo` (a lossy VP8 video before the GIF step).
 
 ## Invariants
 

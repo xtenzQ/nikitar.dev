@@ -71,7 +71,8 @@ Work from the task-spec and the actual diff, top-down:
 
 Write each decision once, dated, with its rejected options; link the rest by `[[id]]`. Mark anything
 unconfirmed where it stands. A new spec is `status: draft` until the owner has read it. Update
-`README.md` when a visible capability changed. Run `pnpm check:specs`. A bug classified right, or a change
+`README.md` when a visible capability changed; when the change shows on the README GIF, offer to
+re-record it (`record-readme-gif`). Run `pnpm check:specs`. A bug classified right, or a change
 the specs already describe, changes no spec.
 
 Done when every spec you touched matches what was built.

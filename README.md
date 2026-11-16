@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/preview-dark.png" alt="Preview" />
+  <img src="docs/preview.gif" alt="The home page opening Open source and Photos, then switching to the light theme and back" />
 </p>
 
 ## ✨ Features
@@ -71,6 +71,9 @@ pnpm photos
 
 # Print /cv/ to a PDF in .output/public after a build (needs Google Chrome)
 pnpm cv:pdf
+
+# Record docs/preview.gif from a build (needs Google Chrome and ffmpeg)
+pnpm readme:gif
 ```
 
 Agent and contributor docs: `AGENTS.md`, then `goal-and-requirements.md` and `architecture.md`, with a spec beside each module. `pnpm check:specs` checks the links between them.

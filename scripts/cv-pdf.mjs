@@ -1,37 +1,14 @@
-import { readFile, stat, writeFile } from 'node:fs/promises'
-import { extname, join, normalize } from 'node:path'
+import { readFile, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 import { chromium } from 'playwright-core'
+import { origin, root, serveBuild } from './serve-build.mjs'
 
-const root = '.output/public'
 const { pdf } = JSON.parse(await readFile('app/data/cv.json', 'utf8'))
-const origin = `https://${(await readFile('public/CNAME', 'utf8')).trim()}`
-const types = {
-  '.html': 'text/html; charset=utf-8',
-  '.js': 'text/javascript',
-  '.css': 'text/css',
-  '.json': 'application/json',
-  '.svg': 'image/svg+xml',
-  '.png': 'image/png',
-  '.webp': 'image/webp',
-}
-
-async function serve(route) {
-  const url = new URL(route.request().url())
-  if (url.origin !== origin) return route.abort()
-  let file = join(root, normalize(decodeURIComponent(url.pathname)))
-  try {
-    if ((await stat(file)).isDirectory()) file = join(file, 'index.html')
-    await route.fulfill({ body: await readFile(file), contentType: types[extname(file)] ?? 'application/octet-stream' })
-  }
-  catch {
-    await route.fulfill({ status: 404 })
-  }
-}
 
 const browser = await chromium.launch({ channel: 'chrome' })
 try {
   const page = await browser.newPage()
-  await page.route('**/*', serve)
+  await serveBuild(page)
   await page.emulateMedia({ media: 'print', colorScheme: 'light' })
   await page.goto(`${origin}/cv/`, { waitUntil: 'load' })
   const bytes = await page.pdf({ preferCSSPageSize: true, printBackground: true, tagged: true, outline: true })

@@ -57,4 +57,5 @@ real edges. A new or rewritten spec is `draft` until the owner has reviewed it, 
 ## Stack
 
 Nuxt 4 · Vue 3 · Nuxt Content 3 · Tailwind v4 + typography · `@nuxtjs/seo` · `@nuxt/icon` (Phosphor,
-client-bundled) · pnpm · GitHub Pages. Photo pipeline: macOS `swift` (ImageIO) and `cwebp`.
+client-bundled) · pnpm · GitHub Pages. Photo pipeline: macOS `swift` (ImageIO) and `cwebp`. README GIF:
+`ffmpeg`.
