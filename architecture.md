@@ -53,7 +53,8 @@ the [[submodule-app-design]] tokens. [[module-deploy]] runs the build, then the 
    motion. `scripts/readme-gif.mjs` (`pnpm readme:gif`) opens the build in Chrome the way the CV print
    does ([[submodule-app-cv]]), through `scripts/serve-build.mjs`, but lets GitHub images through. It
    keeps Chrome's screencast frames at 2x and encodes them with `ffmpeg`: 800px wide, 25 fps, one
-   palette, about 3.3 MB. Each recording stays in git history, so it is re-recorded only when the owner
+   palette, about 3 MB. Page animations run 5 times slower while it records and the frame times are
+   scaled back: at full speed the screencast dropped frames, and the Photos transition froze for 0.3 s. Each recording stays in git history, so it is re-recorded only when the owner
    agrees.
    Rejected: an MP4 or WebM (GitHub plays a README video only when it is uploaded through its web
    editor, outside the repo); animated WebP (the local `ffmpeg` has no WebP encoder); 1200 or 1600px
