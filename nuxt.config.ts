@@ -33,6 +33,7 @@ export default defineNuxtConfig({
     classSuffix: '',
     preference: 'system',
     fallback: 'light',
+    disableTransition: true,
   },
 
   vite: {
