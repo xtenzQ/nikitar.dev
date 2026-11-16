@@ -13,11 +13,19 @@ Markdown posts in `content/blog/`, rendered at `/blog/<slug>`, with per-tag list
 
 ## Status
 
-Dormant since 2026-11: the only post (2026-02) is out of date. The routes stay prerendered and in the
-sitemap so existing links work, but no page links to the blog. `draft: true` unpublishes a post.
+Dormant since 2026-11: the only post (2026-02) is out of date. The routes stay prerendered so existing
+links work, but no page links to the blog. `/blog/` and posts stay in the sitemap. `draft: true`
+unpublishes a post.
 
 When writing resumes, add a Writing door on the home page (the latest post's title and `yyyy-mm`); the
 doors grid takes it without a layout change.
+
+## Decisions
+
+1. **Tag pages are `noindex`** (2026-11-16). A `robots: false` route rule on `/blog/tags/**` sets the
+   meta tag, and the sitemap module drops those URLs. Five tag pages for one post are thin, and Search
+   Console listed them as not indexed. Rejected: `Disallow` in `robots.txt` (Google could not read the
+   `noindex` and may still index the bare URL); deleting the pages (old links would 404).
 
 ## Boundary
 

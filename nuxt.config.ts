@@ -116,6 +116,7 @@ export default defineNuxtConfig({
     '/about': { redirect: '/' },
     // The github_pages preset writes an SPA fallback that GitHub Pages serves as a plain page
     '/200.html': { robots: false },
+    '/blog/tags/**': { robots: false },
   },
 
   nitro: {
